@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-components/controller" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.10.2">
+<title data-rh="true">Controller | llm-d Resiliency Operator</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/controller"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Controller | llm-d Resiliency Operator"><meta data-rh="true" name="description" content="The controller runs one loop per engine group, on the elected leader. Every poll it reads the"><meta data-rh="true" property="og:description" content="The controller runs one loop per engine group, on the elected leader. Every poll it reads the"><link data-rh="true" rel="icon" href="/llm-d-resiliency-operator/img/favicon.png"><link data-rh="true" rel="canonical" href="https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/controller"><link data-rh="true" rel="alternate" href="https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/controller" hreflang="en"><link data-rh="true" rel="alternate" href="https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/controller" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Components","item":"https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/"},{"@type":"ListItem","position":2,"name":"Controller","item":"https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/controller"}]}</script><link rel="stylesheet" href="/llm-d-resiliency-operator/assets/css/styles.544c8b07.css">
+<script src="/llm-d-resiliency-operator/assets/js/runtime~main.d09c1ea8.js" defer="defer"></script>
+<script src="/llm-d-resiliency-operator/assets/js/main.0dd1a1ad.js" defer="defer"></script>
+</head>
+<body>
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/llm-d-resiliency-operator/img/llm-d-logo-transparent.png"><link rel="preload" as="image" href="/llm-d-resiliency-operator/img/llm-d-logo-transparent-dark.png"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/llm-d-resiliency-operator/"><div class="navbar__logo"><img src="/llm-d-resiliency-operator/img/llm-d-logo-transparent.png" alt="llm-d Resiliency Operator" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/llm-d-resiliency-operator/img/llm-d-logo-transparent-dark.png" alt="llm-d Resiliency Operator" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/llm-d-resiliency-operator/docs/">Docs</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/llm-d-incubation/llm-d-resiliency-operator" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-github-link" aria-label="GitHub"></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/llm-d-resiliency-operator/docs/"><span class="linkLabel_WmDU">Architecture</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/llm-d-resiliency-operator/docs/getting-started"><span class="linkLabel_WmDU">Getting started</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href="/llm-d-resiliency-operator/docs/components/"><span class="categoryLinkLabel_W154">Components</span></a><button aria-label="Collapse sidebar category &#x27;Components&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/llm-d-resiliency-operator/docs/components/controller"><span class="linkLabel_WmDU">Controller</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/llm-d-resiliency-operator/docs/components/engines/"><span class="categoryLinkLabel_W154">Engines</span></a><button aria-label="Expand sidebar category &#x27;Engines&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/llm-d-resiliency-operator/docs/components/workloads/"><span class="categoryLinkLabel_W154">Workloads</span></a><button aria-label="Expand sidebar category &#x27;Workloads&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/llm-d-resiliency-operator/docs/components/journal"><span class="linkLabel_WmDU">Journal</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/llm-d-resiliency-operator/docs/components/telemetry"><span class="linkLabel_WmDU">Telemetry</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/llm-d-resiliency-operator/docs/failures/"><span class="categoryLinkLabel_W154">Failures</span></a><button aria-label="Expand sidebar category &#x27;Failures&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/llm-d-resiliency-operator/docs/examples/"><span class="categoryLinkLabel_W154">Examples</span></a><button aria-label="Expand sidebar category &#x27;Examples&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/llm-d-resiliency-operator/docs/reference/upstream-versions"><span class="categoryLinkLabel_W154">Reference</span></a></div></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/llm-d-resiliency-operator/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/llm-d-resiliency-operator/docs/components/"><span>Components</span></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">Controller</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Controller</h1></header>
+<p>The controller runs one loop per engine group, on the elected leader. Every poll it reads the
+<a class="" href="/llm-d-resiliency-operator/docs/components/workloads/">workload</a> and the <a class="" href="/llm-d-resiliency-operator/docs/components/engines/">engine</a>, decides what the group needs, and acts.
+It owns everything that is not engine- or workload-specific:</p>
+<ul>
+<li class="">the phases and their deadlines,</li>
+<li class="">whether it is still the same group,</li>
+<li class="">connecting Pods to engine members,</li>
+<li class="">saving state in the <a class="" href="/llm-d-resiliency-operator/docs/components/journal">journal</a> before acting,</li>
+<li class="">resets, and bringing capacity back after a shrink,</li>
+<li class="">the checks every engine plan must pass.</li>
+</ul>
+<p>It reads only the engine-neutral <a class="" href="/llm-d-resiliency-operator/docs/components/engines/#objects"><code>Member</code></a> fields and <a class="" href="/llm-d-resiliency-operator/docs/components/workloads/#objects"><code>Pod</code></a>
+facts. Everything engine-specific stays in the engine.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="interface">Interface<a href="#interface" class="hash-link" aria-label="Direct link to Interface" title="Direct link to Interface" translate="no">​</a></h2>
+<div class="language-go codeBlockContainer_Ckt0 theme-code-block" style="--prism-background-color:hsl(230, 1%, 98%);--prism-color:hsl(230, 8%, 24%)"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-go codeBlock_bY9V thin-scrollbar" style="background-color:hsl(230, 1%, 98%);color:hsl(230, 8%, 24%)"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token keyword" style="color:hsl(301, 63%, 40%)">func</span><span class="token plain"> </span><span class="token function" style="color:hsl(221, 87%, 60%)">New</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token plain">ctx context</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">.</span><span class="token plain">Context</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"> workload Workload</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"> engine Engine</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"> journal Journal</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"> recorder Recorder</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"> config Config</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token plain"> </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token plain">Controller</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"> </span><span class="token builtin" style="color:hsl(119, 34%, 47%)">error</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token keyword" style="color:hsl(301, 63%, 40%)">type</span><span class="token plain"> Controller </span><span class="token keyword" style="color:hsl(301, 63%, 40%)">interface</span><span class="token plain"> </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">{</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    </span><span class="token function" style="color:hsl(221, 87%, 60%)">Step</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token plain">ctx context</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">.</span><span class="token plain">Context</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token plain"> </span><span class="token builtin" style="color:hsl(119, 34%, 47%)">error</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">}</span><br></div></code></pre></div></div>
+<p>A runner calls <code>New</code> until the journal loads, then <code>Step</code> every <code>PollInterval</code> while this process leads.
+When <code>Step</code> returns <code>ErrConflict</code>, the runner drops the controller and calls <code>New</code> again.
+<code>New</code> and the defaults below come with the implementation; the code defines <code>Controller</code> and its objects.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="objects">Objects<a href="#objects" class="hash-link" aria-label="Direct link to Objects" title="Direct link to Objects" translate="no">​</a></h2>
+<div class="language-go codeBlockContainer_Ckt0 theme-code-block" style="--prism-background-color:hsl(230, 1%, 98%);--prism-color:hsl(230, 8%, 24%)"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-go codeBlock_bY9V thin-scrollbar" style="background-color:hsl(230, 1%, 98%);color:hsl(230, 8%, 24%)"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token comment" style="color:hsl(230, 4%, 64%)">// Config holds the controller&#x27;s settings. Flags are in Configuration below.</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token keyword" style="color:hsl(301, 63%, 40%)">type</span><span class="token plain"> Config </span><span class="token keyword" style="color:hsl(301, 63%, 40%)">struct</span><span class="token plain"> </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">{</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    PollInterval     time</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">.</span><span class="token plain">Duration   </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// 1s</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    DiagnosisTimeout time</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">.</span><span class="token plain">Duration   </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// 75s: longest time in recovering without a reconfig</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    ApplyTimeout     time</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">.</span><span class="token plain">Duration   </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// 90s: longest time a reconfig may stay in flight</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    VerifyTimeout    time</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">.</span><span class="token plain">Duration   </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// 2m: how long a failed check after a reconfig is retried</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    UnseenTimeout    time</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">.</span><span class="token plain">Duration   </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// 10m: longest time no admitted member can be read before the group is reset</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    FlapWindow       time</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">.</span><span class="token plain">Duration   </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// 2m: check C6</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    CapacityRestore  CapacityRestore </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// reset-pod (default) | reset-all | release</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">}</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token keyword" style="color:hsl(301, 63%, 40%)">type</span><span class="token plain"> Phase </span><span class="token builtin" style="color:hsl(119, 34%, 47%)">string</span><span class="token plain"> </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// starting | serving | recovering</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token comment" style="color:hsl(230, 4%, 64%)">// CapacityRestore says how capacity comes back after a shrink.</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token keyword" style="color:hsl(301, 63%, 40%)">type</span><span class="token plain"> CapacityRestore </span><span class="token builtin" style="color:hsl(119, 34%, 47%)">string</span><span class="token plain"> </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// reset-pod | reset-all | release</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token keyword" style="color:hsl(301, 63%, 40%)">type</span><span class="token plain"> MemberState </span><span class="token builtin" style="color:hsl(119, 34%, 47%)">string</span><span class="token plain"> </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// candidate | admitted | excluded | rejected</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token comment" style="color:hsl(230, 4%, 64%)">// PodRecord is what the controller remembers about one Pod.</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token keyword" style="color:hsl(301, 63%, 40%)">type</span><span class="token plain"> PodRecord </span><span class="token keyword" style="color:hsl(301, 63%, 40%)">struct</span><span class="token plain"> </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">{</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Name     </span><span class="token builtin" style="color:hsl(119, 34%, 47%)">string</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Identity </span><span class="token builtin" style="color:hsl(119, 34%, 47%)">string</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Node     </span><span class="token builtin" style="color:hsl(119, 34%, 47%)">string</span><span class="token plain"> </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// so an incident can name the node of a Pod that is already gone</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Removing </span><span class="token builtin" style="color:hsl(119, 34%, 47%)">bool</span><span class="token plain">   </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// asked to go, through Reset, ResetAll or Release</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">}</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token comment" style="color:hsl(230, 4%, 64%)">// Record is the controller&#x27;s whole state. It is what the journal stores.</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token keyword" style="color:hsl(301, 63%, 40%)">type</span><span class="token plain"> Record </span><span class="token keyword" style="color:hsl(301, 63%, 40%)">struct</span><span class="token plain"> </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">{</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Phase  Phase</span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Since  time</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">.</span><span class="token plain">Time </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// when the phase started. The diagnosis deadline counts from here.</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Reason </span><span class="token builtin" style="color:hsl(119, 34%, 47%)">string</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Pods    </span><span class="token keyword" style="color:hsl(301, 63%, 40%)">map</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">[</span><span class="token builtin" style="color:hsl(119, 34%, 47%)">string</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">]</span><span class="token plain">PodRecord </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// by UID. Also what ResetAll names.</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Members </span><span class="token keyword" style="color:hsl(301, 63%, 40%)">map</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">[</span><span class="token plain">MemberID</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">]</span><span class="token plain">MemberState</span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Reconfig      </span><span class="token operator" style="color:hsl(221, 87%, 60%)">*</span><span class="token plain">Reconfig  </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// in flight, nil when none</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    ReconfigSince time</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">.</span><span class="token plain">Time  </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// the apply deadline counts from here</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Acceptances   </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">[</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">]</span><span class="token plain">Acceptance</span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Verifying     </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">[</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">]</span><span class="token plain">MemberID </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// members of a reconfig that succeeded, not yet checked with Verify</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    LastNoChangeReconfig time</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">.</span><span class="token plain">Time </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// check C6</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    VerifyFailedSince    time</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">.</span><span class="token plain">Time</span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    UnseenSince          time</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">.</span><span class="token plain">Time </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// Discover failed, or Observe read no admitted member. Deadlines do not count this time.</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    RecreateStopped      </span><span class="token builtin" style="color:hsl(119, 34%, 47%)">bool</span><span class="token plain">      </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// from the last Discover, so people can see the workload gave up</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Incident </span><span class="token operator" style="color:hsl(221, 87%, 60%)">*</span><span class="token plain">Incident </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// the open incident, nil when none. Closed ones go to telemetry.</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">}</span><br></div></code></pre></div></div>
+<p><code>Reconfig</code>, <code>Acceptance</code> and <code>MemberID</code> come from the <a class="" href="/llm-d-resiliency-operator/docs/components/engines/#objects">engine</a>. <code>Incident</code> comes from <a class="" href="/llm-d-resiliency-operator/docs/components/telemetry#objects">telemetry</a>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="functions">Functions<a href="#functions" class="hash-link" aria-label="Direct link to Functions" title="Direct link to Functions" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="new">New<a href="#new" class="hash-link" aria-label="Direct link to New" title="Direct link to New" translate="no">​</a></h3>
+<p>Builds the controller and loads its state.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>Input</strong></td><td>a <a class="" href="/llm-d-resiliency-operator/docs/components/workloads/#interface"><code>Workload</code></a>, an <a class="" href="/llm-d-resiliency-operator/docs/components/engines/#interface"><code>Engine</code></a>, a <a class="" href="/llm-d-resiliency-operator/docs/components/journal#interface"><code>Journal</code></a>, a <a class="" href="/llm-d-resiliency-operator/docs/components/telemetry#interface"><code>Recorder</code></a>, a <a href="#objects" class=""><code>Config</code></a></td></tr><tr><td><strong>Output</strong></td><td>a <code>Controller</code>, or an error</td></tr><tr><td><strong>Side effects</strong></td><td><code>Journal.Load</code></td></tr></tbody></table>
+<p><strong>Examples.</strong></p>
+<div class="language-go codeBlockContainer_Ckt0 theme-code-block" style="--prism-background-color:hsl(230, 1%, 98%);--prism-color:hsl(230, 8%, 24%)"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-go codeBlock_bY9V thin-scrollbar" style="background-color:hsl(230, 1%, 98%);color:hsl(230, 8%, 24%)"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token function" style="color:hsl(221, 87%, 60%)">New</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token operator" style="color:hsl(221, 87%, 60%)">...</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token plain"> </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// empty journal (first run):       Record{Phase: starting}</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token function" style="color:hsl(221, 87%, 60%)">New</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token operator" style="color:hsl(221, 87%, 60%)">...</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token plain"> </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// leader changed during a reconfig:   Record{Phase: recovering, Reconfig: iro-ft-7c1e, ...}. The next Step watches Progress. It sends the reconfig again only if no acceptances were saved and Progress says NotStarted.</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token function" style="color:hsl(221, 87%, 60%)">New</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token operator" style="color:hsl(221, 87%, 60%)">...</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token plain"> </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// journal unreadable or not valid: error. The runner logs it and calls New again next poll.</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token function" style="color:hsl(221, 87%, 60%)">New</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token operator" style="color:hsl(221, 87%, 60%)">...</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token plain"> </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// after a save conflicted: Record as saved by the other writer. Deadlines restart, as after a leader change.</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token function" style="color:hsl(221, 87%, 60%)">New</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token operator" style="color:hsl(221, 87%, 60%)">...</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token plain"> </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// the record was deleted while running: the last save conflicted, and now the journal is empty: starting.</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token function" style="color:hsl(221, 87%, 60%)">New</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token operator" style="color:hsl(221, 87%, 60%)">...</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token plain"> </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// a phase this version does not know: starts over, as with an empty journal.</span><br></div></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="step">Step<a href="#step" class="hash-link" aria-label="Direct link to Step" title="Direct link to Step" translate="no">​</a></h3>
+<p>Runs one reconciliation: read, decide, act.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>Input</strong></td><td>none</td></tr><tr><td><strong>Output</strong></td><td><code>nil</code>, or an error that the runner logs. An error before a save leaves the saved state as it was. A workload call that fails after its save is repeated on the next poll, and its error is returned once the step has saved.</td></tr><tr><td><strong>Side effects</strong></td><td>any of <code>Journal.Save</code>, <code>Probe</code>, <code>Apply</code>, <code>Verify</code>, <code>Reset</code>, <code>ResetAll</code>, <code>Release</code>, and <a class="" href="/llm-d-resiliency-operator/docs/components/telemetry#interface"><code>Recorder</code></a> calls for what happened</td></tr></tbody></table>
+<p>In order:</p>
+<ol>
+<li class=""><strong>Discover.</strong> If it fails, the controller cannot see the group: keep the phase, pause its deadlines, note
+the time, and stop here.</li>
+<li class=""><strong>Read Discover</strong> against the journal: same group, new group, or going away. While the old group is going,
+repeat any owed <code>ResetAll</code> and stop here. See <a href="#reading-discover" class="">Reading Discover</a>.</li>
+<li class=""><strong>If <code>starting</code></strong>, record the Pods, <code>Observe</code>, and ask for a <code>Plan</code> over the members that are not Terminal.
+Wait while a Pod is <code>Starting</code> or gives no members. On a <code>Healthy</code> plan, admit every member and go to
+<code>serving</code>. Stop here: no member is admitted yet, so there is nothing to check.</li>
+<li class=""><strong>Observe</strong> the Pods and <a href="#connecting-pods-and-members" class="">connect members to Pods</a>. If it reads none of the
+admitted members, stop here as in step 1, or reset the group once that has lasted <code>UnseenTimeout</code>. See
+<a href="#unknown-members" class="">unknown members</a>.</li>
+<li class=""><strong>Check the observation</strong> (C1, C4, C5). A violation resets the group. Unknown members are not checked.</li>
+<li class=""><strong>Act by phase.</strong> Ask the policy for a <code>Plan</code>, or for <code>Progress</code> when a <a href="#reconfigs" class="">reconfig</a> is in flight.
+Check and send a new reconfig, verify the members of a reconfig that succeeded, or reset.</li>
+<li class=""><strong><a href="#restoring-capacity" class="">Restore capacity</a></strong> if the group is <code>serving</code>.</li>
+</ol>
+<p><strong>Example</strong>, <a class="" href="/llm-d-resiliency-operator/docs/failures/member-dies">a member dies</a>, poll by poll:</p>
+<div class="example_GJdX"><div class="head_Mri7"><span class="label_fVJx">Example</span><a href="/llm-d-resiliency-operator/docs/failures/member-dies">A member dies, poll by poll</a></div><div class="scenario_THZZ" tabindex="0"><div class="timeline_zBxX"><button type="button" class="dot_sdw1 dotActive_Y1EO phase_serving_rliy" title="Nothing to do">poll 1</button><button type="button" class="dot_sdw1 phase_recovering_vJP2" title="A fault: enter recovering, probe once">poll 2</button><button type="button" class="dot_sdw1 phase_recovering_vJP2" title="Wait: under 2 polls in recovering">poll 3</button><button type="button" class="dot_sdw1 phase_recovering_vJP2" title="Check, save, send">poll 4</button><button type="button" class="dot_sdw1 phase_recovering_vJP2" title="The survivors rebuild">poll 5</button><button type="button" class="dot_sdw1 phase_serving_rliy" title="Done: exclude m3, verify the survivors">poll 6</button><button type="button" class="dot_sdw1 phase_serving_rliy" title="pod-3 holds only excluded members: reset it">poll 7</button><button type="button" class="dot_sdw1 phase_serving_rliy" title="pod-3 terminates">poll 8</button><button type="button" class="dot_sdw1 phase_serving_rliy" title="The new pod-3 starts">poll 9</button><button type="button" class="dot_sdw1 phase_serving_rliy" title="m3 joins">later</button><button type="button" class="dot_sdw1 phase_serving_rliy" title="Full again">later</button></div><div class="header_Le2D"><div><div class="stepTitle_COsw">Nothing to do</div></div><span class="phase_Ict0 phase_serving_rliy">serving</span></div><div class="pods_P7fz"><div class="pod_eiGx pod_serving_KOzE"><div class="podName_y8jH">pod-0</div><div class="podUid_UIHW">UID a1</div><div class="members_h0Td"><span class="member_R00j m_serving_Mycq" title="serving">m0</span></div><div class="badge_NqHd b_serving_AY16">serving</div></div><div class="pod_eiGx pod_serving_KOzE"><div class="podName_y8jH">pod-1</div><div class="podUid_UIHW">UID b1</div><div class="members_h0Td"><span class="member_R00j m_serving_Mycq" title="serving">m1</span></div><div class="badge_NqHd b_serving_AY16">serving</div></div><div class="pod_eiGx pod_serving_KOzE"><div class="podName_y8jH">pod-2</div><div class="podUid_UIHW">UID c1</div><div class="members_h0Td"><span class="member_R00j m_serving_Mycq" title="serving">m2</span></div><div class="badge_NqHd b_serving_AY16">serving</div></div><div class="pod_eiGx pod_serving_KOzE"><div class="podName_y8jH">pod-3</div><div class="podUid_UIHW">UID d1</div><div class="members_h0Td"><span class="member_R00j m_serving_Mycq" title="serving">m3</span></div><div class="badge_NqHd b_serving_AY16">serving</div></div></div><div class="calls_7JjX"><div class="callsTitle_n5Ik">What the controller calls</div><div class="call_Kdd8"><div class="callHead_Xj23"><span class="target_illD t_workload_k4l7">Workload</span><code class="callName_ZqyH">Discover()</code></div><div class="io_A5H6"><span class="ioTag_JRUC out_tj4M">out</span><span>4 Pods Ready</span></div></div><div class="call_Kdd8"><div class="callHead_Xj23"><span class="target_illD t_driver_IkJG">Engine driver</span><code class="callName_ZqyH">Observe(pods)</code></div><div class="io_A5H6"><span class="ioTag_JRUC out_tj4M">out</span><span>all Serving</span></div></div><div class="call_Kdd8"><div class="callHead_Xj23"><span class="target_illD t_policy_jBMH">Engine policy</span><code class="callName_ZqyH">Plan(observation, admitted, candidates)</code></div><div class="io_A5H6"><span class="ioTag_JRUC out_tj4M">out</span><span>Healthy</span></div></div></div><div class="nav_YRHF"><button type="button" class="button button--secondary button--sm" disabled="">◀ prev</button><span class="counter_lxmk">step <!-- -->1<!-- --> of <!-- -->11</span><button type="button" class="button button--primary button--sm">next ▶</button></div></div></div>
+<p>The <a href="#objects" class=""><code>Record</code></a> after poll 5, as the journal stores it and <code>Recorder.Stepped</code> receives it:</p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-background-color:hsl(230, 1%, 98%);--prism-color:hsl(230, 8%, 24%)"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="background-color:hsl(230, 1%, 98%);color:hsl(230, 8%, 24%)"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token key atrule" style="color:hsl(35, 99%, 36%)">Phase</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">:</span><span class="token plain"> recovering</span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token key atrule" style="color:hsl(35, 99%, 36%)">Reason</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">:</span><span class="token plain"> </span><span class="token string" style="color:hsl(119, 34%, 47%)">&quot;m3 is dead; survivors paused&quot;</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token key atrule" style="color:hsl(35, 99%, 36%)">Reconfig</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">:</span><span class="token plain"> </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">{</span><span class="token key atrule" style="color:hsl(35, 99%, 36%)">ID</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">:</span><span class="token plain"> iro</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">-</span><span class="token plain">ft</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">-</span><span class="token plain">7c1e</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"> </span><span class="token key atrule" style="color:hsl(35, 99%, 36%)">Participants</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">:</span><span class="token plain"> </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">[</span><span class="token plain">m0@idA</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"> m1@idB</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"> m2@idC</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">]</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"> </span><span class="token key atrule" style="color:hsl(35, 99%, 36%)">Remove</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">:</span><span class="token plain"> </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">[</span><span class="token plain">m3@idD</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">]</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">}</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token key atrule" style="color:hsl(35, 99%, 36%)">Members</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">:</span><span class="token plain"> </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">{</span><span class="token key atrule" style="color:hsl(35, 99%, 36%)">m0@idA</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">:</span><span class="token plain"> admitted</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"> </span><span class="token key atrule" style="color:hsl(35, 99%, 36%)">m1@idB</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">:</span><span class="token plain"> admitted</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"> </span><span class="token key atrule" style="color:hsl(35, 99%, 36%)">m2@idC</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">:</span><span class="token plain"> admitted</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"> </span><span class="token key atrule" style="color:hsl(35, 99%, 36%)">m3@idD</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">:</span><span class="token plain"> admitted</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">}</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token key atrule" style="color:hsl(35, 99%, 36%)">RecreateStopped</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">:</span><span class="token plain"> </span><span class="token boolean important" style="color:hsl(230, 8%, 24%);font-weight:bold">false</span><br></div></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="behavior">Behavior<a href="#behavior" class="hash-link" aria-label="Direct link to Behavior" title="Direct link to Behavior" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="state-machine">State machine<a href="#state-machine" class="hash-link" aria-label="Direct link to State machine" title="Direct link to State machine" translate="no">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="Controller phases: starting, serving, recovering" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDExMDAgNDAwIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgJ1NlZ29lIFVJJywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiI+CjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJ4PSI4IiBmaWxsPSIjZmZmZmZmIi8+Cjx0ZXh0IHg9IjMyLjAiIHk9IjQyLjAiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiMyMDIxMjQiIHRleHQtYW5jaG9yPSJzdGFydCIgZm9udC13ZWlnaHQ9IjcwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+Q29udHJvbGxlciBwaGFzZXM8L3RleHQ+Cjx0ZXh0IHg9IjMyLjAiIHk9IjY2LjAiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiM1ZjYzNjgiIHRleHQtYW5jaG9yPSJzdGFydCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+d2hlcmUgdGhlIGNvbnRyb2xsZXIgaXMsIGFuZCB3aGF0IG1vdmVzIGl0PC90ZXh0Pgo8cmVjdCB4PSI3MC4wIiB5PSIxMzAuMCIgd2lkdGg9IjIwMC4wIiBoZWlnaHQ9Ijg0LjAiIHJ4PSI0MiIgZmlsbD0iI2YxZjNmNCIgc3Ryb2tlPSIjNWY2MzY4IiBzdHJva2Utd2lkdGg9IjIuNSIvPgo8dGV4dCB4PSIxNzAuMCIgeT0iMTY2LjAiIGZvbnQtc2l6ZT0iMTkiIGZpbGw9IiM1ZjYzNjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPnN0YXJ0aW5nPC90ZXh0Pgo8dGV4dCB4PSIxNzAuMCIgeT0iMTkwLjAiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiM1ZjYzNjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIHhtbDpzcGFjZT0icHJlc2VydmUiPnRoZSBncm91cCBjb21lcyB1cDwvdGV4dD4KPHJlY3QgeD0iNDUwLjAiIHk9IjEzMC4wIiB3aWR0aD0iMjAwLjAiIGhlaWdodD0iODQuMCIgcng9IjQyIiBmaWxsPSIjZTZmNGVhIiBzdHJva2U9IiMxZThlM2UiIHN0cm9rZS13aWR0aD0iMi41Ii8+Cjx0ZXh0IHg9IjU1MC4wIiB5PSIxNjYuMCIgZm9udC1zaXplPSIxOSIgZmlsbD0iIzFlOGUzZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9IjcwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+c2VydmluZzwvdGV4dD4KPHRleHQgeD0iNTUwLjAiIHk9IjE5MC4wIiBmb250LXNpemU9IjEzIiBmaWxsPSIjNWY2MzY4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4bWw6c3BhY2U9InByZXNlcnZlIj50aGUgZ3JvdXAgc2VydmVzPC90ZXh0Pgo8cmVjdCB4PSI4MzAuMCIgeT0iMTMwLjAiIHdpZHRoPSIyMDAuMCIgaGVpZ2h0PSI4NC4wIiByeD0iNDIiIGZpbGw9IiNmZWY3ZTAiIHN0cm9rZT0iI2YyOTkwMCIgc3Ryb2tlLXdpZHRoPSIyLjUiLz4KPHRleHQgeD0iOTMwLjAiIHk9IjE2Ni4wIiBmb250LXNpemU9IjE5IiBmaWxsPSIjZjI5OTAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj5yZWNvdmVyaW5nPC90ZXh0Pgo8dGV4dCB4PSI5MzAuMCIgeT0iMTkwLjAiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiM1ZjYzNjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIHhtbDpzcGFjZT0icHJlc2VydmUiPmEgZmF1bHQgaXMgcmVwYWlyZWQ8L3RleHQ+CjxwYXRoIGQ9Ik0gMjcwLjAgMTcyLjAgTCA0NTAuMCAxNzIuMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWU4ZTNlIiBzdHJva2Utd2lkdGg9IjEuOCIvPgo8cG9seWdvbiBwb2ludHM9IjQ1MC4wLDE3Mi4wIDQ0MC44LDE3NS45IDQ0MC44LDE2OC4xIiBmaWxsPSIjMWU4ZTNlIi8+Cjx0ZXh0IHg9IjM2MC4wIiB5PSIxNjIuMCIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzFlOGUzZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+ZXZlcnkgbWVtYmVyIGlzIHVwPC90ZXh0Pgo8cGF0aCBkPSJNIDY1MC4wIDE1OC4wIEwgODMwLjAgMTU4LjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2YyOTkwMCIgc3Ryb2tlLXdpZHRoPSIxLjgiLz4KPHBvbHlnb24gcG9pbnRzPSI4MzAuMCwxNTguMCA4MjAuOCwxNjEuOSA4MjAuOCwxNTQuMSIgZmlsbD0iI2YyOTkwMCIvPgo8dGV4dCB4PSI3NDAuMCIgeT0iMTQ4LjAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiNmMjk5MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIHhtbDpzcGFjZT0icHJlc2VydmUiPmEgZmF1bHQ8L3RleHQ+CjxwYXRoIGQ9Ik0gODMwLjAgMTkyLjAgTCA2NTAuMCAxOTIuMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWU4ZTNlIiBzdHJva2Utd2lkdGg9IjEuOCIvPgo8cG9seWdvbiBwb2ludHM9IjY1MC4wLDE5Mi4wIDY1OS4yLDE4OC4xIDY1OS4yLDE5NS45IiBmaWxsPSIjMWU4ZTNlIi8+Cjx0ZXh0IHg9Ijc0MC4wIiB5PSIyMTIuMCIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzFlOGUzZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+cmVwYWlyZWQ8L3RleHQ+CjxwYXRoIGQ9Ik0gNTUwLjAgMjE0LjAgTCA1NTAuMCAyNzAuMCBMIDIwMC4wIDI3MC4wIEwgMjAwLjAgMjE0LjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Q5MzAyNSIgc3Ryb2tlLXdpZHRoPSIxLjgiLz4KPHBvbHlnb24gcG9pbnRzPSIyMDAuMCwyMTQuMCAyMDMuOSwyMjMuMiAxOTYuMSwyMjMuMiIgZmlsbD0iI2Q5MzAyNSIvPgo8cGF0aCBkPSJNIDkzMC4wIDIxNC4wIEwgOTMwLjAgMzEwLjAgTCAxNDAuMCAzMTAuMCBMIDE0MC4wIDIxNC4wIiBmaWxsPSJub25lIiBzdHJva2U9IiNkOTMwMjUiIHN0cm9rZS13aWR0aD0iMS44Ii8+Cjxwb2x5Z29uIHBvaW50cz0iMTQwLjAsMjE0LjAgMTQzLjksMjIzLjIgMTM2LjEsMjIzLjIiIGZpbGw9IiNkOTMwMjUiLz4KPHRleHQgeD0iMzc1LjAiIHk9IjI2Mi4wIiBmb250LXNpemU9IjEzIiBmaWxsPSIjZDkzMDI1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj5yZXNldCB0aGUgZ3JvdXA8L3RleHQ+Cjx0ZXh0IHg9IjUzNS4wIiB5PSIzMDIuMCIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2Q5MzAyNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9IjcwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+cmVzZXQgdGhlIGdyb3VwOiBpdCBjYW5ub3QgYmUgcmVwYWlyZWQgaW4gcGxhY2U8L3RleHQ+CjxsaW5lIHgxPSIzMi4wIiB5MT0iMzU2LjAiIHgyPSI2Mi4wIiB5Mj0iMzU2LjAiIHN0cm9rZT0iIzFlOGUzZSIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjx0ZXh0IHg9IjcwLjAiIHk9IjM2MC4wIiBmb250LXNpemU9IjEyLjUiIGZpbGw9IiM1ZjYzNjgiIHRleHQtYW5jaG9yPSJzdGFydCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+dGhpbmdzIGdldCBiZXR0ZXI8L3RleHQ+CjxsaW5lIHgxPSIyMTYuOSIgeTE9IjM1Ni4wIiB4Mj0iMjQ2LjkiIHkyPSIzNTYuMCIgc3Ryb2tlPSIjZjI5OTAwIiBzdHJva2Utd2lkdGg9IjIiLz4KPHRleHQgeD0iMjU0LjkiIHk9IjM2MC4wIiBmb250LXNpemU9IjEyLjUiIGZpbGw9IiM1ZjYzNjgiIHRleHQtYW5jaG9yPSJzdGFydCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+YSBmYXVsdDwvdGV4dD4KPGxpbmUgeDE9IjMzMy4wIiB5MT0iMzU2LjAiIHgyPSIzNjMuMCIgeTI9IjM1Ni4wIiBzdHJva2U9IiNkOTMwMjUiIHN0cm9rZS13aWR0aD0iMiIvPgo8dGV4dCB4PSIzNzEuMCIgeT0iMzYwLjAiIGZvbnQtc2l6ZT0iMTIuNSIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9InN0YXJ0IiB4bWw6c3BhY2U9InByZXNlcnZlIj5hIHJlc2V0OiBldmVyeSBQb2QgaXMgcmVjcmVhdGVkPC90ZXh0Pgo8L3N2Zz4K" width="1100" height="400" class="img_ev3q"></p>
+<p>The controller is always in one of three states. There is no final state: it never gives up on a group.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>State</th><th>Meaning</th><th>The controller</th></tr></thead><tbody><tr><td><code>starting</code></td><td>the group is coming up: a new group, or one that was just reset</td><td>waits for every member, then admits them all. No deadline: how fast the group comes up is the workload&#x27;s call.</td></tr><tr><td><code>serving</code></td><td>the group serves, maybe with fewer members than it started with</td><td>checks the result of a recovery it just made, and <a href="#restoring-capacity" class="">brings failed Pods back</a></td></tr><tr><td><code>recovering</code></td><td>the engine reports a fault</td><td>removes dead members in place with a <a href="#reconfigs" class="">reconfig</a>, or retries</td></tr></tbody></table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>From</th><th>To</th><th>When</th></tr></thead><tbody><tr><td><code>starting</code></td><td><code>serving</code></td><td>every member is up: the policy says <code>Healthy</code></td></tr><tr><td><code>serving</code></td><td><code>recovering</code></td><td>the engine reports a fault: the policy says anything but <code>Healthy</code>, other than adding members back</td></tr><tr><td><code>recovering</code></td><td><code>serving</code></td><td>the fault is repaired: the policy says <code>Healthy</code>, or the reconfig succeeded</td></tr><tr><td><code>serving</code> or <code>recovering</code></td><td><code>starting</code></td><td>recovery in place cannot help, so IRO resets the group (<code>ResetAll</code>). Each <a class="" href="/llm-d-resiliency-operator/docs/failures/">failure</a> says when.</td></tr></tbody></table>
+<p>Details per state:</p>
+<ul>
+<li class=""><strong><code>starting</code></strong>: while Pods of the old group remain, the controller repeats the <code>ResetAll</code> and does nothing
+else (see <a href="#reading-discover" class="">Reading Discover</a>). Then it records the Pods every poll and ignores any plan
+but <code>Healthy</code>.</li>
+<li class=""><strong><code>serving</code></strong>: plans every poll. A plan that only adds members runs a reconfig here too, to admit the
+members of a Pod that was reset.</li>
+<li class=""><strong><code>recovering</code></strong>: probes once on entry, and sends a reconfig no sooner than 2 polls in. Resets on
+<code>Unrecoverable</code>. While a reconfig runs, it follows <code>Progress</code> instead of planning.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="reading-discover">Reading Discover<a href="#reading-discover" class="hash-link" aria-label="Direct link to Reading Discover" title="Direct link to Reading Discover" translate="no">​</a></h3>
+<p>The workload only reports Pods as they are now. The controller decides what they mean by comparing
+them with the Pods saved in its journal.</p>
+<p><img decoding="async" loading="lazy" alt="Deciding on Discover whether this is the same group or a new one" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDQwIiBoZWlnaHQ9IjQ3MCIgdmlld0JveD0iMCAwIDEwNDAgNDcwIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgJ1NlZ29lIFVJJywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiI+CjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJ4PSI4IiBmaWxsPSIjZmZmZmZmIi8+Cjx0ZXh0IHg9IjMyLjAiIHk9IjQyLjAiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiMyMDIxMjQiIHRleHQtYW5jaG9yPSJzdGFydCIgZm9udC13ZWlnaHQ9IjcwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+U2FtZSBncm91cCBvciBhIG5ldyBvbmU/PC90ZXh0Pgo8dGV4dCB4PSIzMi4wIiB5PSI2Ni4wIiBmb250LXNpemU9IjEzIiBmaWxsPSIjNWY2MzY4IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIHhtbDpzcGFjZT0icHJlc2VydmUiPmNoZWNrZWQgb24gZXZlcnkgRGlzY292ZXIsIGJlZm9yZSBhbnl0aGluZyBlbHNlPC90ZXh0Pgo8cmVjdCB4PSI2MC4wIiB5PSIxMDAuMCIgd2lkdGg9IjIyMC4wIiBoZWlnaHQ9IjU2LjAiIHJ4PSI2IiBmaWxsPSIjZThmMGZlIiBzdHJva2U9IiMxYTczZTgiIHN0cm9rZS13aWR0aD0iMiIvPgo8dGV4dCB4PSIxNzAuMCIgeT0iMTMzLjAiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMxYTczZTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPkRpc2NvdmVyPC90ZXh0Pgo8cmVjdCB4PSIzNjAuMCIgeT0iOTIuMCIgd2lkdGg9IjMwMC4wIiBoZWlnaHQ9IjcyLjAiIHJ4PSI2IiBmaWxsPSIjZmVmN2UwIiBzdHJva2U9IiNmMjk5MDAiIHN0cm9rZS13aWR0aD0iMiIvPgo8dGV4dCB4PSI1MTAuMCIgeT0iMTI0LjAiIGZvbnQtc2l6ZT0iMTMuNSIgZmlsbD0iI2YyOTkwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9IjcwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+UmVjcmVhdGluZywgc3RvcHBlZCwgb3IgYW4gb3dlZDwvdGV4dD4KPHRleHQgeD0iNTEwLjAiIHk9IjE0NC4wIiBmb250LXNpemU9IjEyLjUiIGZpbGw9IiM1ZjYzNjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIHhtbDpzcGFjZT0icHJlc2VydmUiPlJlc2V0QWxsIHdpdGggb2xkIFBvZHMgbGVmdD88L3RleHQ+CjxyZWN0IHg9Ijc0MC4wIiB5PSI5Mi4wIiB3aWR0aD0iMjYwLjAiIGhlaWdodD0iNzIuMCIgcng9IjYiIGZpbGw9IiNmMWYzZjQiIHN0cm9rZT0iIzVmNjM2OCIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjx0ZXh0IHg9Ijg3MC4wIiB5PSIxMjQuMCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9IjcwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+V2FpdCwgYWN0IG9uIG5vdGhpbmc8L3RleHQ+Cjx0ZXh0IHg9Ijg3MC4wIiB5PSIxNDQuMCIgZm9udC1zaXplPSIxMi41IiBmaWxsPSIjNWY2MzY4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4bWw6c3BhY2U9InByZXNlcnZlIj5yZXBlYXQgdGhlIG93ZWQgUmVzZXRBbGw8L3RleHQ+CjxyZWN0IHg9IjM2MC4wIiB5PSIyNTAuMCIgd2lkdGg9IjMwMC4wIiBoZWlnaHQ9IjcyLjAiIHJ4PSI2IiBmaWxsPSIjZmVmN2UwIiBzdHJva2U9IiNmMjk5MDAiIHN0cm9rZS13aWR0aD0iMiIvPgo8dGV4dCB4PSI1MTAuMCIgeT0iMjgyLjAiIGZvbnQtc2l6ZT0iMTMuNSIgZmlsbD0iI2YyOTkwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9IjcwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+QW55IHNhdmVkIFBvZCBzdGlsbCB0aGVyZTwvdGV4dD4KPHRleHQgeD0iNTEwLjAiIHk9IjMwMi4wIiBmb250LXNpemU9IjEyLjUiIGZpbGw9IiM1ZjYzNjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIHhtbDpzcGFjZT0icHJlc2VydmUiPndpdGggdGhlIHNhbWUgaWRlbnRpdHk/PC90ZXh0Pgo8cmVjdCB4PSI3NDAuMCIgeT0iMjEwLjAiIHdpZHRoPSIyNjAuMCIgaGVpZ2h0PSI3Mi4wIiByeD0iNiIgZmlsbD0iI2U2ZjRlYSIgc3Ryb2tlPSIjMWU4ZTNlIiBzdHJva2Utd2lkdGg9IjIiLz4KPHRleHQgeD0iODcwLjAiIHk9IjI0Mi4wIiBmb250LXNpemU9IjE0IiBmaWxsPSIjMWU4ZTNlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj5TYW1lIGdyb3VwPC90ZXh0Pgo8dGV4dCB4PSI4NzAuMCIgeT0iMjYyLjAiIGZvbnQtc2l6ZT0iMTIuNSIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+Y29tcGFyZSBQb2QgYnkgUG9kPC90ZXh0Pgo8cmVjdCB4PSI3NDAuMCIgeT0iMzMwLjAiIHdpZHRoPSIyNjAuMCIgaGVpZ2h0PSI3Mi4wIiByeD0iNiIgZmlsbD0iI2ZjZThlNiIgc3Ryb2tlPSIjZDkzMDI1IiBzdHJva2Utd2lkdGg9IjIiLz4KPHRleHQgeD0iODcwLjAiIHk9IjM2Mi4wIiBmb250LXNpemU9IjE0IiBmaWxsPSIjZDkzMDI1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj5OZXcgZ3JvdXA8L3RleHQ+Cjx0ZXh0IHg9Ijg3MC4wIiB5PSIzODIuMCIgZm9udC1zaXplPSIxMi41IiBmaWxsPSIjNWY2MzY4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4bWw6c3BhY2U9InByZXNlcnZlIj5jbGVhciB0aGUgam91cm5hbCwgZ28gdG8gc3RhcnRpbmc8L3RleHQ+CjxwYXRoIGQ9Ik0gMjgwLjAgMTI4LjAgTCAzNjAuMCAxMjguMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWE3M2U4IiBzdHJva2Utd2lkdGg9IjEuOCIvPgo8cG9seWdvbiBwb2ludHM9IjM2MC4wLDEyOC4wIDM1MC44LDEzMS45IDM1MC44LDEyNC4xIiBmaWxsPSIjMWE3M2U4Ii8+CjxwYXRoIGQ9Ik0gNjYwLjAgMTI4LjAgTCA3NDAuMCAxMjguMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNWY2MzY4IiBzdHJva2Utd2lkdGg9IjEuOCIvPgo8cG9seWdvbiBwb2ludHM9Ijc0MC4wLDEyOC4wIDczMC44LDEzMS45IDczMC44LDEyNC4xIiBmaWxsPSIjNWY2MzY4Ii8+Cjx0ZXh0IHg9IjcwMC4wIiB5PSIxMjAuMCIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+eWVzPC90ZXh0Pgo8cGF0aCBkPSJNIDUxMC4wIDE2NC4wIEwgNTEwLjAgMjUwLjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFhNzNlOCIgc3Ryb2tlLXdpZHRoPSIxLjgiLz4KPHBvbHlnb24gcG9pbnRzPSI1MTAuMCwyNTAuMCA1MDYuMSwyNDAuOCA1MTMuOSwyNDAuOCIgZmlsbD0iIzFhNzNlOCIvPgo8dGV4dCB4PSI1MjAuMCIgeT0iMjEyLjAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiMxYTczZTgiIHRleHQtYW5jaG9yPSJzdGFydCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+bm88L3RleHQ+CjxwYXRoIGQ9Ik0gNjYwLjAgMjcyLjAgTCA3MDAuMCAyNzIuMCBMIDcwMC4wIDI0Ni4wIEwgNzQwLjAgMjQ2LjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFlOGUzZSIgc3Ryb2tlLXdpZHRoPSIxLjgiLz4KPHBvbHlnb24gcG9pbnRzPSI3NDAuMCwyNDYuMCA3MzAuOCwyNDkuOSA3MzAuOCwyNDIuMSIgZmlsbD0iIzFlOGUzZSIvPgo8dGV4dCB4PSI2ODAuMCIgeT0iMjYyLjAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiMxZThlM2UiIHRleHQtYW5jaG9yPSJtaWRkbGUiIHhtbDpzcGFjZT0icHJlc2VydmUiPnllczwvdGV4dD4KPHBhdGggZD0iTSA2NjAuMCAzMDAuMCBMIDcwMC4wIDMwMC4wIEwgNzAwLjAgMzY2LjAgTCA3NDAuMCAzNjYuMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZDkzMDI1IiBzdHJva2Utd2lkdGg9IjEuOCIvPgo8cG9seWdvbiBwb2ludHM9Ijc0MC4wLDM2Ni4wIDczMC44LDM2OS45IDczMC44LDM2Mi4xIiBmaWxsPSIjZDkzMDI1Ii8+Cjx0ZXh0IHg9IjY4MC4wIiB5PSIzMjAuMCIgZm9udC1zaXplPSIxMiIgZmlsbD0iI2Q5MzAyNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+bm88L3RleHQ+Cjwvc3ZnPgo=" width="1040" height="470" class="img_ev3q"></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Pod compared with the journal</th><th>Meaning</th><th>Controller does</th></tr></thead><tbody><tr><td>saved, same identity, not <code>Terminating</code></td><td>unchanged</td><td>nothing</td></tr><tr><td>saved as <code>Removing</code>, now gone or <code>Terminating</code></td><td>the <code>Reset</code> or <code>Release</code> is happening</td><td>forgets it once it is gone</td></tr><tr><td>saved, not <code>Removing</code>, now gone or <code>Terminating</code></td><td>its members are lost</td><td>adds them to the observation as Terminal (<a class="" href="/llm-d-resiliency-operator/docs/components/engines/#observe">lost members</a>), so the policy plans as usual and a reconfig can remove them</td></tr><tr><td>saved, not <code>Removing</code>, same UID with a new identity: an engine container restarted in place</td><td>its members are lost. The restarted container&#x27;s members are not in the group.</td><td>the same for the old members. It keeps the Pod&#x27;s old identity while it tracks them, so once a reconfig removed them the Pod is <a href="#restoring-capacity" class="">restored</a> like a failed Pod. The new members are never candidates. A Pod that restarts before its members were recorded is only a slower start.</td></tr><tr><td>not saved, <code>Starting</code></td><td>a replacement Pod is loading</td><td>saves it and waits</td></tr><tr><td>not saved, <code>Ready</code></td><td>a replacement Pod is up</td><td>its members, as <code>Observe</code> reports them, are candidates</td></tr></tbody></table>
+<p>A <code>ResetAll</code> is owed when every saved Pod is <code>Removing</code>. Once none of them remain, the first check
+fails, the second finds no saved Pod, and the new Pods form a new group.</p>
+<p>While <code>starting</code>, every Pod belongs to the group being started. The controller records the Pods again on
+every poll and does not connect or check members. On the first <code>Healthy</code> plan it admits every member it saw.
+The table above, <a href="#connecting-pods-and-members" class="">connecting Pods and members</a> and checks C1, C4 and C5 apply
+from then on. An empty journal (IRO&#x27;s first run) is a new group.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="connecting-pods-and-members">Connecting Pods and members<a href="#connecting-pods-and-members" class="hash-link" aria-label="Direct link to Connecting Pods and members" title="Direct link to Connecting Pods and members" translate="no">​</a></h3>
+<p><code>Discover</code> reports Pods. <code>Observe</code> reports members, each with the Pod it runs on. The controller joins
+the two by <code>Member.ID()</code> (<code>m3@idD</code>) and keeps each ID as candidate, admitted, excluded or rejected.
+Excluded means a reconfig removed it, and its Pod may still be reset. Rejected means it stays out until the
+next group: a candidate that could not join, or an excluded member whose Pod is kept as it is.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Case</th><th>Controller does</th></tr></thead><tbody><tr><td>member reported on a saved Pod</td><td>matches it by ID</td></tr><tr><td>member reported on a new, <code>Ready</code> Pod</td><td>records it as a candidate</td></tr><tr><td>admitted member reported <code>Unknown</code>, or not reported while its Pod is unchanged</td><td>unknown: see <a href="#unknown-members" class="">unknown members</a></td></tr><tr><td>admitted member on a Pod that is gone, <code>Terminating</code> or has a new identity (replaced, or its engine restarted)</td><td>lost: added to the observation as Terminal, <code>Detail: &quot;pod lost&quot;</code></td></tr><tr><td>member reported under a restarted Pod&#x27;s new identity</td><td>not tracked, never a candidate. C5 still applies: it must not serve.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="unknown-members">Unknown members<a href="#unknown-members" class="hash-link" aria-label="Direct link to Unknown members" title="Direct link to Unknown members" translate="no">​</a></h3>
+<p>An unknown member is one IRO cannot read now: it is never Serving, never Terminal, and never put in <code>Remove</code>
+by a new plan. What happens depends on how many admitted members IRO can read. Lost members do not count as read.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Admitted members IRO can read</th><th>Controller does</th></tr></thead><tbody><tr><td>all that are not lost</td><td>as usual</td></tr><tr><td>some, and others are unknown</td><td>the group is not healthy: a <code>Healthy</code> plan, or a grow in <code>serving</code>, counts as a fault. A <code>Change</code> that passes the checks but names an unknown participant is not sent: the controller waits. If they stay unknown, the diagnosis deadline resets the group, which is what stops them.</td></tr><tr><td>none, and some are unknown (the rest lost)</td><td>it cannot see the group, as when <code>Discover</code> fails: no incident, no plan, and its deadlines are paused. If that lasts <code>UnseenTimeout</code>, counted from <code>UnseenSince</code>, the group is reset (reason <code>unseen</code>): a hung frontend, or every member hung, is not left alone forever.</td></tr></tbody></table>
+<p>An unknown member never becomes Terminal by timeout. IRO cannot tell a hung member from one only IRO cannot
+reach, and the router may still send it traffic: removing it would break C1. Only the engine (<code>Terminal</code>) or
+the workload (the Pod is gone, <code>Terminating</code> or restarted) proves a process is gone.</p>
+<p>Step by step: <a class="" href="/llm-d-resiliency-operator/docs/failures/iro-blind">IRO cannot see the group</a>.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="reconfigs">Reconfigs<a href="#reconfigs" class="hash-link" aria-label="Direct link to Reconfigs" title="Direct link to Reconfigs" translate="no">​</a></h3>
+<p>A reconfig is the one engine action IRO can have in flight. It is saved in the journal before it is
+sent, and cleared when <code>Progress</code> reports <code>Succeeded</code> or <code>Failed</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>No reconfig in flight</th><th>Reconfig in flight</th></tr></thead><tbody><tr><td>Asks the policy</td><td><code>Plan</code></td><td><code>Progress</code></td></tr><tr><td>Deadline</td><td><code>DiagnosisTimeout</code>, from the fault</td><td><code>ApplyTimeout</code>, from <code>ReconfigSince</code></td></tr><tr><td>Members in <code>Remove</code></td><td>admitted</td><td>still fenced: they must reach Terminal (C1, C4)</td></tr><tr><td>After a leader change</td><td>plans again</td><td>watches <code>Progress</code>. Sends the same reconfig again only if no acceptances were saved and <code>Progress</code> says <code>NotStarted</code>.</td></tr></tbody></table>
+<p>The two deadlines catch different hangs: an engine that never reaches a state IRO can act on,
+and a reconfig that never finishes. While the workload reports <code>Recreating</code>, deadlines are not checked, and
+both restart when it ends, and when a new leader takes over. While the controller cannot see the group,
+deadlines do not count either: when it sees the group again, <code>Since</code> (in <code>recovering</code>), <code>ReconfigSince</code> and
+<code>VerifyFailedSince</code> move forward by the time it could not see. A new group drops the reconfig in flight: the workload is already replacing everything.</p>
+<p><strong>A reconfig that never left.</strong> The reconfig is saved before <code>Apply</code>, and its acceptances after. No saved
+acceptances means the send was never confirmed: the leader may have died before <code>Apply</code> reached the engine.
+When <code>Progress</code> then says <code>NotStarted</code>, the controller checks the reconfig again (C1 to C3, and C7 on the
+current observation), saves, and sends the same reconfig: same ID, same members. A reconfig that no longer
+passes is dropped, since nothing reached the engine, and the controller plans again. A resend restarts
+<code>ReconfigSince</code> and is not a new reconfig for C6. With acceptances saved, <code>NotStarted</code> counts as <code>Running</code>.
+An engine that cannot prove that no member got a reconfig never says <code>NotStarted</code>: the reconfig then fails,
+or runs into its deadline, and the group is reset.</p>
+<p><strong>After a reconfig succeeds</strong>, the controller saves its participants and joiners in <code>Verifying</code> and calls
+<code>Verify</code> on them every poll until it passes. Members the reconfig removed are already out and are not
+checked. One failed request is not a fault: a failure is retried for <code>VerifyTimeout</code>, and only a member that
+still cannot generate after that resets the group (reason <code>verify_failed</code>, naming every member that failed).
+If the engine reports a fault meanwhile, or a member becomes unknown, the group goes to <code>recovering</code>, where
+the policy can remove a dead member in place. The check is kept: when the group serves again it resumes, and
+the incident stays open until it passes, unless a new reconfig succeeds and replaces it. While IRO cannot see
+the group, the retry window is paused like the deadlines. A new leader finds <code>Verifying</code> in the journal and continues the check. Verify runs only here: IRO checks
+what it changed, nothing else. A fresh group, or one that recovered without a reconfig, goes to <code>serving</code>
+on a <code>Healthy</code> plan.</p>
+<p>Step by step: <a class="" href="/llm-d-resiliency-operator/docs/failures/leader-dies">the IRO leader dies mid-reconfig</a>, <a class="" href="/llm-d-resiliency-operator/docs/failures/reconfig-fails">a reconfig fails</a>.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="restoring-capacity">Restoring capacity<a href="#restoring-capacity" class="hash-link" aria-label="Direct link to Restoring capacity" title="Direct link to Restoring capacity" translate="no">​</a></h3>
+<p>Capacity never comes from new Pods. It comes back by resetting the failed Pod, or the whole group.
+This runs only while the group is <code>serving</code>; a fault comes first.</p>
+<p><img decoding="async" loading="lazy" alt="Restoring capacity with reset-pod, reset-all or release" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDExMDAgNTAwIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgJ1NlZ29lIFVJJywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiI+CjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJ4PSI4IiBmaWxsPSIjZmZmZmZmIi8+Cjx0ZXh0IHg9IjMyLjAiIHk9IjQyLjAiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiMyMDIxMjQiIHRleHQtYW5jaG9yPSJzdGFydCIgZm9udC13ZWlnaHQ9IjcwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+UmVzdG9yaW5nIGNhcGFjaXR5PC90ZXh0Pgo8dGV4dCB4PSIzMi4wIiB5PSI2Ni4wIiBmb250LXNpemU9IjEzIiBmaWxsPSIjNWY2MzY4IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIHhtbDpzcGFjZT0icHJlc2VydmUiPmEgUG9kIGhvbGRzIG9ubHkgZXhjbHVkZWQgbWVtYmVycyDCtyAtLWZ0LWNhcGFjaXR5LXJlc3RvcmUgcGlja3Mgd2hhdCBoYXBwZW5zPC90ZXh0Pgo8cmVjdCB4PSIzOTAuMCIgeT0iOTIuMCIgd2lkdGg9IjMyMC4wIiBoZWlnaHQ9IjU2LjAiIHJ4PSI2IiBmaWxsPSIjZmNlOGU2IiBzdHJva2U9IiNkOTMwMjUiIHN0cm9rZS13aWR0aD0iMiIvPgo8dGV4dCB4PSI1NTAuMCIgeT0iMTI1LjAiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiNkOTMwMjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPlBvZCB3aXRoIG9ubHkgZXhjbHVkZWQgbWVtYmVyczwvdGV4dD4KPHBhdGggZD0iTSA1NTAuMCAxNDguMCBMIDU1MC4wIDE4MC4wIEwgMjEwLjAgMTgwLjAgTCAyMTAuMCAyMjIuMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWE3M2U4IiBzdHJva2Utd2lkdGg9IjEuOCIvPgo8cG9seWdvbiBwb2ludHM9IjIxMC4wLDIyMi4wIDIwNi4xLDIxMi44IDIxMy45LDIxMi44IiBmaWxsPSIjMWE3M2U4Ii8+Cjx0ZXh0IHg9IjIxMC4wIiB5PSIyMTIuMCIgZm9udC1zaXplPSIxMi41IiBmaWxsPSIjMWE3M2U4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj5yZXNldC1wb2QgIChkZWZhdWx0KTwvdGV4dD4KPHJlY3QgeD0iNjAuMCIgeT0iMjIyLjAiIHdpZHRoPSIzMDAuMCIgaGVpZ2h0PSI2NC4wIiByeD0iNiIgZmlsbD0iI2U2ZjRlYSIgc3Ryb2tlPSIjMWU4ZTNlIiBzdHJva2Utd2lkdGg9IjIiLz4KPHRleHQgeD0iMjEwLjAiIHk9IjI1MC4wIiBmb250LXNpemU9IjE0IiBmaWxsPSIjMWU4ZTNlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj5SZXNldCB0aGUgUG9kPC90ZXh0Pgo8dGV4dCB4PSIyMTAuMCIgeT0iMjcwLjAiIGZvbnQtc2l6ZT0iMTIuNSIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+dHJpZWQgb25jZTwvdGV4dD4KPHBhdGggZD0iTSA1NTAuMCAxNDguMCBMIDU1MC4wIDE4MC4wIEwgNTUwLjAgMTgwLjAgTCA1NTAuMCAyMjIuMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWE3M2U4IiBzdHJva2Utd2lkdGg9IjEuOCIvPgo8cG9seWdvbiBwb2ludHM9IjU1MC4wLDIyMi4wIDU0Ni4xLDIxMi44IDU1My45LDIxMi44IiBmaWxsPSIjMWE3M2U4Ii8+Cjx0ZXh0IHg9IjU1MC4wIiB5PSIyMTIuMCIgZm9udC1zaXplPSIxMi41IiBmaWxsPSIjMWE3M2U4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj5yZXNldC1hbGw8L3RleHQ+CjxyZWN0IHg9IjQwMC4wIiB5PSIyMjIuMCIgd2lkdGg9IjMwMC4wIiBoZWlnaHQ9IjY0LjAiIHJ4PSI2IiBmaWxsPSIjZmVmN2UwIiBzdHJva2U9IiNmMjk5MDAiIHN0cm9rZS13aWR0aD0iMiIvPgo8dGV4dCB4PSI1NTAuMCIgeT0iMjUwLjAiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiNmMjk5MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPlJlc2V0QWxsPC90ZXh0Pgo8dGV4dCB4PSI1NTAuMCIgeT0iMjcwLjAiIGZvbnQtc2l6ZT0iMTIuNSIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+dGhlIHdob2xlIGdyb3VwIHJlc3RhcnRzPC90ZXh0Pgo8cGF0aCBkPSJNIDU1MC4wIDE0OC4wIEwgNTUwLjAgMTgwLjAgTCA4OTAuMCAxODAuMCBMIDg5MC4wIDIyMi4wIiBmaWxsPSJub25lIiBzdHJva2U9IiMxYTczZTgiIHN0cm9rZS13aWR0aD0iMS44Ii8+Cjxwb2x5Z29uIHBvaW50cz0iODkwLjAsMjIyLjAgODg2LjEsMjEyLjggODkzLjksMjEyLjgiIGZpbGw9IiMxYTczZTgiLz4KPHRleHQgeD0iODkwLjAiIHk9IjIxMi4wIiBmb250LXNpemU9IjEyLjUiIGZpbGw9IiMxYTczZTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPnJlbGVhc2U8L3RleHQ+CjxyZWN0IHg9Ijc0MC4wIiB5PSIyMjIuMCIgd2lkdGg9IjMwMC4wIiBoZWlnaHQ9IjY0LjAiIHJ4PSI2IiBmaWxsPSIjZjFmM2Y0IiBzdHJva2U9IiM1ZjYzNjgiIHN0cm9rZS13aWR0aD0iMiIvPgo8dGV4dCB4PSI4OTAuMCIgeT0iMjUwLjAiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM1ZjYzNjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPlJlbGVhc2UgdGhlIFBvZDwvdGV4dD4KPHRleHQgeD0iODkwLjAiIHk9IjI3MC4wIiBmb250LXNpemU9IjEyLjUiIGZpbGw9IiM1ZjYzNjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIHhtbDpzcGFjZT0icHJlc2VydmUiPnRoZSB3b3JrbG9hZCBnaXZlcyBpdCBiYWNrPC90ZXh0Pgo8cmVjdCB4PSI0MC4wIiB5PSIzODAuMCIgd2lkdGg9IjE2MC4wIiBoZWlnaHQ9IjY0LjAiIHJ4PSI2IiBmaWxsPSIjZTZmNGVhIiBzdHJva2U9IiMxZThlM2UiIHN0cm9rZS13aWR0aD0iMiIvPgo8dGV4dCB4PSIxMjAuMCIgeT0iNDE3LjAiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMxZThlM2UiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPkZ1bGwgYWdhaW48L3RleHQ+CjxyZWN0IHg9IjIyMC4wIiB5PSIzODAuMCIgd2lkdGg9IjE2MC4wIiBoZWlnaHQ9IjY0LjAiIHJ4PSI2IiBmaWxsPSIjZjFmM2Y0IiBzdHJva2U9IiM1ZjYzNjgiIHN0cm9rZS13aWR0aD0iMiIvPgo8dGV4dCB4PSIzMDAuMCIgeT0iNDA4LjAiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM1ZjYzNjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPkZld2VyIG1lbWJlcnM8L3RleHQ+Cjx0ZXh0IHg9IjMwMC4wIiB5PSI0MjguMCIgZm9udC1zaXplPSIxMi41IiBmaWxsPSIjNWY2MzY4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4bWw6c3BhY2U9InByZXNlcnZlIj5Qb2Qga2VwdCBhcyBpdCBpczwvdGV4dD4KPHJlY3QgeD0iNDAwLjAiIHk9IjM4MC4wIiB3aWR0aD0iMzAwLjAiIGhlaWdodD0iNjQuMCIgcng9IjYiIGZpbGw9IiNlNmY0ZWEiIHN0cm9rZT0iIzFlOGUzZSIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjx0ZXh0IHg9IjU1MC4wIiB5PSI0MDguMCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzFlOGUzZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9IjcwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+RnVsbCBhZ2FpbjwvdGV4dD4KPHRleHQgeD0iNTUwLjAiIHk9IjQyOC4wIiBmb250LXNpemU9IjEyLjUiIGZpbGw9IiM1ZjYzNjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIHhtbDpzcGFjZT0icHJlc2VydmUiPmFmdGVyIGEgZnJlc2ggc3RhcnQ8L3RleHQ+CjxyZWN0IHg9Ijc0MC4wIiB5PSIzODAuMCIgd2lkdGg9IjMwMC4wIiBoZWlnaHQ9IjY0LjAiIHJ4PSI2IiBmaWxsPSIjZjFmM2Y0IiBzdHJva2U9IiM1ZjYzNjgiIHN0cm9rZS13aWR0aD0iMiIvPgo8dGV4dCB4PSI4OTAuMCIgeT0iNDA4LjAiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM1ZjYzNjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPkZld2VyIG1lbWJlcnM8L3RleHQ+Cjx0ZXh0IHg9Ijg5MC4wIiB5PSI0MjguMCIgZm9udC1zaXplPSIxMi41IiBmaWxsPSIjNWY2MzY4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4bWw6c3BhY2U9InByZXNlcnZlIj51bnRpbCB0aGUgZ3JvdXAgcmVzdGFydHM8L3RleHQ+CjxwYXRoIGQ9Ik0gMTcwLjAgMjg2LjAgTCAxNzAuMCAzMzAuMCBMIDEyMC4wIDMzMC4wIEwgMTIwLjAgMzgwLjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFlOGUzZSIgc3Ryb2tlLXdpZHRoPSIxLjgiLz4KPHBvbHlnb24gcG9pbnRzPSIxMjAuMCwzODAuMCAxMTYuMSwzNzAuOCAxMjMuOSwzNzAuOCIgZmlsbD0iIzFlOGUzZSIvPgo8dGV4dCB4PSIxMjguMCIgeT0iMzUyLjAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiMxZThlM2UiIHRleHQtYW5jaG9yPSJzdGFydCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+am9pbmVkPC90ZXh0Pgo8cGF0aCBkPSJNIDI1MC4wIDI4Ni4wIEwgMjUwLjAgMzMwLjAgTCAzMDAuMCAzMzAuMCBMIDMwMC4wIDM4MC4wIiBmaWxsPSJub25lIiBzdHJva2U9IiM1ZjYzNjgiIHN0cm9rZS13aWR0aD0iMS44Ii8+Cjxwb2x5Z29uIHBvaW50cz0iMzAwLjAsMzgwLjAgMjk2LjEsMzcwLjggMzAzLjksMzcwLjgiIGZpbGw9IiM1ZjYzNjgiLz4KPHRleHQgeD0iMzA4LjAiIHk9IjM0Ni4wIiBmb250LXNpemU9IjEyIiBmaWxsPSIjNWY2MzY4IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIHhtbDpzcGFjZT0icHJlc2VydmUiPnVuc3VwcG9ydGVkLDwvdGV4dD4KPHRleHQgeD0iMzA4LjAiIHk9IjM2Mi4wIiBmb250LXNpemU9IjEyIiBmaWxsPSIjNWY2MzY4IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIHhtbDpzcGFjZT0icHJlc2VydmUiPm9yIGpvaW4gZmFpbHM8L3RleHQ+CjxwYXRoIGQ9Ik0gNTUwLjAgMjg2LjAgTCA1NTAuMCAzODAuMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWU4ZTNlIiBzdHJva2Utd2lkdGg9IjEuOCIvPgo8cG9seWdvbiBwb2ludHM9IjU1MC4wLDM4MC4wIDU0Ni4xLDM3MC44IDU1My45LDM3MC44IiBmaWxsPSIjMWU4ZTNlIi8+CjxwYXRoIGQ9Ik0gODkwLjAgMjg2LjAgTCA4OTAuMCAzODAuMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNWY2MzY4IiBzdHJva2Utd2lkdGg9IjEuOCIvPgo8cG9seWdvbiBwb2ludHM9Ijg5MC4wLDM4MC4wIDg4Ni4xLDM3MC44IDg5My45LDM3MC44IiBmaWxsPSIjNWY2MzY4Ii8+CjxyZWN0IHg9IjMyLjAiIHk9IjQ2Ny4wIiB3aWR0aD0iMjYuMCIgaGVpZ2h0PSIxNi4wIiByeD0iMyIgZmlsbD0iI2U2ZjRlYSIgc3Ryb2tlPSIjMWU4ZTNlIiBzdHJva2Utd2lkdGg9IjIiLz4KPHRleHQgeD0iNjYuMCIgeT0iNDgwLjAiIGZvbnQtc2l6ZT0iMTIuNSIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9InN0YXJ0IiB4bWw6c3BhY2U9InByZXNlcnZlIj5mdWxsIGdyb3VwPC90ZXh0Pgo8cmVjdCB4PSIxNjQuOCIgeT0iNDY3LjAiIHdpZHRoPSIyNi4wIiBoZWlnaHQ9IjE2LjAiIHJ4PSIzIiBmaWxsPSIjZjFmM2Y0IiBzdHJva2U9IiM1ZjYzNjgiIHN0cm9rZS13aWR0aD0iMiIvPgo8dGV4dCB4PSIxOTguOCIgeT0iNDgwLjAiIGZvbnQtc2l6ZT0iMTIuNSIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9InN0YXJ0IiB4bWw6c3BhY2U9InByZXNlcnZlIj5zZXJ2aW5nIGJlbG93IGZ1bGw8L3RleHQ+Cjwvc3ZnPgo=" width="1100" height="500" class="img_ev3q"></p>
+<ol>
+<li class="">Once the members of the last reconfig passed <code>Verify</code>, on a poll whose plan is <code>Healthy</code>, the controller
+looks for Pods that hold only excluded members. It marks them all <code>Removing</code>, saves once, and names them
+all in one <code>Reset</code>, <code>ResetAll</code> or <code>Release</code>, per <code>--ft-capacity-restore</code> (C8). If a call that names several
+Pods returns <code>ErrUnsupported</code>, it asks for each Pod alone, so a Pod the workload can never replace does not
+keep the others below full. A Pod that is already gone is just forgotten.
+A Pod restarted in place is one of them once the reconfig that removed its old members finished.</li>
+<li class="">After a <code>Reset</code>, the new Pods start on their own. Their members become candidates as each Pod becomes
+<code>Ready</code>, and the policy admits them in ordinary <a href="#reconfigs" class="">reconfigs</a>: one for all of them, or one as each is ready.</li>
+<li class="">There is one try, no budget. If the Pod cannot be reset (<code>ErrUnsupported</code>, or the engine cannot grow),
+or the new Pod&#x27;s members are rejected (the join reconfig fails, or the new Pod restarts before joining),
+the group keeps serving with fewer members. The Pod&#x27;s members are marked rejected, so it is not tried
+again. A new Pod that is still starting is waited for.</li>
+<li class="">With <code>release</code>, the released Pod goes and the group serves with fewer members. <code>ErrUnsupported</code> keeps
+the Pod as it is, the same way.</li>
+<li class="">With <code>reset-all</code>, any excluded or rejected member resets the whole group (reason <code>capacity</code>), even when
+its Pod still holds admitted members, so the group never stays below full.</li>
+<li class="">Other workload errors are not failures: the call is repeated on the next poll.</li>
+<li class="">Full capacity comes back with the next group: any <code>ResetAll</code>, or a recreation by the workload.</li>
+<li class="">There is no extra state: the <code>Removing</code> Pods, the member states and the reconfig in flight say where things are.</li>
+</ol>
+<p>Step by step: <a class="" href="/llm-d-resiliency-operator/docs/failures/several-members-die">several members die at once</a>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="rules">Rules<a href="#rules" class="hash-link" aria-label="Direct link to Rules" title="Direct link to Rules" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="checks-on-every-plan">Checks on every plan<a href="#checks-on-every-plan" class="hash-link" aria-label="Direct link to Checks on every plan" title="Direct link to Checks on every plan" translate="no">​</a></h3>
+<p>The policy decides. The controller still refuses any plan that breaks these rules,
+so a wrong policy can stall or reset a group but cannot exclude a member that still serves.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>Rule</th><th>Why</th></tr></thead><tbody><tr><td>C1</td><td><code>Remove</code> holds only members that are Terminal when the plan is checked: an unknown one fails. They stay Terminal until the reconfig succeeds; one that later reads unknown is not checked.</td><td>the router follows native health. A removed member that still serves gets traffic outside the group.</td></tr><tr><td>C2</td><td><code>Add</code> holds only candidates that are Joinable, on Pods that are <code>Ready</code> and unchanged</td><td>a stale Pod must not join</td></tr><tr><td>C3</td><td><code>Participants</code> and <code>Remove</code> are admitted members, <code>Add</code> holds candidates, the three are disjoint, and <code>Participants</code> is not empty</td><td>a reconfig must name a real, consistent membership change</td></tr><tr><td>C4</td><td>Excluded members stay Terminal. An unknown one is not checked: it cannot serve.</td><td>otherwise an excluded member could take traffic again</td></tr><tr><td>C5</td><td>Members that are not admitted are not Serving, except those the reconfig in flight adds</td><td>a joiner must not take traffic before it is in the group</td></tr><tr><td>C6</td><td>A reconfig that changes no membership cannot repeat within <code>FlapWindow</code></td><td>stops retry loops</td></tr><tr><td>C7</td><td>One reconfig at a time. Every member a reconfig names is in the observation it is planned on, lost members included. <code>Apply</code> refuses any other reconfig.</td><td>a stale reconfig cannot apply to a changed group</td></tr><tr><td>C8</td><td><code>Reset</code> and <code>Release</code> name only Pods whose every member is excluded, after the reconfig that removed them finished</td><td>the engine must no longer depend on a Pod before it goes</td></tr></tbody></table>
+<p>A plan that fails C1 to C3 resets the group. An observation that fails C1, C4 or C5 resets the group.
+The observation is checked in <code>serving</code> and <code>recovering</code>. In <code>starting</code> no member is admitted yet: the
+<code>Healthy</code> plan that ends <code>starting</code> admits them all. C8 limits what the controller itself sends, so it is
+never violated at runtime.</p>
+<p>Step by step: <a class="" href="/llm-d-resiliency-operator/docs/failures/transient-fault">a transient fault</a>.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="guarantees">Guarantees<a href="#guarantees" class="hash-link" aria-label="Direct link to Guarantees" title="Direct link to Guarantees" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Guarantee</th><th>How</th></tr></thead><tbody><tr><td>One writer per group</td><td>runs only on the elected leader. Journal saves are compare-and-swap on the version this controller loaded or saved; after a conflict it loads again.</td></tr><tr><td>At most one run per reconfig</td><td>saved before <code>Apply</code>, acceptances saved after. Sent again, same ID, only when the send was never confirmed and <code>Progress</code> says <code>NotStarted</code>. A member that already got it does not start it again.</td></tr><tr><td>Repeatable workload calls</td><td><code>Reset</code>, <code>ResetAll</code> and <code>Release</code> are saved first and repeated until <code>Discover</code> shows the result</td></tr><tr><td>One reconfig at a time</td><td>a new plan is asked for only when no reconfig is in flight</td></tr><tr><td>Faults come first</td><td>capacity is restored only while <code>serving</code></td></tr><tr><td>A failed save never advances the phase</td><td>the in-memory state keeps the last saved phase</td></tr><tr><td>Never resets a group it cannot see</td><td>a failed <code>Discover</code> waits. An <code>Observe</code> that reads no admitted member waits with deadlines paused, up to <code>UnseenTimeout</code>.</td></tr><tr><td>Resets hit only what failed</td><td><code>Reset</code> names the failed Pods by UID; <code>ResetAll</code> names the saved Pods by UID. Both are repeated, one call per poll, until those Pods are gone.</td></tr><tr><td>Never gives up on its own</td><td>no reset budget and no terminal phase. The workload&#x27;s restart policy paces resets and decides when to stop.</td></tr><tr><td>No startup deadline</td><td><code>starting</code>, and a reset Pod coming back, take as long as they need</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="configuration">Configuration<a href="#configuration" class="hash-link" aria-label="Direct link to Configuration" title="Direct link to Configuration" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Flag</th><th>Default</th><th>Meaning</th></tr></thead><tbody><tr><td><code>--enable-engine-ft</code></td><td><code>false</code></td><td>turn the controller on (needs <code>--leader-elect</code>)</td></tr><tr><td><code>--engine</code></td><td></td><td>engine implementation, e.g. <code>vllm</code></td></tr><tr><td><code>--workload</code> (target)</td><td><code>lws</code></td><td>workload implementation</td></tr><tr><td><code>--ft-diagnosis-timeout</code></td><td>75s</td><td><code>DiagnosisTimeout</code></td></tr><tr><td><code>--ft-apply-timeout</code></td><td>90s</td><td><code>ApplyTimeout</code></td></tr><tr><td><code>--ft-verify-timeout</code></td><td>2m</td><td><code>VerifyTimeout</code>: how long a failed check after a reconfig is retried. 0 resets on the first failure.</td></tr><tr><td><code>--ft-unseen-timeout</code></td><td>10m</td><td><code>UnseenTimeout</code>: how long no admitted member may be readable before the group is reset. 0 waits forever.</td></tr><tr><td><code>--ft-capacity-restore</code> (target)</td><td><code>reset-pod</code></td><td><code>CapacityRestore</code>: <code>reset-pod</code> resets the failed Pods once and serves below full if that fails; <code>reset-all</code> resets the group, so it never stays below full; <code>release</code> frees the GPUs and serves below full.</td></tr><tr><td>no flag</td><td>2m</td><td><code>FlapWindow</code></td></tr><tr><td>no flag</td><td>1s</td><td><code>PollInterval</code></td></tr></tbody></table>
+<p>Each engine and workload implementation registers its own flags.
+<code>--ft-store-port</code> moves to the engine driver that needs it.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="considerations">Considerations<a href="#considerations" class="hash-link" aria-label="Direct link to Considerations" title="Direct link to Considerations" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>IRO cannot see the group.</strong> A failed <code>Discover</code>, or an <code>Observe</code> that reads no admitted member, proves
+nothing about the group: IRO may be the one cut off. The controller keeps the phase, opens no incident,
+asks for no plan, and pauses its deadlines. A group whose every member hangs, or whose single frontend
+hangs, looks the same, so the wait is bounded: once no admitted member has been readable for
+<code>UnseenTimeout</code>, the group is reset. The timeout is long, so a short blip on IRO&#x27;s side never resets a
+group that serves. A failed <code>Discover</code> never resets: IRO cannot see the Pods it would name. A real fault
+does not wait that long either: an engine that gives up on recovery reports its members Terminal, and the
+group is reset once IRO sees it again.</li>
+<li class=""><strong>The workload gave up.</strong> <code>RecreateStopped</code> makes the controller wait and act on nothing. Telemetry
+reports it so people can see it. Recovery resumes when the workload recreates the group.</li>
+<li class=""><strong>Why verify only after a reconfig.</strong> Verify does not gate traffic: the router follows the engine&#x27;s native
+health. Its job is to catch a recovery the engine reports as done but that cannot generate. That risk
+comes from what IRO changed, so that is when it checks. One slow completion is not a fault, so a failure
+is retried for <code>VerifyTimeout</code> before the reset.</li>
+<li class=""><strong>Why a failed check resets the whole group.</strong> It happens only when the engine reports every checked
+member <code>Serving</code> and one still cannot generate after <code>VerifyTimeout</code>. The checked members are admitted and
+the engine depends on them: after a shrink or a retry they are every member left, and in expert parallel
+every member takes part in every step. No smaller action is safe. A reconfig removes only Terminal members
+(C1), and a Pod is reset only once the engine no longer depends on it (C8). Resetting the failing member&#x27;s
+Pod would be a new fault for every member that shares a step with it, and its replacement comes back only
+if the engine can grow. Keeping the member admitted is not safe either: the router keeps sending it traffic
+that fails. <code>--ft-capacity-restore</code> does not apply: it is about Pods whose members a reconfig already removed.</li>
+<li class=""><strong>No give-up state.</strong> IRO resets whenever recovery in place cannot help. How often a group may be
+recreated, and when to stop, is the workload&#x27;s restart policy (for LWS, <code>restartBackoff</code> and <code>maxGroupRestarts</code>).</li>
+<li class=""><strong>Restarts in place.</strong> Kubelet restarts a crashed or probe-failed container without replacing its Pod. A
+workload that recreates the group for that reports <code>Recreating</code>, and the controller waits for the new group.
+One that does not (for example LWS with <code>restartPolicy: None</code>) reports the same UID with a new identity, and the controller
+handles it like a lost Pod: a reconfig removes the old members, and capacity comes back only through the
+Pod&#x27;s reset. The restarted container&#x27;s members are never candidates: IRO did not ask for them, and a
+container that restarted once may restart again, so the fresh Pod from <code>Reset</code> is the one try. A restart
+during recovery costs more: a member paused for a reconfig that is restarted is lost too, so it is removed
+with the dead one, or the reconfig in flight fails and the group is reset. Probes on engine containers must
+not fail while a member is paused for recovery; each engine doc names the probes that are safe, if any.</li>
+<li class=""><strong>Why the controller decides &quot;same group&quot;.</strong> It already remembers which Pods it asked to reset or
+release, so it can tell those from a lost one. The workload stays a plain reporter.</li>
+<li class=""><strong>Why reset the failed Pods first.</strong> It is the smallest action that brings capacity back: only the failed Pods
+restart, and the other members keep serving. <code>ResetAll</code> stops the whole group while the model loads
+again, and when this group is the only one serving the model, that is a full outage. So when a Pod
+cannot come back, the default keeps serving with fewer members. <code>--ft-capacity-restore=reset-all</code> takes
+the outage to get back to full.</li>
+</ul></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/llm-d-resiliency-operator/docs/components/"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">IRO components and contracts</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/llm-d-resiliency-operator/docs/components/engines/"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Engine</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#interface" class="table-of-contents__link toc-highlight">Interface</a></li><li><a href="#objects" class="table-of-contents__link toc-highlight">Objects</a></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#new" class="table-of-contents__link toc-highlight">New</a></li><li><a href="#step" class="table-of-contents__link toc-highlight">Step</a></li></ul></li><li><a href="#behavior" class="table-of-contents__link toc-highlight">Behavior</a><ul><li><a href="#state-machine" class="table-of-contents__link toc-highlight">State machine</a></li><li><a href="#reading-discover" class="table-of-contents__link toc-highlight">Reading Discover</a></li><li><a href="#connecting-pods-and-members" class="table-of-contents__link toc-highlight">Connecting Pods and members</a></li><li><a href="#unknown-members" class="table-of-contents__link toc-highlight">Unknown members</a></li><li><a href="#reconfigs" class="table-of-contents__link toc-highlight">Reconfigs</a></li><li><a href="#restoring-capacity" class="table-of-contents__link toc-highlight">Restoring capacity</a></li></ul></li><li><a href="#rules" class="table-of-contents__link toc-highlight">Rules</a><ul><li><a href="#checks-on-every-plan" class="table-of-contents__link toc-highlight">Checks on every plan</a></li><li><a href="#guarantees" class="table-of-contents__link toc-highlight">Guarantees</a></li></ul></li><li><a href="#configuration" class="table-of-contents__link toc-highlight">Configuration</a></li><li><a href="#considerations" class="table-of-contents__link toc-highlight">Considerations</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/llm-d-resiliency-operator/docs">Architecture</a></li><li class="footer__item"><a class="footer__link-item" href="/llm-d-resiliency-operator/docs/components">Components</a></li><li class="footer__item"><a class="footer__link-item" href="/llm-d-resiliency-operator/docs/failures">Failures</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/llm-d-incubation/llm-d-resiliency-operator" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://llm-d.ai" target="_blank" rel="noopener noreferrer" class="footer__link-item">llm-d<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 llm-d Project Authors. Apache-2.0.</div></div></div></footer></div>
+</body>
+</html>

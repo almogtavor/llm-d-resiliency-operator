@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-components/index" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.10.2">
+<title data-rh="true">IRO components and contracts | llm-d Resiliency Operator</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="IRO components and contracts | llm-d Resiliency Operator"><meta data-rh="true" name="description" content="- Author: Itay Etelis"><meta data-rh="true" property="og:description" content="- Author: Itay Etelis"><link data-rh="true" rel="icon" href="/llm-d-resiliency-operator/img/favicon.png"><link data-rh="true" rel="canonical" href="https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/"><link data-rh="true" rel="alternate" href="https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/" hreflang="en"><link data-rh="true" rel="alternate" href="https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Components","item":"https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/"}]}</script><link rel="stylesheet" href="/llm-d-resiliency-operator/assets/css/styles.544c8b07.css">
+<script src="/llm-d-resiliency-operator/assets/js/runtime~main.d09c1ea8.js" defer="defer"></script>
+<script src="/llm-d-resiliency-operator/assets/js/main.0dd1a1ad.js" defer="defer"></script>
+</head>
+<body>
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/llm-d-resiliency-operator/img/llm-d-logo-transparent.png"><link rel="preload" as="image" href="/llm-d-resiliency-operator/img/llm-d-logo-transparent-dark.png"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/llm-d-resiliency-operator/"><div class="navbar__logo"><img src="/llm-d-resiliency-operator/img/llm-d-logo-transparent.png" alt="llm-d Resiliency Operator" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/llm-d-resiliency-operator/img/llm-d-logo-transparent-dark.png" alt="llm-d Resiliency Operator" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/llm-d-resiliency-operator/docs/">Docs</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/llm-d-incubation/llm-d-resiliency-operator" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-github-link" aria-label="GitHub"></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/llm-d-resiliency-operator/docs/"><span class="linkLabel_WmDU">Architecture</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/llm-d-resiliency-operator/docs/getting-started"><span class="linkLabel_WmDU">Getting started</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible menu__list-item-collapsible--active"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" aria-current="page" href="/llm-d-resiliency-operator/docs/components/"><span class="categoryLinkLabel_W154">Components</span></a><button aria-label="Collapse sidebar category &#x27;Components&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/llm-d-resiliency-operator/docs/components/controller"><span class="linkLabel_WmDU">Controller</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/llm-d-resiliency-operator/docs/components/engines/"><span class="categoryLinkLabel_W154">Engines</span></a><button aria-label="Expand sidebar category &#x27;Engines&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/llm-d-resiliency-operator/docs/components/workloads/"><span class="categoryLinkLabel_W154">Workloads</span></a><button aria-label="Expand sidebar category &#x27;Workloads&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/llm-d-resiliency-operator/docs/components/journal"><span class="linkLabel_WmDU">Journal</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/llm-d-resiliency-operator/docs/components/telemetry"><span class="linkLabel_WmDU">Telemetry</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/llm-d-resiliency-operator/docs/failures/"><span class="categoryLinkLabel_W154">Failures</span></a><button aria-label="Expand sidebar category &#x27;Failures&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/llm-d-resiliency-operator/docs/examples/"><span class="categoryLinkLabel_W154">Examples</span></a><button aria-label="Expand sidebar category &#x27;Examples&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/llm-d-resiliency-operator/docs/reference/upstream-versions"><span class="categoryLinkLabel_W154">Reference</span></a></div></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/llm-d-resiliency-operator/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">Components</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>IRO components and contracts</h1></header>
+<ul>
+<li class=""><strong>Author:</strong> Itay Etelis</li>
+<li class=""><strong>Date:</strong> 2026-10-12</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="problem">Problem<a href="#problem" class="hash-link" aria-label="Direct link to Problem" title="Direct link to Problem" translate="no">​</a></h2>
+<p>Recovery involves three parties: the controller, the workload that runs the Pods, and the inference engine.
+If they share the details of one engine or one workload type, such as rank numbers, store addresses, status
+strings or ports, then every new engine, every new workload type, and scaling back up after a shrink means
+changing all three. This doc fixes the boundaries: the controller sees only Pods and members, and everything
+specific to an engine or a workload stays behind its plugin.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="components">Components<a href="#components" class="hash-link" aria-label="Direct link to Components" title="Direct link to Components" translate="no">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="IRO manager, its plugins and what they talk to" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjgyMCIgdmlld0JveD0iMCAwIDEyMDAgODIwIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgJ1NlZ29lIFVJJywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiI+CjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJ4PSI4IiBmaWxsPSIjZmZmZmZmIi8+Cjx0ZXh0IHg9IjMyLjAiIHk9IjQyLjAiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiMyMDIxMjQiIHRleHQtYW5jaG9yPSJzdGFydCIgZm9udC13ZWlnaHQ9IjcwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+SVJPIGF0IGEgZ2xhbmNlPC90ZXh0Pgo8dGV4dCB4PSIzMi4wIiB5PSI2Ni4wIiBmb250LXNpemU9IjEzIiBmaWxsPSIjNWY2MzY4IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIHhtbDpzcGFjZT0icHJlc2VydmUiPm9uZSBtYW5hZ2VyIHBlciBlbmdpbmUgZ3JvdXAgwrcgdGhlIGNvbnRyb2xsZXIgb25seSB0YWxrcyB0byBpdHMgcGx1Z2luczwvdGV4dD4KPHJlY3QgeD0iMzAuMCIgeT0iOTIuMCIgd2lkdGg9Ijc5MC4wIiBoZWlnaHQ9IjYyMC4wIiByeD0iMTAiIGZpbGw9IiNmYmZjZmYiIHN0cm9rZT0iIzFhNzNlOCIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjx0ZXh0IHg9IjQ4LjAiIHk9IjExOC4wIiBmb250LXNpemU9IjE0IiBmaWxsPSIjMWE3M2U4IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZvbnQtd2VpZ2h0PSI3MDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPklSTyBtYW5hZ2VyICAobGVhZGVyLWVsZWN0ZWQpPC90ZXh0Pgo8cmVjdCB4PSI2MC4wIiB5PSIzMzAuMCIgd2lkdGg9IjIxMC4wIiBoZWlnaHQ9IjEwMC4wIiByeD0iNiIgZmlsbD0iI2U4ZjBmZSIgc3Ryb2tlPSIjMWE3M2U4IiBzdHJva2Utd2lkdGg9IjIiLz4KPHRleHQgeD0iNzQuMCIgeT0iMzU0LjAiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMyMDIxMjQiIHRleHQtYW5jaG9yPSJzdGFydCIgZm9udC13ZWlnaHQ9IjcwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+Q29udHJvbGxlcjwvdGV4dD4KPHRleHQgeD0iNzQuMCIgeT0iMzc0LjAiIGZvbnQtc2l6ZT0iMTIuNSIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9InN0YXJ0IiB4bWw6c3BhY2U9InByZXNlcnZlIj5vbmUgc3RlcCBwZXIgcG9sbDwvdGV4dD4KPHRleHQgeD0iNzQuMCIgeT0iMzkyLjAiIGZvbnQtc2l6ZT0iMTIuNSIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9InN0YXJ0IiB4bWw6c3BhY2U9InByZXNlcnZlIj5waGFzZXMsIGRlYWRsaW5lcywgY2hlY2tzPC90ZXh0Pgo8cmVjdCB4PSI1NDAuMCIgeT0iMTQwLjAiIHdpZHRoPSIyNjAuMCIgaGVpZ2h0PSI2Ni4wIiByeD0iNiIgZmlsbD0iI2YxZjNmNCIgc3Ryb2tlPSIjNWY2MzY4IiBzdHJva2Utd2lkdGg9IjIiLz4KPHRleHQgeD0iNTU0LjAiIHk9IjE2NC4wIiBmb250LXNpemU9IjE0IiBmaWxsPSIjMjAyMTI0IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZvbnQtd2VpZ2h0PSI3MDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPkpvdXJuYWw8L3RleHQ+Cjx0ZXh0IHg9IjU1NC4wIiB5PSIxODQuMCIgZm9udC1zaXplPSIxMi41IiBmaWxsPSIjNWY2MzY4IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIHhtbDpzcGFjZT0icHJlc2VydmUiPnZlcnNpb25lZCByZWNvcmQsIExvYWQgLyBTYXZlPC90ZXh0Pgo8cmVjdCB4PSI1NDAuMCIgeT0iMjYwLjAiIHdpZHRoPSIyNjAuMCIgaGVpZ2h0PSI3OC4wIiByeD0iNiIgZmlsbD0iI2YxZjNmNCIgc3Ryb2tlPSIjNWY2MzY4IiBzdHJva2Utd2lkdGg9IjIiLz4KPHRleHQgeD0iNTU0LjAiIHk9IjI4NC4wIiBmb250LXNpemU9IjE0IiBmaWxsPSIjMjAyMTI0IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZvbnQtd2VpZ2h0PSI3MDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPldvcmtsb2FkPC90ZXh0Pgo8dGV4dCB4PSI1NTQuMCIgeT0iMzA0LjAiIGZvbnQtc2l6ZT0iMTIuNSIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9InN0YXJ0IiB4bWw6c3BhY2U9InByZXNlcnZlIj5MV1M6IG9uZSBncm91cCBvZiBQb2RzPC90ZXh0Pgo8dGV4dCB4PSI1NTQuMCIgeT0iMzIyLjAiIGZvbnQtc2l6ZT0iMTIuNSIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9InN0YXJ0IiB4bWw6c3BhY2U9InByZXNlcnZlIj5Qb2QgaWRlbnRpdHksIFJlc2V0LCBSZWxlYXNlPC90ZXh0Pgo8cmVjdCB4PSI1NDAuMCIgeT0iMzgwLjAiIHdpZHRoPSIyNjAuMCIgaGVpZ2h0PSIxNzAuMCIgcng9IjYiIGZpbGw9IiNlNmY0ZWEiIHN0cm9rZT0iIzFlOGUzZSIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjx0ZXh0IHg9IjU1NC4wIiB5PSI0MDQuMCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzIwMjEyNCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmb250LXdlaWdodD0iNzAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj5FbmdpbmU8L3RleHQ+Cjx0ZXh0IHg9IjU1NC4wIiB5PSI0MjQuMCIgZm9udC1zaXplPSIxMi41IiBmaWxsPSIjNWY2MzY4IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIHhtbDpzcGFjZT0icHJlc2VydmUiPm9uZSBwbHVnaW4gcGVyIGluZmVyZW5jZSBlbmdpbmU8L3RleHQ+CjxyZWN0IHg9IjU1NC4wIiB5PSI0NDIuMCIgd2lkdGg9IjExMi4wIiBoZWlnaHQ9IjkwLjAiIHJ4PSI2IiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiMxZThlM2UiIHN0cm9rZS13aWR0aD0iMiIvPgo8dGV4dCB4PSI1NjguMCIgeT0iNDY2LjAiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMyMDIxMjQiIHRleHQtYW5jaG9yPSJzdGFydCIgZm9udC13ZWlnaHQ9IjcwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+UG9saWN5PC90ZXh0Pgo8dGV4dCB4PSI1NjguMCIgeT0iNDg2LjAiIGZvbnQtc2l6ZT0iMTIuNSIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9InN0YXJ0IiB4bWw6c3BhY2U9InByZXNlcnZlIj5wdXJlOiBwbGFucyw8L3RleHQ+Cjx0ZXh0IHg9IjU2OC4wIiB5PSI1MDQuMCIgZm9udC1zaXplPSIxMi41IiBmaWxsPSIjNWY2MzY4IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIHhtbDpzcGFjZT0icHJlc2VydmUiPm5vIEkvTzwvdGV4dD4KPHJlY3QgeD0iNjc2LjAiIHk9IjQ0Mi4wIiB3aWR0aD0iMTEyLjAiIGhlaWdodD0iOTAuMCIgcng9IjYiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzFlOGUzZSIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjx0ZXh0IHg9IjY5MC4wIiB5PSI0NjYuMCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzIwMjEyNCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmb250LXdlaWdodD0iNzAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj5Ecml2ZXI8L3RleHQ+Cjx0ZXh0IHg9IjY5MC4wIiB5PSI0ODYuMCIgZm9udC1zaXplPSIxMi41IiBmaWxsPSIjNWY2MzY4IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIHhtbDpzcGFjZT0icHJlc2VydmUiPnJlYWRzLCBhcHBsaWVzPC90ZXh0Pgo8dGV4dCB4PSI2OTAuMCIgeT0iNTA0LjAiIGZvbnQtc2l6ZT0iMTIuNSIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9InN0YXJ0IiB4bWw6c3BhY2U9InByZXNlcnZlIj5vdmVyIEhUVFA8L3RleHQ+CjxyZWN0IHg9IjU0MC4wIiB5PSI2MjAuMCIgd2lkdGg9IjI2MC4wIiBoZWlnaHQ9IjYwLjAiIHJ4PSI2IiBmaWxsPSIjZjFmM2Y0IiBzdHJva2U9IiM1ZjYzNjgiIHN0cm9rZS13aWR0aD0iMiIvPgo8dGV4dCB4PSI1NTQuMCIgeT0iNjQ0LjAiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMyMDIxMjQiIHRleHQtYW5jaG9yPSJzdGFydCIgZm9udC13ZWlnaHQ9IjcwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+VGVsZW1ldHJ5PC90ZXh0Pgo8dGV4dCB4PSI1NTQuMCIgeT0iNjY0LjAiIGZvbnQtc2l6ZT0iMTIuNSIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9InN0YXJ0IiB4bWw6c3BhY2U9InByZXNlcnZlIj5tZXRyaWNzLCBFdmVudHMsIGxvZ3M8L3RleHQ+CjxwYXRoIGQ9Ik0gMTY1LjAgMzMwLjAgTCAxNjUuMCAxNzMuMCBMIDU0MC4wIDE3My4wIiBmaWxsPSJub25lIiBzdHJva2U9IiMxYTczZTgiIHN0cm9rZS13aWR0aD0iMS44Ii8+Cjxwb2x5Z29uIHBvaW50cz0iNTQwLjAsMTczLjAgNTMwLjgsMTc2LjkgNTMwLjgsMTY5LjEiIGZpbGw9IiMxYTczZTgiLz4KPHRleHQgeD0iMzUwLjAiIHk9IjE2NS4wIiBmb250LXNpemU9IjEyIiBmaWxsPSIjMWE3M2U4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4bWw6c3BhY2U9InByZXNlcnZlIj5Mb2FkLCBTYXZlPC90ZXh0Pgo8cGF0aCBkPSJNIDI3MC4wIDM2MC4wIEwgNDcwLjAgMzYwLjAgTCA0NzAuMCAyOTkuMCBMIDU0MC4wIDI5OS4wIiBmaWxsPSJub25lIiBzdHJva2U9IiMxYTczZTgiIHN0cm9rZS13aWR0aD0iMS44Ii8+Cjxwb2x5Z29uIHBvaW50cz0iNTQwLjAsMjk5LjAgNTMwLjgsMzAyLjkgNTMwLjgsMjk1LjEiIGZpbGw9IiMxYTczZTgiLz4KPHRleHQgeD0iMjg0LjAiIHk9IjMzNi4wIiBmb250LXNpemU9IjEyIiBmaWxsPSIjMWE3M2U4IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIHhtbDpzcGFjZT0icHJlc2VydmUiPkRpc2NvdmVyLCBSZXNldCw8L3RleHQ+Cjx0ZXh0IHg9IjI4NC4wIiB5PSIzNTIuMCIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzFhNzNlOCIgdGV4dC1hbmNob3I9InN0YXJ0IiB4bWw6c3BhY2U9InByZXNlcnZlIj5SZXNldEFsbCwgUmVsZWFzZTwvdGV4dD4KPHBhdGggZD0iTSAyNzAuMCA0MDAuMCBMIDQ3MC4wIDQwMC4wIEwgNDcwLjAgNDY1LjAgTCA1NDAuMCA0NjUuMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWE3M2U4IiBzdHJva2Utd2lkdGg9IjEuOCIvPgo8cG9seWdvbiBwb2ludHM9IjU0MC4wLDQ2NS4wIDUzMC44LDQ2OC45IDUzMC44LDQ2MS4xIiBmaWxsPSIjMWE3M2U4Ii8+Cjx0ZXh0IHg9IjI4NC4wIiB5PSI0MjIuMCIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzFhNzNlOCIgdGV4dC1hbmNob3I9InN0YXJ0IiB4bWw6c3BhY2U9InByZXNlcnZlIj5PYnNlcnZlLCBQcm9iZSwgQXBwbHksPC90ZXh0Pgo8dGV4dCB4PSIyODQuMCIgeT0iNDM4LjAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiMxYTczZTgiIHRleHQtYW5jaG9yPSJzdGFydCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+VmVyaWZ5IMK3IFBsYW4sIFByb2dyZXNzPC90ZXh0Pgo8cGF0aCBkPSJNIDE2NS4wIDQzMC4wIEwgMTY1LjAgNjUwLjAgTCA1NDAuMCA2NTAuMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWE3M2U4IiBzdHJva2Utd2lkdGg9IjEuOCIvPgo8cG9seWdvbiBwb2ludHM9IjU0MC4wLDY1MC4wIDUzMC44LDY1My45IDUzMC44LDY0Ni4xIiBmaWxsPSIjMWE3M2U4Ii8+Cjx0ZXh0IHg9IjM1MC4wIiB5PSI2NDIuMCIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzFhNzNlOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+d2hhdCBoYXBwZW5lZDwvdGV4dD4KPHJlY3QgeD0iODkwLjAiIHk9IjI2MC4wIiB3aWR0aD0iMjgwLjAiIGhlaWdodD0iNzguMCIgcng9IjYiIGZpbGw9IiNmMWYzZjQiIHN0cm9rZT0iIzVmNjM2OCIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjx0ZXh0IHg9IjEwMzAuMCIgeT0iMjk1LjAiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM1ZjYzNjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPkt1YmVybmV0ZXMgKyBMV1MgY29udHJvbGxlcjwvdGV4dD4KPHRleHQgeD0iMTAzMC4wIiB5PSIzMTUuMCIgZm9udC1zaXplPSIxMi41IiBmaWxsPSIjNWY2MzY4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4bWw6c3BhY2U9InByZXNlcnZlIj5yZWNyZWF0ZXMgZGVsZXRlZCBQb2RzPC90ZXh0Pgo8cmVjdCB4PSI4OTAuMCIgeT0iNDIwLjAiIHdpZHRoPSIyODAuMCIgaGVpZ2h0PSI4MC4wIiByeD0iNiIgZmlsbD0iI2U2ZjRlYSIgc3Ryb2tlPSIjMWU4ZTNlIiBzdHJva2Utd2lkdGg9IjIiLz4KPHRleHQgeD0iMTAzMC4wIiB5PSI0NTYuMCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzFlOGUzZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9IjcwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+RW5naW5lIHJ1bnRpbWU8L3RleHQ+Cjx0ZXh0IHg9IjEwMzAuMCIgeT0iNDc2LjAiIGZvbnQtc2l6ZT0iMTIuNSIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+cmFua3MsIEZUIEFQSSwgcHJvY2VzcyBvYnNlcnZlcjwvdGV4dD4KPHJlY3QgeD0iODkwLjAiIHk9IjUzMC4wIiB3aWR0aD0iMjgwLjAiIGhlaWdodD0iNTYuMCIgcng9IjYiIGZpbGw9IiNmM2U4ZmQiIHN0cm9rZT0iIzg0MzBjZSIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjx0ZXh0IHg9IjEwMzAuMCIgeT0iNTYzLjAiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM4NDMwY2UiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPlRyYWZmaWMgcm91dGVyIChFUFApPC90ZXh0Pgo8cmVjdCB4PSI4OTAuMCIgeT0iNjIwLjAiIHdpZHRoPSIyODAuMCIgaGVpZ2h0PSI2MC4wIiByeD0iNiIgZmlsbD0iI2YxZjNmNCIgc3Ryb2tlPSIjNWY2MzY4IiBzdHJva2Utd2lkdGg9IjIiLz4KPHRleHQgeD0iMTAzMC4wIiB5PSI2NTUuMCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9IjcwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+UHJvbWV0aGV1cywgRXZlbnRzLCBsb2dzPC90ZXh0Pgo8cGF0aCBkPSJNIDgwMC4wIDI5OS4wIEwgODkwLjAgMjk5LjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzVmNjM2OCIgc3Ryb2tlLXdpZHRoPSIxLjgiLz4KPHBvbHlnb24gcG9pbnRzPSI4OTAuMCwyOTkuMCA4ODAuOCwzMDIuOSA4ODAuOCwyOTUuMSIgZmlsbD0iIzVmNjM2OCIvPgo8dGV4dCB4PSI4NDUuMCIgeT0iMjkxLjAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM1ZjYzNjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIHhtbDpzcGFjZT0icHJlc2VydmUiPlBvZHM8L3RleHQ+CjxwYXRoIGQ9Ik0gNzg4LjAgNDY1LjAgTCA4OTAuMCA0NjUuMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWU4ZTNlIiBzdHJva2Utd2lkdGg9IjEuOCIvPgo8cG9seWdvbiBwb2ludHM9Ijg5MC4wLDQ2NS4wIDg4MC44LDQ2OC45IDg4MC44LDQ2MS4xIiBmaWxsPSIjMWU4ZTNlIi8+Cjx0ZXh0IHg9Ijg0MC4wIiB5PSI0NTcuMCIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzFlOGUzZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+SFRUUDwvdGV4dD4KPHBhdGggZD0iTSA4MDAuMCA2NTAuMCBMIDg5MC4wIDY1MC4wIiBmaWxsPSJub25lIiBzdHJva2U9IiM1ZjYzNjgiIHN0cm9rZS13aWR0aD0iMS44Ii8+Cjxwb2x5Z29uIHBvaW50cz0iODkwLjAsNjUwLjAgODgwLjgsNjUzLjkgODgwLjgsNjQ2LjEiIGZpbGw9IiM1ZjYzNjgiLz4KPHRleHQgeD0iODQ1LjAiIHk9IjY0Mi4wIiBmb250LXNpemU9IjEyIiBmaWxsPSIjNWY2MzY4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4bWw6c3BhY2U9InByZXNlcnZlIj5leHBvcnQ8L3RleHQ+CjxwYXRoIGQ9Ik0gMTAzMC4wIDUzMC4wIEwgMTAzMC4wIDUwMC4wIiBmaWxsPSJub25lIiBzdHJva2U9IiM4NDMwY2UiIHN0cm9rZS13aWR0aD0iMS44Ii8+Cjxwb2x5Z29uIHBvaW50cz0iMTAzMC4wLDUwMC4wIDEwMzMuOSw1MDkuMiAxMDI2LjEsNTA5LjIiIGZpbGw9IiM4NDMwY2UiLz4KPHRleHQgeD0iMTA0Mi4wIiB5PSI1MjAuMCIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzg0MzBjZSIgdGV4dC1hbmNob3I9InN0YXJ0IiB4bWw6c3BhY2U9InByZXNlcnZlIj5yb3V0ZXMgb24gbmF0aXZlIGhlYWx0aDwvdGV4dD4KPGxpbmUgeDE9IjMyLjAiIHkxPSI3NTYuMCIgeDI9IjYyLjAiIHkyPSI3NTYuMCIgc3Ryb2tlPSIjMWE3M2U4IiBzdHJva2Utd2lkdGg9IjIiLz4KPHRleHQgeD0iNzAuMCIgeT0iNzYwLjAiIGZvbnQtc2l6ZT0iMTIuNSIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9InN0YXJ0IiB4bWw6c3BhY2U9InByZXNlcnZlIj5jb250cm9sbGVyIGNhbGw8L3RleHQ+CjxsaW5lIHgxPSIyMDMuMSIgeTE9Ijc1Ni4wIiB4Mj0iMjMzLjEiIHkyPSI3NTYuMCIgc3Ryb2tlPSIjMWU4ZTNlIiBzdHJva2Utd2lkdGg9IjIiLz4KPHRleHQgeD0iMjQxLjEiIHk9Ijc2MC4wIiBmb250LXNpemU9IjEyLjUiIGZpbGw9IiM1ZjYzNjgiIHRleHQtYW5jaG9yPSJzdGFydCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+ZW5naW5lIEhUVFA8L3RleHQ+CjxsaW5lIHgxPSIzNDYuOCIgeTE9Ijc1Ni4wIiB4Mj0iMzc2LjgiIHkyPSI3NTYuMCIgc3Ryb2tlPSIjNWY2MzY4IiBzdHJva2Utd2lkdGg9IjIiLz4KPHRleHQgeD0iMzg0LjgiIHk9Ijc2MC4wIiBmb250LXNpemU9IjEyLjUiIGZpbGw9IiM1ZjYzNjgiIHRleHQtYW5jaG9yPSJzdGFydCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+S3ViZXJuZXRlcyAvIGV4cG9ydDwvdGV4dD4KPGxpbmUgeDE9IjU0NS40IiB5MT0iNzU2LjAiIHgyPSI1NzUuNCIgeTI9Ijc1Ni4wIiBzdHJva2U9IiM4NDMwY2UiIHN0cm9rZS13aWR0aD0iMiIvPgo8dGV4dCB4PSI1ODMuNCIgeT0iNzYwLjAiIGZvbnQtc2l6ZT0iMTIuNSIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9InN0YXJ0IiB4bWw6c3BhY2U9InByZXNlcnZlIj50cmFmZmljPC90ZXh0Pgo8L3N2Zz4K" width="1200" height="820" class="img_ev3q"></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Component</th><th>Owns</th><th>Must not know</th><th>Doc</th></tr></thead><tbody><tr><td>Controller</td><td>phases, deadlines, durability, whether it is still the same group, connecting Pods to members, resets, bringing capacity back, checks on every plan</td><td>engine states, what a member is inside the engine, Pod layout</td><td><a class="" href="/llm-d-resiliency-operator/docs/components/controller">controller.md</a></td></tr><tr><td>Journal</td><td>durable controller state, one writer at a time</td><td>what the bytes mean</td><td><a class="" href="/llm-d-resiliency-operator/docs/components/journal">journal.md</a></td></tr><tr><td>Telemetry</td><td>logs, metrics, Events, incident records, readiness. Best-effort, never read back.</td><td>how recovery decides anything</td><td><a class="" href="/llm-d-resiliency-operator/docs/components/telemetry">telemetry.md</a></td></tr><tr><td>Workload</td><td>reporting the group&#x27;s Pods as they are now, resetting some Pods or all of them, releasing Pods</td><td>engine members, ports, engine processes, anything from before</td><td><a class="" href="/llm-d-resiliency-operator/docs/components/workloads/">workload.md</a></td></tr><tr><td>Engine driver</td><td>reporting which members run on each Pod and their state, sending reconfigs, inference probes</td><td>phases, deadlines, Kubernetes, anything from before</td><td><a class="" href="/llm-d-resiliency-operator/docs/components/engines/#interface">engine.md</a></td></tr><tr><td>Engine policy</td><td>which members to remove or admit and when, how a reconfig is going</td><td>I/O, time, Kubernetes</td><td><a class="" href="/llm-d-resiliency-operator/docs/components/engines/#interface">engine.md</a></td></tr></tbody></table>
+<p>Outside IRO, but the contracts depend on them:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>External</th><th>What IRO relies on</th></tr></thead><tbody><tr><td>Kubernetes + the workload&#x27;s controller</td><td>recreates the group after a reset, and decides how often and whether to keep doing so (for LWS, <code>restartBackoff</code> and <code>maxGroupRestarts</code>). Later: removes and adds Pods without recreating it.</td></tr><tr><td>Engine runtime</td><td>exposes engine state and accepts recovery reconfigs</td></tr><tr><td>Traffic router (EPP)</td><td>routes on the engine&#x27;s native health. IRO never steers traffic.</td></tr><tr><td>Leader election</td><td>one controller acts on a group at a time</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="example-group">Example group<a href="#example-group" class="hash-link" aria-label="Direct link to Example group" title="Direct link to Example group" translate="no">​</a></h2>
+<p>The examples in these pages use one group: four Pods, <code>pod-0</code> to <code>pod-3</code> (UIDs <code>a1</code> to <code>d1</code>, identities <code>idA</code> to
+<code>idD</code>), with one member each, <code>m0</code> to <code>m3</code>. See them step by step in <a class="" href="/llm-d-resiliency-operator/docs/failures/">Failures</a> and
+<a class="" href="/llm-d-resiliency-operator/docs/examples/">Examples</a>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="one-reconciliation-step">One reconciliation step<a href="#one-reconciliation-step" class="hash-link" aria-label="Direct link to One reconciliation step" title="Direct link to One reconciliation step" translate="no">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="One controller step: discover, decide, act, restore capacity" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTU2IiBoZWlnaHQ9Ijg4NCIgdmlld0JveD0iMCAwIDExNTYgODg0IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgJ1NlZ29lIFVJJywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiI+CjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJ4PSI4IiBmaWxsPSIjZmZmZmZmIi8+Cjx0ZXh0IHg9IjMyLjAiIHk9IjQyLjAiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiMyMDIxMjQiIHRleHQtYW5jaG9yPSJzdGFydCIgZm9udC13ZWlnaHQ9IjcwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+T25lIGNvbnRyb2xsZXIgc3RlcDwvdGV4dD4KPHRleHQgeD0iMzIuMCIgeT0iNjYuMCIgZm9udC1zaXplPSIxMyIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9InN0YXJ0IiB4bWw6c3BhY2U9InByZXNlcnZlIj5yZXBlYXRlZCBldmVyeSBwb2xsIMK3IHRoZSBqb3VybmFsIGlzIHNhdmVkIGJlZm9yZSBhbnl0aGluZyByZWFjaGVzIHRoZSBlbmdpbmU8L3RleHQ+CjxyZWN0IHg9IjE5Ni4wIiB5PSI5NC4wIiB3aWR0aD0iMTYyLjAiIGhlaWdodD0iNDQuMCIgcng9IjYiIGZpbGw9IiNlOGYwZmUiIHN0cm9rZT0iIzFhNzNlOCIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjx0ZXh0IHg9IjI3Ny4wIiB5PSIxMjEuMCIgZm9udC1zaXplPSIxMy41IiBmaWxsPSIjMWE3M2U4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj5Db250cm9sbGVyPC90ZXh0Pgo8cmVjdCB4PSIzODYuMCIgeT0iOTQuMCIgd2lkdGg9IjE2Mi4wIiBoZWlnaHQ9IjQ0LjAiIHJ4PSI2IiBmaWxsPSIjZjFmM2Y0IiBzdHJva2U9IiM1ZjYzNjgiIHN0cm9rZS13aWR0aD0iMiIvPgo8dGV4dCB4PSI0NjcuMCIgeT0iMTIxLjAiIGZvbnQtc2l6ZT0iMTMuNSIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9IjcwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+V29ya2xvYWQ8L3RleHQ+CjxyZWN0IHg9IjU3Ni4wIiB5PSI5NC4wIiB3aWR0aD0iMTYyLjAiIGhlaWdodD0iNDQuMCIgcng9IjYiIGZpbGw9IiNlNmY0ZWEiIHN0cm9rZT0iIzFlOGUzZSIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjx0ZXh0IHg9IjY1Ny4wIiB5PSIxMjEuMCIgZm9udC1zaXplPSIxMy41IiBmaWxsPSIjMWU4ZTNlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj5FbmdpbmUgZHJpdmVyPC90ZXh0Pgo8cmVjdCB4PSI3NjYuMCIgeT0iOTQuMCIgd2lkdGg9IjE2Mi4wIiBoZWlnaHQ9IjQ0LjAiIHJ4PSI2IiBmaWxsPSIjZTZmNGVhIiBzdHJva2U9IiMxZThlM2UiIHN0cm9rZS13aWR0aD0iMiIvPgo8dGV4dCB4PSI4NDcuMCIgeT0iMTIxLjAiIGZvbnQtc2l6ZT0iMTMuNSIgZmlsbD0iIzFlOGUzZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9IjcwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+RW5naW5lIHBvbGljeTwvdGV4dD4KPHJlY3QgeD0iOTU2LjAiIHk9Ijk0LjAiIHdpZHRoPSIxNjIuMCIgaGVpZ2h0PSI0NC4wIiByeD0iNiIgZmlsbD0iI2YxZjNmNCIgc3Ryb2tlPSIjNWY2MzY4IiBzdHJva2Utd2lkdGg9IjIiLz4KPHRleHQgeD0iMTAzNy4wIiB5PSIxMjEuMCIgZm9udC1zaXplPSIxMy41IiBmaWxsPSIjNWY2MzY4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj5Kb3VybmFsPC90ZXh0Pgo8Zz4KPGxpbmUgeDE9IjEwMzcuMCIgeTE9IjEzOCIgeDI9IjEwMzcuMCIgeTI9IjgxOC4wIiBzdHJva2U9IiNjNGM3YzUiIHN0cm9rZS13aWR0aD0iMS4zIiBzdHJva2UtZGFzaGFycmF5PSI1IDUiLz4KPGxpbmUgeDE9Ijg0Ny4wIiB5MT0iMTM4IiB4Mj0iODQ3LjAiIHkyPSI4MTguMCIgc3Ryb2tlPSIjYzRjN2M1IiBzdHJva2Utd2lkdGg9IjEuMyIgc3Ryb2tlLWRhc2hhcnJheT0iNSA1Ii8+CjxsaW5lIHgxPSI2NTcuMCIgeTE9IjEzOCIgeDI9IjY1Ny4wIiB5Mj0iODE4LjAiIHN0cm9rZT0iI2M0YzdjNSIgc3Ryb2tlLXdpZHRoPSIxLjMiIHN0cm9rZS1kYXNoYXJyYXk9IjUgNSIvPgo8bGluZSB4MT0iNDY3LjAiIHkxPSIxMzgiIHgyPSI0NjcuMCIgeTI9IjgxOC4wIiBzdHJva2U9IiNjNGM3YzUiIHN0cm9rZS13aWR0aD0iMS4zIiBzdHJva2UtZGFzaGFycmF5PSI1IDUiLz4KPGxpbmUgeDE9IjI3Ny4wIiB5MT0iMTM4IiB4Mj0iMjc3LjAiIHkyPSI4MTguMCIgc3Ryb2tlPSIjYzRjN2M1IiBzdHJva2Utd2lkdGg9IjEuMyIgc3Ryb2tlLWRhc2hhcnJheT0iNSA1Ii8+CjxsaW5lIHgxPSIyNC4wIiB5MT0iMTUwLjAiIHgyPSIxMTQwLjAiIHkyPSIxNTAuMCIgc3Ryb2tlPSIjZGFkY2UwIiBzdHJva2Utd2lkdGg9IjEuMiIvPgo8dGV4dCB4PSIzMi4wIiB5PSIxNzAuMCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzFhNzNlOCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmb250LXdlaWdodD0iNzAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj4xICBzZWUgdGhlIGdyb3VwPC90ZXh0Pgo8cGF0aCBkPSJNIDI3Ny4wIDE5OC4wIEwgNDY0LjAgMTk4LjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFhNzNlOCIgc3Ryb2tlLXdpZHRoPSIxLjgiLz4KPHBvbHlnb24gcG9pbnRzPSI0NjQuMCwxOTguMCA0NTQuOCwyMDEuOSA0NTQuOCwxOTQuMSIgZmlsbD0iIzFhNzNlOCIvPgo8dGV4dCB4PSIzNzIuMCIgeT0iMTkxLjAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiMxYTczZTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIHhtbDpzcGFjZT0icHJlc2VydmUiPkRpc2NvdmVyKCk8L3RleHQ+CjxwYXRoIGQ9Ik0gNDY3LjAgMjM4LjAgTCAyODAuMCAyMzguMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNWY2MzY4IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWRhc2hhcnJheT0iNyA1Ii8+Cjxwb2x5Z29uIHBvaW50cz0iMjgwLjAsMjM4LjAgMjg5LjIsMjM0LjEgMjg5LjIsMjQxLjkiIGZpbGw9IiM1ZjYzNjgiLz4KPHRleHQgeD0iMzcyLjAiIHk9IjIzMS4wIiBmb250LXNpemU9IjEyIiBmaWxsPSIjNWY2MzY4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4bWw6c3BhY2U9InByZXNlcnZlIj5Qb2RzLCBSZWNyZWF0aW5nPC90ZXh0Pgo8cGF0aCBkPSJNIDI3Ny4wIDI3OC4wIEwgNjU0LjAgMjc4LjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFhNzNlOCIgc3Ryb2tlLXdpZHRoPSIxLjgiLz4KPHBvbHlnb24gcG9pbnRzPSI2NTQuMCwyNzguMCA2NDQuOCwyODEuOSA2NDQuOCwyNzQuMSIgZmlsbD0iIzFhNzNlOCIvPgo8dGV4dCB4PSI0NjcuMCIgeT0iMjcxLjAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiMxYTczZTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIHhtbDpzcGFjZT0icHJlc2VydmUiPk9ic2VydmUocG9kcyk8L3RleHQ+CjxwYXRoIGQ9Ik0gNjU3LjAgMzE4LjAgTCAyODAuMCAzMTguMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWU4ZTNlIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWRhc2hhcnJheT0iNyA1Ii8+Cjxwb2x5Z29uIHBvaW50cz0iMjgwLjAsMzE4LjAgMjg5LjIsMzE0LjEgMjg5LjIsMzIxLjkiIGZpbGw9IiMxZThlM2UiLz4KPHRleHQgeD0iNDY3LjAiIHk9IjMxMS4wIiBmb250LXNpemU9IjEyIiBmaWxsPSIjMWU4ZTNlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4bWw6c3BhY2U9InByZXNlcnZlIj5tZW1iZXJzIHBlciBQb2QgYW5kIHRoZWlyIHN0YXRlPC90ZXh0Pgo8bGluZSB4MT0iMjQuMCIgeTE9IjM1MC4wIiB4Mj0iMTE0MC4wIiB5Mj0iMzUwLjAiIHN0cm9rZT0iI2RhZGNlMCIgc3Ryb2tlLXdpZHRoPSIxLjIiLz4KPHRleHQgeD0iMzIuMCIgeT0iMzcwLjAiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMxYTczZTgiIHRleHQtYW5jaG9yPSJzdGFydCIgZm9udC13ZWlnaHQ9IjcwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+MiAgZGVjaWRlPC90ZXh0Pgo8cGF0aCBkPSJNIDI3Ny4wIDM5OC4wIEwgODQ0LjAgMzk4LjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFhNzNlOCIgc3Ryb2tlLXdpZHRoPSIxLjgiLz4KPHBvbHlnb24gcG9pbnRzPSI4NDQuMCwzOTguMCA4MzQuOCw0MDEuOSA4MzQuOCwzOTQuMSIgZmlsbD0iIzFhNzNlOCIvPgo8dGV4dCB4PSI1NjIuMCIgeT0iMzkxLjAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiMxYTczZTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIHhtbDpzcGFjZT0icHJlc2VydmUiPlBsYW4ob2JzZXJ2YXRpb24sIGFkbWl0dGVkLCBjYW5kaWRhdGVzKTwvdGV4dD4KPHBhdGggZD0iTSA4NDcuMCA0MzguMCBMIDI4MC4wIDQzOC4wIiBmaWxsPSJub25lIiBzdHJva2U9IiMxZThlM2UiIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtZGFzaGFycmF5PSI3IDUiLz4KPHBvbHlnb24gcG9pbnRzPSIyODAuMCw0MzguMCAyODkuMiw0MzQuMSAyODkuMiw0NDEuOSIgZmlsbD0iIzFlOGUzZSIvPgo8dGV4dCB4PSI1NjIuMCIgeT0iNDMxLjAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiMxZThlM2UiIHRleHQtYW5jaG9yPSJtaWRkbGUiIHhtbDpzcGFjZT0icHJlc2VydmUiPkhlYWx0aHkgwrcgV2FpdCDCtyBDaGFuZ2UgwrcgVW5yZWNvdmVyYWJsZTwvdGV4dD4KPHJlY3QgeD0iMTk3LjAiIHk9IjQ2NC4wIiB3aWR0aD0iMzUwLjAiIGhlaWdodD0iNTIuMCIgcng9IjUiIGZpbGw9IiNmZWY3ZTAiIHN0cm9rZT0iI2YyOTkwMCIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KPHRleHQgeD0iMjA5LjAiIHk9IjQ4NC4wIiBmb250LXNpemU9IjEyLjUiIGZpbGw9IiMyMDIxMjQiIHRleHQtYW5jaG9yPSJzdGFydCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+YSByZWNvbmZpZyBpbiBmbGlnaHQgYXNrcyBQcm9ncmVzcyhvYnNlcnZhdGlvbiwgcmVjb25maWcpPC90ZXh0Pgo8dGV4dCB4PSIyMDkuMCIgeT0iNTAyLjAiIGZvbnQtc2l6ZT0iMTIuNSIgZmlsbD0iIzIwMjEyNCIgdGV4dC1hbmNob3I9InN0YXJ0IiB4bWw6c3BhY2U9InByZXNlcnZlIj5pbnN0ZWFkIG9mIFBsYW48L3RleHQ+CjxsaW5lIHgxPSIyNC4wIiB5MT0iNTQwLjAiIHgyPSIxMTQwLjAiIHkyPSI1NDAuMCIgc3Ryb2tlPSIjZGFkY2UwIiBzdHJva2Utd2lkdGg9IjEuMiIvPgo8dGV4dCB4PSIzMi4wIiB5PSI1NjAuMCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzFhNzNlOCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmb250LXdlaWdodD0iNzAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj4zICBhY3QsIG9ubHkgZm9yIGEgQ2hhbmdlIHRoYXQgcGFzc2VzIHRoZSBjaGVja3M8L3RleHQ+CjxwYXRoIGQ9Ik0gMjc3LjAgNTg4LjAgTCAxMDM0LjAgNTg4LjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFhNzNlOCIgc3Ryb2tlLXdpZHRoPSIxLjgiLz4KPHBvbHlnb24gcG9pbnRzPSIxMDM0LjAsNTg4LjAgMTAyNC44LDU5MS45IDEwMjQuOCw1ODQuMSIgZmlsbD0iIzFhNzNlOCIvPgo8dGV4dCB4PSI2NTcuMCIgeT0iNTgxLjAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiMxYTczZTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIHhtbDpzcGFjZT0icHJlc2VydmUiPlNhdmUocmVjb25maWcpPC90ZXh0Pgo8cGF0aCBkPSJNIDI3Ny4wIDYyOC4wIEwgNjU0LjAgNjI4LjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFhNzNlOCIgc3Ryb2tlLXdpZHRoPSIxLjgiLz4KPHBvbHlnb24gcG9pbnRzPSI2NTQuMCw2MjguMCA2NDQuOCw2MzEuOSA2NDQuOCw2MjQuMSIgZmlsbD0iIzFhNzNlOCIvPgo8dGV4dCB4PSI0NjcuMCIgeT0iNjIxLjAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiMxYTczZTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIHhtbDpzcGFjZT0icHJlc2VydmUiPkFwcGx5KG9ic2VydmF0aW9uLCByZWNvbmZpZyk8L3RleHQ+CjxwYXRoIGQ9Ik0gNjU3LjAgNjY4LjAgTCAyODAuMCA2NjguMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWU4ZTNlIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWRhc2hhcnJheT0iNyA1Ii8+Cjxwb2x5Z29uIHBvaW50cz0iMjgwLjAsNjY4LjAgMjg5LjIsNjY0LjEgMjg5LjIsNjcxLjkiIGZpbGw9IiMxZThlM2UiLz4KPHRleHQgeD0iNDY3LjAiIHk9IjY2MS4wIiBmb250LXNpemU9IjEyIiBmaWxsPSIjMWU4ZTNlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4bWw6c3BhY2U9InByZXNlcnZlIj5hY2NlcHRhbmNlczwvdGV4dD4KPHBhdGggZD0iTSAyNzcuMCA3MDguMCBMIDEwMzQuMCA3MDguMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWE3M2U4IiBzdHJva2Utd2lkdGg9IjEuOCIvPgo8cG9seWdvbiBwb2ludHM9IjEwMzQuMCw3MDguMCAxMDI0LjgsNzExLjkgMTAyNC44LDcwNC4xIiBmaWxsPSIjMWE3M2U4Ii8+Cjx0ZXh0IHg9IjY1Ny4wIiB5PSI3MDEuMCIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzFhNzNlOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+U2F2ZShhY2NlcHRhbmNlcyk8L3RleHQ+CjxsaW5lIHgxPSIyNC4wIiB5MT0iNzQwLjAiIHgyPSIxMTQwLjAiIHkyPSI3NDAuMCIgc3Ryb2tlPSIjZGFkY2UwIiBzdHJva2Utd2lkdGg9IjEuMiIvPgo8dGV4dCB4PSIzMi4wIiB5PSI3NjAuMCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzFhNzNlOCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmb250LXdlaWdodD0iNzAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj40ICByZXN0b3JlIGNhcGFjaXR5LCBvbmx5IHdoZW4gc2VydmluZyBiZWxvdyBmdWxsPC90ZXh0Pgo8cGF0aCBkPSJNIDI3Ny4wIDc4OC4wIEwgNDY0LjAgNzg4LjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFhNzNlOCIgc3Ryb2tlLXdpZHRoPSIxLjgiLz4KPHBvbHlnb24gcG9pbnRzPSI0NjQuMCw3ODguMCA0NTQuOCw3OTEuOSA0NTQuOCw3ODQuMSIgZmlsbD0iIzFhNzNlOCIvPgo8dGV4dCB4PSIzNzIuMCIgeT0iNzgxLjAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiMxYTczZTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIHhtbDpzcGFjZT0icHJlc2VydmUiPlJlc2V0KFBvZHMpLCBSZXNldEFsbCBvciBSZWxlYXNlPC90ZXh0Pgo8L2c+CjxsaW5lIHgxPSIyNC4wIiB5MT0iODI4LjAiIHgyPSIxMTQwLjAiIHkyPSI4MjguMCIgc3Ryb2tlPSIjZGFkY2UwIiBzdHJva2Utd2lkdGg9IjEuMiIvPgo8bGluZSB4MT0iMzIuMCIgeTE9Ijg1OC4wIiB4Mj0iNjIuMCIgeTI9Ijg1OC4wIiBzdHJva2U9IiMxYTczZTgiIHN0cm9rZS13aWR0aD0iMiIvPgo8dGV4dCB4PSI3MC4wIiB5PSI4NjIuMCIgZm9udC1zaXplPSIxMi41IiBmaWxsPSIjNWY2MzY4IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIHhtbDpzcGFjZT0icHJlc2VydmUiPmNvbnRyb2xsZXIgY2FsbDwvdGV4dD4KPGxpbmUgeDE9IjIwMy4xIiB5MT0iODU4LjAiIHgyPSIyMzMuMSIgeTI9Ijg1OC4wIiBzdHJva2U9IiMxZThlM2UiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWRhc2hhcnJheT0iNiA0Ii8+Cjx0ZXh0IHg9IjI0MS4xIiB5PSI4NjIuMCIgZm9udC1zaXplPSIxMi41IiBmaWxsPSIjNWY2MzY4IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIHhtbDpzcGFjZT0icHJlc2VydmUiPmVuZ2luZSByZXBseTwvdGV4dD4KPGxpbmUgeDE9IjM1My42IiB5MT0iODU4LjAiIHgyPSIzODMuNiIgeTI9Ijg1OC4wIiBzdHJva2U9IiM1ZjYzNjgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWRhc2hhcnJheT0iNiA0Ii8+Cjx0ZXh0IHg9IjM5MS42IiB5PSI4NjIuMCIgZm9udC1zaXplPSIxMi41IiBmaWxsPSIjNWY2MzY4IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIHhtbDpzcGFjZT0icHJlc2VydmUiPndvcmtsb2FkIHJlcGx5PC90ZXh0Pgo8cmVjdCB4PSI1MTcuOSIgeT0iODQ5LjAiIHdpZHRoPSIyNi4wIiBoZWlnaHQ9IjE2LjAiIHJ4PSIzIiBmaWxsPSIjZmVmN2UwIiBzdHJva2U9IiNmMjk5MDAiIHN0cm9rZS13aWR0aD0iMiIvPgo8dGV4dCB4PSI1NTEuOSIgeT0iODYyLjAiIGZvbnQtc2l6ZT0iMTIuNSIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9InN0YXJ0IiB4bWw6c3BhY2U9InByZXNlcnZlIj5ydWxlPC90ZXh0Pgo8L3N2Zz4K" width="1156" height="884" class="img_ev3q"></p>
+<p>Two kinds of action, with opposite delivery rules:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Action</th><th>Delivery</th><th>Why</th></tr></thead><tbody><tr><td>Engine reconfig (<code>Apply</code>)</td><td>at most one run. Saved first. Sent again, same ID, only when the send was never confirmed and <code>Progress</code> proves no member got it.</td><td>running a reconfig twice can break the group, so a resend needs proof, and a member that already got it ignores it</td></tr><tr><td>Workload call (<code>Reset</code>, <code>ResetAll</code>, <code>Release</code>)</td><td>saved first, repeated every poll until <code>Discover</code> shows the result</td><td>each call names Pods by UID and does nothing once they are gone, so repeating it is harmless</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="where-each-object-lives">Where each object lives<a href="#where-each-object-lives" class="hash-link" aria-label="Direct link to Where each object lives" title="Direct link to Where each object lives" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Object</th><th>Defined in</th><th>Made by</th><th>Read by</th></tr></thead><tbody><tr><td><code>Group</code>, <code>Pod</code>, <code>PodState</code>, <code>PodRef</code></td><td><a class="" href="/llm-d-resiliency-operator/docs/components/workloads/#objects">workload.md</a></td><td>workload</td><td>controller, engine driver</td></tr><tr><td><code>ErrUnsupported</code></td><td><a class="" href="/llm-d-resiliency-operator/docs/components/workloads/#objects">workload.md</a></td><td>workload</td><td>controller</td></tr><tr><td><code>Capabilities</code>, <code>Member</code>, <code>MemberID</code>, <code>Observation</code></td><td><a class="" href="/llm-d-resiliency-operator/docs/components/engines/#objects">engine.md</a></td><td>engine driver</td><td>controller, engine policy</td></tr><tr><td><code>Reconfig</code></td><td><a class="" href="/llm-d-resiliency-operator/docs/components/engines/#objects">engine.md</a></td><td>controller</td><td>engine driver, engine policy</td></tr><tr><td><code>Acceptance</code></td><td><a class="" href="/llm-d-resiliency-operator/docs/components/engines/#objects">engine.md</a></td><td>engine driver</td><td>controller</td></tr><tr><td><code>Plan</code>, <code>Progress</code></td><td><a class="" href="/llm-d-resiliency-operator/docs/components/engines/#objects">engine.md</a></td><td>engine policy</td><td>controller</td></tr><tr><td><code>Config</code>, <code>Record</code>, <code>Phase</code>, <code>MemberState</code>, <code>PodRecord</code></td><td><a class="" href="/llm-d-resiliency-operator/docs/components/controller#objects">controller.md</a></td><td>controller</td><td>journal (as bytes), telemetry</td></tr><tr><td><code>Recorder</code>, <code>Incident</code>, <code>Outcome</code>, <code>Durations</code>, <code>ResetReason</code></td><td><a class="" href="/llm-d-resiliency-operator/docs/components/telemetry#objects">telemetry.md</a>, code in <code>internal/controller/enginefault</code></td><td>controller</td><td>telemetry</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="code-layout">Code layout<a href="#code-layout" class="hash-link" aria-label="Direct link to Code layout" title="Direct link to Code layout" translate="no">​</a></h2>
+<p>Every file the design needs, and the PR that brings it.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>File</th><th>Holds</th><th>Comes with</th></tr></thead><tbody><tr><td><code>internal/workload/workload.go</code></td><td><code>Workload</code> and its objects</td><td>contracts (#32)</td></tr><tr><td><code>internal/engine/engine.go</code></td><td><code>Engine</code>, <code>Driver</code>, <code>Policy</code> and their objects</td><td>contracts (#32)</td></tr><tr><td><code>internal/journal/journal.go</code></td><td><code>Journal</code></td><td>contracts (#32)</td></tr><tr><td><code>internal/controller/enginefault/controller.go</code></td><td><code>Controller</code>, <code>Config</code>, <code>Record</code></td><td>contracts (#32)</td></tr><tr><td><code>internal/controller/enginefault/recorder.go</code></td><td><code>Recorder</code>, <code>Incident</code></td><td>contracts (#32)</td></tr><tr><td><code>internal/controller/enginefault/step.go</code></td><td><code>New</code> and <code>Step</code>: phases, reading Discover, connecting members, checks</td><td>controller (#11)</td></tr><tr><td><code>internal/controller/enginefault/reconfig.go</code></td><td>sending and watching reconfigs, plan checks, <code>Verify</code>, <code>ResetAll</code></td><td>controller (#11)</td></tr><tr><td><code>internal/controller/enginefault/capacity.go</code></td><td>restoring capacity</td><td>controller (#11)</td></tr><tr><td><code>internal/controller/enginefault/incident.go</code></td><td>incident records</td><td>controller (#11)</td></tr><tr><td><code>internal/controller/enginefault/runner.go</code></td><td>the leader-elected loop that calls <code>Step</code></td><td>controller (#11)</td></tr><tr><td><code>internal/controller/enginefault/setup.go</code></td><td>flags; picks the engine and workload</td><td>controller (#11)</td></tr><tr><td><code>cmd/main.go</code></td><td>registers engines and workloads, starts the manager</td><td>controller (#11)</td></tr><tr><td><code>internal/workload/lws/workload.go</code></td><td>LWS <code>Workload</code></td><td>controller (#11), see <a class="" href="/llm-d-resiliency-operator/docs/components/workloads/lws">lws.md</a></td></tr><tr><td><code>internal/journal/configmap/journal.go</code></td><td>ConfigMap <code>Journal</code>, owned by the workload object</td><td>controller (#11)</td></tr><tr><td><code>internal/telemetry/recorder.go</code></td><td><code>Recorder</code>: log lines (#11); metrics, Events, incident history later</td><td>controller (#11), telemetry</td></tr><tr><td><code>internal/engine/vllm/driver.go</code></td><td>vLLM <code>Driver</code></td><td>vLLM (#19)</td></tr><tr><td><code>internal/engine/vllm/policy.go</code></td><td>vLLM <code>Policy</code></td><td>vLLM (#19)</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="open-decisions">Open decisions<a href="#open-decisions" class="hash-link" aria-label="Direct link to Open decisions" title="Direct link to Open decisions" translate="no">​</a></h2>
+<ol>
+<li class=""><strong>Disaggregated sets.</strong> A prefill/decode set has several engine groups with different roles.
+Proposal: one recovery unit per engine group, each with its own Group, journal and controller loop.</li>
+<li class=""><strong>Pods with some members excluded.</strong> With several members per Pod, losing one member does not let IRO
+reset the Pod (C8), so that capacity stays lost until <code>ResetAll</code>. Should the policy be allowed to remove
+the healthy rest of the Pod so the Pod can be reset?</li>
+</ol></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/llm-d-resiliency-operator/docs/getting-started"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Getting started</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/llm-d-resiliency-operator/docs/components/controller"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Controller</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#problem" class="table-of-contents__link toc-highlight">Problem</a></li><li><a href="#components" class="table-of-contents__link toc-highlight">Components</a></li><li><a href="#example-group" class="table-of-contents__link toc-highlight">Example group</a></li><li><a href="#one-reconciliation-step" class="table-of-contents__link toc-highlight">One reconciliation step</a></li><li><a href="#where-each-object-lives" class="table-of-contents__link toc-highlight">Where each object lives</a></li><li><a href="#code-layout" class="table-of-contents__link toc-highlight">Code layout</a></li><li><a href="#open-decisions" class="table-of-contents__link toc-highlight">Open decisions</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/llm-d-resiliency-operator/docs">Architecture</a></li><li class="footer__item"><a class="footer__link-item" href="/llm-d-resiliency-operator/docs/components">Components</a></li><li class="footer__item"><a class="footer__link-item" href="/llm-d-resiliency-operator/docs/failures">Failures</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/llm-d-incubation/llm-d-resiliency-operator" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://llm-d.ai" target="_blank" rel="noopener noreferrer" class="footer__link-item">llm-d<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 llm-d Project Authors. Apache-2.0.</div></div></div></footer></div>
+</body>
+</html>

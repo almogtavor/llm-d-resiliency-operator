@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-components/telemetry" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.10.2">
+<title data-rh="true">Telemetry | llm-d Resiliency Operator</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/telemetry"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Telemetry | llm-d Resiliency Operator"><meta data-rh="true" name="description" content="Telemetry turns what the controller does into things people can see:"><meta data-rh="true" property="og:description" content="Telemetry turns what the controller does into things people can see:"><link data-rh="true" rel="icon" href="/llm-d-resiliency-operator/img/favicon.png"><link data-rh="true" rel="canonical" href="https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/telemetry"><link data-rh="true" rel="alternate" href="https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/telemetry" hreflang="en"><link data-rh="true" rel="alternate" href="https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/telemetry" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Components","item":"https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/"},{"@type":"ListItem","position":2,"name":"Telemetry","item":"https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/telemetry"}]}</script><link rel="stylesheet" href="/llm-d-resiliency-operator/assets/css/styles.544c8b07.css">
+<script src="/llm-d-resiliency-operator/assets/js/runtime~main.d09c1ea8.js" defer="defer"></script>
+<script src="/llm-d-resiliency-operator/assets/js/main.0dd1a1ad.js" defer="defer"></script>
+</head>
+<body>
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/llm-d-resiliency-operator/img/llm-d-logo-transparent.png"><link rel="preload" as="image" href="/llm-d-resiliency-operator/img/llm-d-logo-transparent-dark.png"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/llm-d-resiliency-operator/"><div class="navbar__logo"><img src="/llm-d-resiliency-operator/img/llm-d-logo-transparent.png" alt="llm-d Resiliency Operator" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/llm-d-resiliency-operator/img/llm-d-logo-transparent-dark.png" alt="llm-d Resiliency Operator" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/llm-d-resiliency-operator/docs/">Docs</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/llm-d-incubation/llm-d-resiliency-operator" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-github-link" aria-label="GitHub"></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/llm-d-resiliency-operator/docs/"><span class="linkLabel_WmDU">Architecture</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/llm-d-resiliency-operator/docs/getting-started"><span class="linkLabel_WmDU">Getting started</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href="/llm-d-resiliency-operator/docs/components/"><span class="categoryLinkLabel_W154">Components</span></a><button aria-label="Collapse sidebar category &#x27;Components&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/llm-d-resiliency-operator/docs/components/controller"><span class="linkLabel_WmDU">Controller</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/llm-d-resiliency-operator/docs/components/engines/"><span class="categoryLinkLabel_W154">Engines</span></a><button aria-label="Expand sidebar category &#x27;Engines&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/llm-d-resiliency-operator/docs/components/workloads/"><span class="categoryLinkLabel_W154">Workloads</span></a><button aria-label="Expand sidebar category &#x27;Workloads&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/llm-d-resiliency-operator/docs/components/journal"><span class="linkLabel_WmDU">Journal</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/llm-d-resiliency-operator/docs/components/telemetry"><span class="linkLabel_WmDU">Telemetry</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/llm-d-resiliency-operator/docs/failures/"><span class="categoryLinkLabel_W154">Failures</span></a><button aria-label="Expand sidebar category &#x27;Failures&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/llm-d-resiliency-operator/docs/examples/"><span class="categoryLinkLabel_W154">Examples</span></a><button aria-label="Expand sidebar category &#x27;Examples&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/llm-d-resiliency-operator/docs/reference/upstream-versions"><span class="categoryLinkLabel_W154">Reference</span></a></div></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/llm-d-resiliency-operator/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/llm-d-resiliency-operator/docs/components/"><span>Components</span></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">Telemetry</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Telemetry</h1></header>
+<p>Telemetry turns what the controller does into things people can see:</p>
+<ul>
+<li class=""><strong>logs</strong>: one structured line per event,</li>
+<li class=""><strong>metrics</strong>: Prometheus, for dashboards and alerts,</li>
+<li class=""><strong>Kubernetes Events</strong> on the workload object, one series per incident,</li>
+<li class=""><strong>incident records</strong>: what failed, what IRO decided, how long it took, how it ended,</li>
+<li class=""><strong>readiness</strong>: whether the leader&#x27;s loop is still making progress.</li>
+</ul>
+<p>It is read by people, Prometheus and <code>kubectl</code>, never by IRO. It never blocks or fails recovery.
+It is not the <a class="" href="/llm-d-resiliency-operator/docs/components/journal">journal</a>: the journal is the controller&#x27;s current state and must be saved
+before IRO acts; telemetry is history and is best-effort.</p>
+<p>This covers issues <a href="https://github.com/llm-d-incubation/llm-d-resiliency-operator/issues/25" target="_blank" rel="noopener noreferrer" class="">#25</a>
+(Events and metrics) and <a href="https://github.com/llm-d-incubation/llm-d-resiliency-operator/issues/30" target="_blank" rel="noopener noreferrer" class="">#30</a>
+(incident records). Tracing is not part of it yet; see <a href="#considerations" class="">Considerations</a>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="interface">Interface<a href="#interface" class="hash-link" aria-label="Direct link to Interface" title="Direct link to Interface" translate="no">​</a></h2>
+<div class="language-go codeBlockContainer_Ckt0 theme-code-block" style="--prism-background-color:hsl(230, 1%, 98%);--prism-color:hsl(230, 8%, 24%)"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-go codeBlock_bY9V thin-scrollbar" style="background-color:hsl(230, 1%, 98%);color:hsl(230, 8%, 24%)"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token keyword" style="color:hsl(301, 63%, 40%)">type</span><span class="token plain"> Recorder </span><span class="token keyword" style="color:hsl(301, 63%, 40%)">interface</span><span class="token plain"> </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">{</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    </span><span class="token function" style="color:hsl(221, 87%, 60%)">Stepped</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token plain">record </span><span class="token operator" style="color:hsl(221, 87%, 60%)">*</span><span class="token plain">Record</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"> err </span><span class="token builtin" style="color:hsl(119, 34%, 47%)">error</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    </span><span class="token function" style="color:hsl(221, 87%, 60%)">PhaseChanged</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token plain">from</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"> to Phase</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"> reason </span><span class="token builtin" style="color:hsl(119, 34%, 47%)">string</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    </span><span class="token function" style="color:hsl(221, 87%, 60%)">IncidentOpened</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token plain">incident </span><span class="token operator" style="color:hsl(221, 87%, 60%)">*</span><span class="token plain">Incident</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    </span><span class="token function" style="color:hsl(221, 87%, 60%)">ReconfigStarted</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token plain">reconfig </span><span class="token operator" style="color:hsl(221, 87%, 60%)">*</span><span class="token plain">Reconfig</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"> plan </span><span class="token operator" style="color:hsl(221, 87%, 60%)">*</span><span class="token plain">Plan</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    </span><span class="token function" style="color:hsl(221, 87%, 60%)">ReconfigFinished</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token plain">reconfig </span><span class="token operator" style="color:hsl(221, 87%, 60%)">*</span><span class="token plain">Reconfig</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"> progress Progress</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    </span><span class="token function" style="color:hsl(221, 87%, 60%)">PodResetRequested</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token plain">pods </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">[</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">]</span><span class="token plain">PodRef</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"> err </span><span class="token builtin" style="color:hsl(119, 34%, 47%)">error</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    </span><span class="token function" style="color:hsl(221, 87%, 60%)">ResetAllRequested</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token plain">reason ResetReason</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"> pods </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">[</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">]</span><span class="token plain">PodRef</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    </span><span class="token function" style="color:hsl(221, 87%, 60%)">ReleaseRequested</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token plain">pods </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">[</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">]</span><span class="token plain">PodRef</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"> err </span><span class="token builtin" style="color:hsl(119, 34%, 47%)">error</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    </span><span class="token function" style="color:hsl(221, 87%, 60%)">SaveFailed</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token plain">err </span><span class="token builtin" style="color:hsl(119, 34%, 47%)">error</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    </span><span class="token function" style="color:hsl(221, 87%, 60%)">IncidentClosed</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token plain">incident </span><span class="token operator" style="color:hsl(221, 87%, 60%)">*</span><span class="token plain">Incident</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    </span><span class="token function" style="color:hsl(221, 87%, 60%)">Ready</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token plain"> </span><span class="token builtin" style="color:hsl(119, 34%, 47%)">error</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">}</span><br></div></code></pre></div></div>
+<p>The code is in <code>internal/controller/enginefault/recorder.go</code>: the recorder reports controller state, so it
+lives next to it. The controller calls the recorder after each thing happens. The recorder decides which signals to emit.
+<code>Ready</code> is the only call that returns an error, and only the manager&#x27;s readiness check uses it.</p>
+<p><code>Record</code> and <code>Phase</code> come from the <a class="" href="/llm-d-resiliency-operator/docs/components/controller#objects">controller</a>; <code>Reconfig</code>, <code>Plan</code>, <code>Progress</code> and
+<code>MemberID</code> from the <a class="" href="/llm-d-resiliency-operator/docs/components/engines/#objects">engine</a>; <code>PodRef</code> from the <a class="" href="/llm-d-resiliency-operator/docs/components/workloads/#objects">workload</a>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="objects">Objects<a href="#objects" class="hash-link" aria-label="Direct link to Objects" title="Direct link to Objects" translate="no">​</a></h2>
+<div class="language-go codeBlockContainer_Ckt0 theme-code-block" style="--prism-background-color:hsl(230, 1%, 98%);--prism-color:hsl(230, 8%, 24%)"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-go codeBlock_bY9V thin-scrollbar" style="background-color:hsl(230, 1%, 98%);color:hsl(230, 8%, 24%)"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token comment" style="color:hsl(230, 4%, 64%)">// Incident is one fault, from the moment IRO sees it until the group serves again or is reset.</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token comment" style="color:hsl(230, 4%, 64%)">// It opens when the engine reports a fault, when some admitted members cannot be read, or when the workload</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token comment" style="color:hsl(230, 4%, 64%)">// starts or stops recreating a serving group.</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token keyword" style="color:hsl(301, 63%, 40%)">type</span><span class="token plain"> Incident </span><span class="token keyword" style="color:hsl(301, 63%, 40%)">struct</span><span class="token plain"> </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">{</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    ID        </span><span class="token builtin" style="color:hsl(119, 34%, 47%)">string</span><span class="token plain">        </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// e.g. &quot;inc-7c1e&quot;</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Opened    time</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">.</span><span class="token plain">Time</span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Closed    time</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">.</span><span class="token plain">Time     </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// zero while open</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Cause     </span><span class="token builtin" style="color:hsl(119, 34%, 47%)">string</span><span class="token plain">        </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// the reason the controller gave when it opened the incident</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Affected  </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">[</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">]</span><span class="token plain">MemberID    </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// Terminal members when it opened (if none, those not Serving),</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">                            </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// plus every member a reconfig removes</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Pods      </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">[</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">]</span><span class="token plain">PodRef      </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// their Pods</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Nodes     </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">[</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">]</span><span class="token builtin" style="color:hsl(119, 34%, 47%)">string</span><span class="token plain">      </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// their nodes</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Reconfigs    </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">[</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">]</span><span class="token plain">ReconfigResult </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// every reconfig sent for it</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Outcome   Outcome       </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// set when closed</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Durations Durations</span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">}</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token keyword" style="color:hsl(301, 63%, 40%)">type</span><span class="token plain"> ReconfigResult </span><span class="token keyword" style="color:hsl(301, 63%, 40%)">struct</span><span class="token plain"> </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">{</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Reconfig    Reconfig</span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Progress Progress</span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">}</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token keyword" style="color:hsl(301, 63%, 40%)">type</span><span class="token plain"> Outcome </span><span class="token builtin" style="color:hsl(119, 34%, 47%)">string</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token keyword" style="color:hsl(301, 63%, 40%)">const</span><span class="token plain"> </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Recovered Outcome </span><span class="token operator" style="color:hsl(221, 87%, 60%)">=</span><span class="token plain"> </span><span class="token string" style="color:hsl(119, 34%, 47%)">&quot;Recovered&quot;</span><span class="token plain"> </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// back to serving with the same members</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Shrunk    Outcome </span><span class="token operator" style="color:hsl(221, 87%, 60%)">=</span><span class="token plain"> </span><span class="token string" style="color:hsl(119, 34%, 47%)">&quot;Shrunk&quot;</span><span class="token plain">    </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// back to serving with fewer members</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Reset     Outcome </span><span class="token operator" style="color:hsl(221, 87%, 60%)">=</span><span class="token plain"> </span><span class="token string" style="color:hsl(119, 34%, 47%)">&quot;Reset&quot;</span><span class="token plain">     </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// IRO asked the workload to recreate the group</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Recreated Outcome </span><span class="token operator" style="color:hsl(221, 87%, 60%)">=</span><span class="token plain"> </span><span class="token string" style="color:hsl(119, 34%, 47%)">&quot;Recreated&quot;</span><span class="token plain"> </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// the workload recreated the group on its own, e.g. after a container failed</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token comment" style="color:hsl(230, 4%, 64%)">// Durations splits an incident into stages.</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token keyword" style="color:hsl(301, 63%, 40%)">type</span><span class="token plain"> Durations </span><span class="token keyword" style="color:hsl(301, 63%, 40%)">struct</span><span class="token plain"> </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">{</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Diagnose time</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">.</span><span class="token plain">Duration </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// opened -&gt; first reconfig sent, or reset requested</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Apply    time</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">.</span><span class="token plain">Duration </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// reconfigs sent -&gt; their Progress finished</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Verify   time</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">.</span><span class="token plain">Duration </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// verification started -&gt; passed</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">    Total    time</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">.</span><span class="token plain">Duration </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// opened -&gt; closed</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">}</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token comment" style="color:hsl(230, 4%, 64%)">// ResetReason is a fixed set, so it can be a metric label.</span><span class="token plain"></span><br></div><div class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token keyword" style="color:hsl(301, 63%, 40%)">type</span><span class="token plain"> ResetReason </span><span class="token builtin" style="color:hsl(119, 34%, 47%)">string</span><span class="token plain"> </span><span class="token comment" style="color:hsl(230, 4%, 64%)">// unrecoverable | reconfig_failed | diagnosis_deadline | apply_deadline | flap | verify_failed | exclusion_broken | capacity | unseen</span><br></div></code></pre></div></div>
+<p>The controller keeps the <strong>open</strong> incident in its <a class="" href="/llm-d-resiliency-operator/docs/components/controller#objects"><code>Record</code></a>, so a new leader
+continues the same incident and its timings. Closed incidents leave the record and go to telemetry.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="functions">Functions<a href="#functions" class="hash-link" aria-label="Direct link to Functions" title="Direct link to Functions" translate="no">​</a></h2>
+<p>All examples use the <a class="" href="/llm-d-resiliency-operator/docs/components/#example-group">example group</a>. The group label is <code>ns1/group</code>.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="stepped">Stepped<a href="#stepped" class="hash-link" aria-label="Direct link to Stepped" title="Direct link to Stepped" translate="no">​</a></h3>
+<p>Called at the end of every <code>Step</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>Input</strong></td><td>the controller&#x27;s <a class="" href="/llm-d-resiliency-operator/docs/components/controller#objects"><code>Record</code></a> after the step, and the step&#x27;s error</td></tr><tr><td><strong>Emits</strong></td><td>refreshes the gauges (phase, members, capacity, and how long the controller has not seen the group, from <code>UnseenSince</code>). Remembers the time, for <code>Ready</code>. Logs the error, if any. A <code>GroupUnseen</code> Warning Event when <code>UnseenSince</code> is first set.</td></tr></tbody></table>
+<p><strong>Example.</strong> After poll 6: <code>llm_d_iro_phase{group=&quot;ns1/group&quot;,phase=&quot;serving&quot;} 1</code>,
+<code>llm_d_iro_members{state=&quot;admitted&quot;} 3</code>, <code>llm_d_iro_members{state=&quot;excluded&quot;} 1</code>.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="phasechanged">PhaseChanged<a href="#phasechanged" class="hash-link" aria-label="Direct link to PhaseChanged" title="Direct link to PhaseChanged" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>Input</strong></td><td>the old phase, the new phase, the reason</td></tr><tr><td><strong>Emits</strong></td><td>a log line, a <code>PhaseChanged</code> Event, <code>llm_d_iro_phase_transitions_total{from,to}</code></td></tr></tbody></table>
+<p><strong>Example.</strong> <code>PhaseChanged(serving, recovering, &quot;m3 is dead; survivors paused&quot;)</code></p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="incidentopened">IncidentOpened<a href="#incidentopened" class="hash-link" aria-label="Direct link to IncidentOpened" title="Direct link to IncidentOpened" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>Input</strong></td><td>the new <a href="#objects" class=""><code>Incident</code></a>, with <code>ID</code>, <code>Opened</code>, <code>Cause</code>, <code>Affected</code>, <code>Pods</code>, <code>Nodes</code></td></tr><tr><td><strong>Emits</strong></td><td>a log line and an <code>IncidentOpened</code> Warning Event. Every later Event of this incident names its ID.</td></tr></tbody></table>
+<p><strong>Example.</strong> <code>IncidentOpened({ID: inc-7c1e, Cause: &quot;m3 is dead&quot;, Affected: [m3@idD], Pods: [pod-3], Nodes: [gpu-node-7]})</code>
+→ Event: <code>inc-7c1e: m3@idD on pod-3 (node gpu-node-7) is dead; recovering</code></p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="reconfigstarted">ReconfigStarted<a href="#reconfigstarted" class="hash-link" aria-label="Direct link to ReconfigStarted" title="Direct link to ReconfigStarted" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>Input</strong></td><td>the <a class="" href="/llm-d-resiliency-operator/docs/components/engines/#objects"><code>Reconfig</code></a> just sent and the <a class="" href="/llm-d-resiliency-operator/docs/components/engines/#objects"><code>Plan</code></a> it came from</td></tr><tr><td><strong>Emits</strong></td><td>a log line and a <code>ReconfigStarted</code> Event, again when the reconfig is sent again (reason <code>resent: no member got it</code>)</td></tr></tbody></table>
+<p><strong>Example.</strong> → Event: <code>inc-7c1e: reconfig iro-ft-7c1e started: shrink, remove m3@idD</code></p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="reconfigfinished">ReconfigFinished<a href="#reconfigfinished" class="hash-link" aria-label="Direct link to ReconfigFinished" title="Direct link to ReconfigFinished" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>Input</strong></td><td>the reconfig and its final <a class="" href="/llm-d-resiliency-operator/docs/components/engines/#objects"><code>Progress</code></a></td></tr><tr><td><strong>Emits</strong></td><td>a log line, a <code>ReconfigSucceeded</code> or <code>ReconfigFailed</code> Event, <code>llm_d_iro_reconfigs_total{change,outcome}</code>. <code>NotStarted</code> is a reconfig dropped because no member got it and it no longer passed the checks: outcome <code>dropped</code>. A reconfig ended by a reset or a new group finishes <code>Running</code>, with that as its reason.</td></tr></tbody></table>
+<p><strong>Example.</strong> <code>ReconfigFinished(iro-ft-7c1e, {Succeeded})</code> → <code>llm_d_iro_reconfigs_total{change=&quot;shrink&quot;,outcome=&quot;succeeded&quot;}</code> +1</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="podresetrequested">PodResetRequested<a href="#podresetrequested" class="hash-link" aria-label="Direct link to PodResetRequested" title="Direct link to PodResetRequested" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>Input</strong></td><td>the Pods named in <code>Reset</code>, and the workload&#x27;s answer</td></tr><tr><td><strong>Emits</strong></td><td>a log line, a <code>PodReset</code> Event and <code>llm_d_iro_pod_resets_total</code> (one per Pod), once per call (not every poll). A call answered with <code>ErrUnsupported</code> emits only the log line, and the Pods the workload cannot handle stay as they are. A list the workload cannot handle as a whole is not recorded; each Pod is then asked for, and recorded, alone.</td></tr></tbody></table>
+<p><strong>Example.</strong> <code>PodResetRequested([{pod-2, c1}, {pod-3, d1}], nil)</code> → Event: <code>resetting pod-2, pod-3 to bring m2, m3 back</code></p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resetallrequested">ResetAllRequested<a href="#resetallrequested" class="hash-link" aria-label="Direct link to ResetAllRequested" title="Direct link to ResetAllRequested" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>Input</strong></td><td>a fixed <a href="#objects" class=""><code>ResetReason</code></a> and the Pods named in <code>ResetAll</code></td></tr><tr><td><strong>Emits</strong></td><td>a log line, a <code>GroupReset</code> Warning Event, <code>llm_d_iro_resets_total{reason}</code></td></tr></tbody></table>
+<p><strong>Example.</strong> <code>ResetAllRequested(reconfig_failed, [pod-0 ... pod-3])</code> → <code>llm_d_iro_resets_total{reason=&quot;reconfig_failed&quot;}</code> +1</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="releaserequested">ReleaseRequested<a href="#releaserequested" class="hash-link" aria-label="Direct link to ReleaseRequested" title="Direct link to ReleaseRequested" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>Input</strong></td><td>the Pods named in <code>Release</code>, and the workload&#x27;s answer</td></tr><tr><td><strong>Emits</strong></td><td>a log line and a <code>PodsReleased</code> Event, once per request (not every poll). As for <code>PodResetRequested</code>, <code>ErrUnsupported</code> emits only the log line.</td></tr></tbody></table>
+<p><strong>Example.</strong> <code>ReleaseRequested([{pod-3, d1}], nil)</code> → Event: <code>releasing pod-3; serving with 3 members</code></p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="savefailed">SaveFailed<a href="#savefailed" class="hash-link" aria-label="Direct link to SaveFailed" title="Direct link to SaveFailed" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>Input</strong></td><td>the journal error</td></tr><tr><td><strong>Emits</strong></td><td>a log line, <code>llm_d_iro_journal_save_failures_total</code></td></tr></tbody></table>
+<p><strong>Example.</strong> <code>SaveFailed(ErrConflict)</code> → <code>llm_d_iro_journal_save_failures_total{group=&quot;ns1/group&quot;}</code> +1</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="incidentclosed">IncidentClosed<a href="#incidentclosed" class="hash-link" aria-label="Direct link to IncidentClosed" title="Direct link to IncidentClosed" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>Input</strong></td><td>the closed <a href="#objects" class=""><code>Incident</code></a>, with <code>Outcome</code> and <code>Durations</code></td></tr><tr><td><strong>Emits</strong></td><td>a log line, an <code>IncidentClosed</code> Event, <code>llm_d_iro_incidents_total{outcome}</code>, one <code>llm_d_iro_incident_duration_seconds{stage}</code> observation per stage, and an entry in the <a href="#incident-history" class="">incident history</a></td></tr></tbody></table>
+<p><strong>Example.</strong> → Event: <code>inc-7c1e: shrunk in 41s (diagnose 4s, apply 22s, verify 15s)</code></p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ready">Ready<a href="#ready" class="hash-link" aria-label="Direct link to Ready" title="Direct link to Ready" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>Input</strong></td><td>none</td></tr><tr><td><strong>Output</strong></td><td><code>nil</code> when this process is not the leader, or when the leader completed a <code>Step</code> recently. An error otherwise.</td></tr></tbody></table>
+<p><strong>Example.</strong> The last <code>Stepped</code> was 45s ago with a 1s poll → <code>error: no completed step for 45s</code>. Kubernetes
+marks the Pod not ready, so a stuck leader is visible. This replaces today&#x27;s plain ping.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="reference">Reference<a href="#reference" class="hash-link" aria-label="Direct link to Reference" title="Direct link to Reference" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="metrics">Metrics<a href="#metrics" class="hash-link" aria-label="Direct link to Metrics" title="Direct link to Metrics" translate="no">​</a></h3>
+<p>All metrics carry <code>group</code> (<code>&lt;namespace&gt;/&lt;workload name&gt;</code>). Label values come from fixed sets only.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metric</th><th>Type</th><th>Labels</th><th>Meaning</th></tr></thead><tbody><tr><td><code>llm_d_iro_leader</code></td><td>gauge</td><td></td><td>1 on the leader, 0 elsewhere</td></tr><tr><td><code>llm_d_iro_phase</code></td><td>gauge</td><td><code>phase</code></td><td>1 for the current phase</td></tr><tr><td><code>llm_d_iro_phase_transitions_total</code></td><td>counter</td><td><code>from</code>, <code>to</code></td><td>phase changes</td></tr><tr><td><code>llm_d_iro_members</code></td><td>gauge</td><td><code>state</code></td><td>members by state: candidate, admitted, excluded, rejected</td></tr><tr><td><code>llm_d_iro_pod_resets_total</code></td><td>counter</td><td></td><td>Pods IRO reset to bring members back, from calls that returned nil</td></tr><tr><td><code>llm_d_iro_reconfigs_total</code></td><td>counter</td><td><code>change</code>, <code>outcome</code></td><td>reconfigs by shape (retry, shrink, grow, replace) and result (succeeded, failed_joiners, failed_group, deadline, dropped)</td></tr><tr><td><code>llm_d_iro_unseen_seconds</code></td><td>gauge</td><td></td><td>how long the controller has not seen the group (<code>Discover</code> failed, or no admitted member could be read); 0 when it sees it</td></tr><tr><td><code>llm_d_iro_resets_total</code></td><td>counter</td><td><code>reason</code></td><td>resets IRO asked for, by <a href="#objects" class=""><code>ResetReason</code></a>. Recreations the workload did on its own are not counted here; they close incidents as <code>Recreated</code>.</td></tr><tr><td><code>llm_d_iro_incidents_total</code></td><td>counter</td><td><code>outcome</code></td><td>closed incidents by outcome</td></tr><tr><td><code>llm_d_iro_incident_duration_seconds</code></td><td>histogram</td><td><code>stage</code></td><td>diagnose, apply, verify, total</td></tr><tr><td><code>llm_d_iro_journal_save_failures_total</code></td><td>counter</td><td></td><td>failed journal saves</td></tr><tr><td><code>llm_d_iro_last_verified_timestamp_seconds</code></td><td>gauge</td><td></td><td>when the last reconfig&#x27;s members passed <code>Verify</code></td></tr></tbody></table>
+<p>Alerts this allows: recovering for more than N minutes, below full for more than N minutes,
+the group unseen for more than N minutes, journal saves failing, no leader.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="events">Events<a href="#events" class="hash-link" aria-label="Direct link to Events" title="Direct link to Events" translate="no">​</a></h3>
+<p>On the workload object. Every Event of an incident starts with its ID.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Reason</th><th>Type</th><th>When</th></tr></thead><tbody><tr><td><code>IncidentOpened</code></td><td>Warning</td><td>a fault opens an incident</td></tr><tr><td><code>PhaseChanged</code></td><td>Normal</td><td>any phase change</td></tr><tr><td><code>ReconfigStarted</code></td><td>Normal</td><td>a reconfig is sent</td></tr><tr><td><code>ReconfigSucceeded</code> / <code>ReconfigFailed</code></td><td>Normal / Warning</td><td>a reconfig finishes</td></tr><tr><td><code>PodReset</code></td><td>Normal</td><td>IRO resets Pods to bring their members back</td></tr><tr><td><code>PodsReleased</code></td><td>Normal</td><td>IRO releases Pods and serves below full</td></tr><tr><td><code>GroupReset</code></td><td>Warning</td><td>IRO asks the workload to recreate the group</td></tr><tr><td><code>RecreateStopped</code></td><td>Warning</td><td>the workload reports it gave up recreating the group</td></tr><tr><td><code>GroupUnseen</code></td><td>Warning</td><td>the controller can no longer see the group: <code>Discover</code> fails, or no admitted member can be read</td></tr><tr><td><code>IncidentClosed</code></td><td>Normal</td><td>the group serves again, or was reset</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="incident-history">Incident history<a href="#incident-history" class="hash-link" aria-label="Direct link to Incident history" title="Direct link to Incident history" translate="no">​</a></h3>
+<p>The last 20 closed incidents, newest first, in ConfigMap <code>&lt;workload-name&gt;-ft-incidents</code>, owned by the workload object.
+Written best-effort: a failed write is logged and dropped. It is separate from the journal, so the
+journal stays small and its saves stay critical-path only.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="rules">Rules<a href="#rules" class="hash-link" aria-label="Direct link to Rules" title="Direct link to Rules" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Rule</th><th>Why</th></tr></thead><tbody><tr><td>Never returns an error to the controller, except <code>Ready</code></td><td>telemetry must not change what IRO does</td></tr><tr><td>Never blocks. Metrics are in memory; Events and history writes are asynchronous.</td><td>a slow API server must not delay a reconfig or a reset</td></tr><tr><td>IRO never reads telemetry back</td><td>decisions come from the workload, the engine and the journal only</td></tr><tr><td>Metric labels come from fixed sets: no member IDs, Pod names or free text</td><td>bounded cardinality. IDs and names go in Events and logs.</td></tr><tr><td>Names follow llm-d: <code>llm_d_iro_*</code></td><td>consistent with <code>llm_d_epp_*</code> and the rest of llm-d</td></tr><tr><td>Each incident&#x27;s Events and history entry carry its ID</td><td>one incident can be followed end to end</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="considerations">Considerations<a href="#considerations" class="hash-link" aria-label="Direct link to Considerations" title="Direct link to Considerations" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Why a <code>Recorder</code> interface.</strong> Recovery logic says what happened, once. The recorder fans it out to
+logs, metrics and Events. Tests assert the exact calls without Prometheus or a cluster.</li>
+<li class=""><strong>Why not the journal.</strong> The journal must succeed before IRO acts and keeps only the current state.
+Telemetry is history and must never block. Putting history in the journal would make every save bigger
+and every telemetry hiccup a recovery problem.</li>
+<li class=""><strong>Detection time.</strong> Issue #30 lists a detect stage. Measuring it needs the time the engine saw the fault,
+and <code>Member</code> has no timestamp yet. Until it does, <code>Diagnose</code> starts when IRO opens the incident.</li>
+<li class=""><strong>Fault kinds.</strong> Issue #30 lists kinds such as member death, collective stall and frontend loss. Today the
+incident&#x27;s <code>Cause</code> is the policy&#x27;s free-text reason. A fixed <code>Plan.Fault</code> kind from the engine would let
+incidents be counted by kind.</li>
+<li class=""><strong>Tracing.</strong> Not now. An OpenTelemetry trace per incident, following llm-d&#x27;s tracing conventions, is
+proposed on <a href="https://github.com/llm-d-incubation/llm-d-resiliency-operator/issues/30" target="_blank" rel="noopener noreferrer" class="">#30</a>. It would
+use the same incident boundaries.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="implementation">Implementation<a href="#implementation" class="hash-link" aria-label="Direct link to Implementation" title="Direct link to Implementation" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Signal</th><th>How</th></tr></thead><tbody><tr><td>Logs</td><td>the controller-runtime logger from the context, with <code>group</code>, <code>incident</code>, <code>reconfig</code> and <code>phase</code> keys</td></tr><tr><td>Metrics</td><td>the controller-runtime metrics registry, served on the manager&#x27;s <code>/metrics</code></td></tr><tr><td>Events</td><td>the manager&#x27;s <code>EventRecorder</code>, on the workload object</td></tr><tr><td>Incident history</td><td>ConfigMap <code>&lt;workload-name&gt;-ft-incidents</code>, owned by the workload object</td></tr><tr><td>Readiness</td><td>a <code>readyz</code> check that calls <code>Ready</code></td></tr></tbody></table>
+<p><strong>Today</strong> IRO logs errors only. It has no IRO metrics, no Events, and its readiness check is a plain ping.</p></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/llm-d-resiliency-operator/docs/components/journal"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Journal</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/llm-d-resiliency-operator/docs/failures/"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Failures</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#interface" class="table-of-contents__link toc-highlight">Interface</a></li><li><a href="#objects" class="table-of-contents__link toc-highlight">Objects</a></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#stepped" class="table-of-contents__link toc-highlight">Stepped</a></li><li><a href="#phasechanged" class="table-of-contents__link toc-highlight">PhaseChanged</a></li><li><a href="#incidentopened" class="table-of-contents__link toc-highlight">IncidentOpened</a></li><li><a href="#reconfigstarted" class="table-of-contents__link toc-highlight">ReconfigStarted</a></li><li><a href="#reconfigfinished" class="table-of-contents__link toc-highlight">ReconfigFinished</a></li><li><a href="#podresetrequested" class="table-of-contents__link toc-highlight">PodResetRequested</a></li><li><a href="#resetallrequested" class="table-of-contents__link toc-highlight">ResetAllRequested</a></li><li><a href="#releaserequested" class="table-of-contents__link toc-highlight">ReleaseRequested</a></li><li><a href="#savefailed" class="table-of-contents__link toc-highlight">SaveFailed</a></li><li><a href="#incidentclosed" class="table-of-contents__link toc-highlight">IncidentClosed</a></li><li><a href="#ready" class="table-of-contents__link toc-highlight">Ready</a></li></ul></li><li><a href="#reference" class="table-of-contents__link toc-highlight">Reference</a><ul><li><a href="#metrics" class="table-of-contents__link toc-highlight">Metrics</a></li><li><a href="#events" class="table-of-contents__link toc-highlight">Events</a></li><li><a href="#incident-history" class="table-of-contents__link toc-highlight">Incident history</a></li></ul></li><li><a href="#rules" class="table-of-contents__link toc-highlight">Rules</a></li><li><a href="#considerations" class="table-of-contents__link toc-highlight">Considerations</a></li><li><a href="#implementation" class="table-of-contents__link toc-highlight">Implementation</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/llm-d-resiliency-operator/docs">Architecture</a></li><li class="footer__item"><a class="footer__link-item" href="/llm-d-resiliency-operator/docs/components">Components</a></li><li class="footer__item"><a class="footer__link-item" href="/llm-d-resiliency-operator/docs/failures">Failures</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/llm-d-incubation/llm-d-resiliency-operator" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://llm-d.ai" target="_blank" rel="noopener noreferrer" class="footer__link-item">llm-d<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 llm-d Project Authors. Apache-2.0.</div></div></div></footer></div>
+</body>
+</html>

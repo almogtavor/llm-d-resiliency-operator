@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-components/engines/vllm" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.10.2">
+<title data-rh="true">vLLM engine | llm-d Resiliency Operator</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/engines/vllm"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="vLLM engine | llm-d Resiliency Operator"><meta data-rh="true" name="description" content="How vLLM implements the engine contract, on top of the vLLM fault tolerance API"><meta data-rh="true" property="og:description" content="How vLLM implements the engine contract, on top of the vLLM fault tolerance API"><link data-rh="true" rel="icon" href="/llm-d-resiliency-operator/img/favicon.png"><link data-rh="true" rel="canonical" href="https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/engines/vllm"><link data-rh="true" rel="alternate" href="https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/engines/vllm" hreflang="en"><link data-rh="true" rel="alternate" href="https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/engines/vllm" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Components","item":"https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/"},{"@type":"ListItem","position":2,"name":"Engines","item":"https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/engines/"},{"@type":"ListItem","position":3,"name":"vLLM engine","item":"https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/components/engines/vllm"}]}</script><link rel="stylesheet" href="/llm-d-resiliency-operator/assets/css/styles.544c8b07.css">
+<script src="/llm-d-resiliency-operator/assets/js/runtime~main.d09c1ea8.js" defer="defer"></script>
+<script src="/llm-d-resiliency-operator/assets/js/main.0dd1a1ad.js" defer="defer"></script>
+</head>
+<body>
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/llm-d-resiliency-operator/img/llm-d-logo-transparent.png"><link rel="preload" as="image" href="/llm-d-resiliency-operator/img/llm-d-logo-transparent-dark.png"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/llm-d-resiliency-operator/"><div class="navbar__logo"><img src="/llm-d-resiliency-operator/img/llm-d-logo-transparent.png" alt="llm-d Resiliency Operator" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/llm-d-resiliency-operator/img/llm-d-logo-transparent-dark.png" alt="llm-d Resiliency Operator" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/llm-d-resiliency-operator/docs/">Docs</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/llm-d-incubation/llm-d-resiliency-operator" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-github-link" aria-label="GitHub"></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/llm-d-resiliency-operator/docs/"><span class="linkLabel_WmDU">Architecture</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/llm-d-resiliency-operator/docs/getting-started"><span class="linkLabel_WmDU">Getting started</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href="/llm-d-resiliency-operator/docs/components/"><span class="categoryLinkLabel_W154">Components</span></a><button aria-label="Collapse sidebar category &#x27;Components&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/llm-d-resiliency-operator/docs/components/controller"><span class="linkLabel_WmDU">Controller</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex="0" href="/llm-d-resiliency-operator/docs/components/engines/"><span class="categoryLinkLabel_W154">Engines</span></a><button aria-label="Collapse sidebar category &#x27;Engines&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/llm-d-resiliency-operator/docs/components/engines/vllm"><span class="linkLabel_WmDU">vLLM engine</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/llm-d-resiliency-operator/docs/components/workloads/"><span class="categoryLinkLabel_W154">Workloads</span></a><button aria-label="Expand sidebar category &#x27;Workloads&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/llm-d-resiliency-operator/docs/components/journal"><span class="linkLabel_WmDU">Journal</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/llm-d-resiliency-operator/docs/components/telemetry"><span class="linkLabel_WmDU">Telemetry</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/llm-d-resiliency-operator/docs/failures/"><span class="categoryLinkLabel_W154">Failures</span></a><button aria-label="Expand sidebar category &#x27;Failures&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/llm-d-resiliency-operator/docs/examples/"><span class="categoryLinkLabel_W154">Examples</span></a><button aria-label="Expand sidebar category &#x27;Examples&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/llm-d-resiliency-operator/docs/reference/upstream-versions"><span class="categoryLinkLabel_W154">Reference</span></a></div></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/llm-d-resiliency-operator/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/llm-d-resiliency-operator/docs/components/"><span>Components</span></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/llm-d-resiliency-operator/docs/components/engines/"><span>Engines</span></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">vLLM engine</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>vLLM engine</h1></header>
+<p>How vLLM implements the <a class="" href="/llm-d-resiliency-operator/docs/components/engines/">engine contract</a>, on top of the vLLM fault tolerance API
+from <a href="https://github.com/vllm-project/vllm/pull/46370" target="_blank" rel="noopener noreferrer" class="">vllm-project/vllm#46370</a>. Code: <code>internal/engine/vllm</code>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-vllm-gives">What vLLM gives<a href="#what-vllm-gives" class="hash-link" aria-label="Direct link to What vLLM gives" title="Direct link to What vLLM gives" translate="no">​</a></h2>
+<p>Each data parallel rank runs its own API server (external load balancing, <code>--data-parallel-size-local 1</code>).
+On <code>--enable-fault-tolerance</code>, a rank that hits a fault stops serving and waits for an instruction:</p>
+<p><img decoding="async" loading="lazy" alt="A vLLM rank&amp;#39;s fault-tolerance states" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDgwIiBoZWlnaHQ9IjQyMCIgdmlld0JveD0iMCAwIDEwODAgNDIwIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgJ1NlZ29lIFVJJywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiI+CjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJ4PSI4IiBmaWxsPSIjZmZmZmZmIi8+Cjx0ZXh0IHg9IjMyLjAiIHk9IjQyLjAiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiMyMDIxMjQiIHRleHQtYW5jaG9yPSJzdGFydCIgZm9udC13ZWlnaHQ9IjcwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+QSB2TExNIHJhbmsmI3gyNztzIGZhdWx0LXRvbGVyYW5jZSBzdGF0ZTwvdGV4dD4KPHRleHQgeD0iMzIuMCIgeT0iNjYuMCIgZm9udC1zaXplPSIxMyIgZmlsbD0iIzVmNjM2OCIgdGV4dC1hbmNob3I9InN0YXJ0IiB4bWw6c3BhY2U9InByZXNlcnZlIj5hcyByZXBvcnRlZCBieSAvdjEvZmF1bHRfdG9sZXJhbmNlL3N0YXR1czwvdGV4dD4KPHJlY3QgeD0iNjAuMCIgeT0iMTIwLjAiIHdpZHRoPSIyMjAuMCIgaGVpZ2h0PSI1Ni4wIiByeD0iMjgiIGZpbGw9IiNlNmY0ZWEiIHN0cm9rZT0iIzFlOGUzZSIgc3Ryb2tlLXdpZHRoPSIyLjUiLz4KPHRleHQgeD0iMTcwLjAiIHk9IjE1NC4wIiBmb250LXNpemU9IjE3IiBmaWxsPSIjMWU4ZTNlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj5oZWFsdGh5PC90ZXh0Pgo8cmVjdCB4PSI0MjAuMCIgeT0iMTIwLjAiIHdpZHRoPSIyMjAuMCIgaGVpZ2h0PSI1Ni4wIiByeD0iMjgiIGZpbGw9IiNmZWY3ZTAiIHN0cm9rZT0iI2YyOTkwMCIgc3Ryb2tlLXdpZHRoPSIyLjUiLz4KPHRleHQgeD0iNTMwLjAiIHk9IjE1NC4wIiBmb250LXNpemU9IjE3IiBmaWxsPSIjZjI5OTAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj5kaWFnbm9zaW5nPC90ZXh0Pgo8cmVjdCB4PSI3ODAuMCIgeT0iMTIwLjAiIHdpZHRoPSIyMjAuMCIgaGVpZ2h0PSI1Ni4wIiByeD0iMjgiIGZpbGw9IiNmZWY3ZTAiIHN0cm9rZT0iI2YyOTkwMCIgc3Ryb2tlLXdpZHRoPSIyLjUiLz4KPHRleHQgeD0iODkwLjAiIHk9IjE1NC4wIiBmb250LXNpemU9IjE3IiBmaWxsPSIjZjI5OTAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj51bmhlYWx0aHk8L3RleHQ+CjxyZWN0IHg9IjQyMC4wIiB5PSIzMDAuMCIgd2lkdGg9IjIyMC4wIiBoZWlnaHQ9IjU2LjAiIHJ4PSIyOCIgZmlsbD0iI2ZjZThlNiIgc3Ryb2tlPSIjZDkzMDI1IiBzdHJva2Utd2lkdGg9IjIuNSIvPgo8dGV4dCB4PSI1MzAuMCIgeT0iMzM0LjAiIGZvbnQtc2l6ZT0iMTciIGZpbGw9IiNkOTMwMjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPmRlYWQ8L3RleHQ+CjxwYXRoIGQ9Ik0gMjgwLjAgMTQwLjAgTCA0MjAuMCAxNDAuMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjI5OTAwIiBzdHJva2Utd2lkdGg9IjEuOCIvPgo8cG9seWdvbiBwb2ludHM9IjQyMC4wLDE0MC4wIDQxMC44LDE0My45IDQxMC44LDEzNi4xIiBmaWxsPSIjZjI5OTAwIi8+Cjx0ZXh0IHg9IjM1MC4wIiB5PSIxMzAuMCIgZm9udC1zaXplPSIxMiIgZmlsbD0iI2YyOTkwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+ZmF1bHQgaW4gdGhlIGJ1c3kgbG9vcDwvdGV4dD4KPHBhdGggZD0iTSA2NDAuMCAxNDAuMCBMIDc4MC4wIDE0MC4wIiBmaWxsPSJub25lIiBzdHJva2U9IiNmMjk5MDAiIHN0cm9rZS13aWR0aD0iMS44Ii8+Cjxwb2x5Z29uIHBvaW50cz0iNzgwLjAsMTQwLjAgNzcwLjgsMTQzLjkgNzcwLjgsMTM2LjEiIGZpbGw9IiNmMjk5MDAiLz4KPHRleHQgeD0iNzEwLjAiIHk9IjEzMC4wIiBmb250LXNpemU9IjEyIiBmaWxsPSIjZjI5OTAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4bWw6c3BhY2U9InByZXNlcnZlIj5wZWVycyYjeDI3OyBtYXNrIGtub3duPC90ZXh0Pgo8cGF0aCBkPSJNIDg5MC4wIDEyMC4wIEwgODkwLjAgODQuMCBMIDE3MC4wIDg0LjAgTCAxNzAuMCAxMjAuMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWU4ZTNlIiBzdHJva2Utd2lkdGg9IjEuOCIvPgo8cG9seWdvbiBwb2ludHM9IjE3MC4wLDEyMC4wIDE2Ni4xLDExMC44IDE3My45LDExMC44IiBmaWxsPSIjMWU4ZTNlIi8+Cjx0ZXh0IHg9IjUzMC4wIiB5PSI3Ni4wIiBmb250LXNpemU9IjEyIiBmaWxsPSIjMWU4ZTNlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4bWw6c3BhY2U9InByZXNlcnZlIj5yZXRyeSBvciBzY2FsZV9kb3duIHN1Y2NlZWRlZDwvdGV4dD4KPHBhdGggZD0iTSAxNzAuMCAxNzYuMCBMIDE3MC4wIDMyOC4wIEwgNDIwLjAgMzI4LjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Q5MzAyNSIgc3Ryb2tlLXdpZHRoPSIxLjgiLz4KPHBvbHlnb24gcG9pbnRzPSI0MjAuMCwzMjguMCA0MTAuOCwzMzEuOSA0MTAuOCwzMjQuMSIgZmlsbD0iI2Q5MzAyNSIvPgo8dGV4dCB4PSIxODAuMCIgeT0iMzE4LjAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiNkOTMwMjUiIHRleHQtYW5jaG9yPSJzdGFydCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+b3duIHdvcmtlciBkaWVkPC90ZXh0Pgo8cGF0aCBkPSJNIDUzMC4wIDE3Ni4wIEwgNTMwLjAgMzAwLjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Q5MzAyNSIgc3Ryb2tlLXdpZHRoPSIxLjgiLz4KPHBvbHlnb24gcG9pbnRzPSI1MzAuMCwzMDAuMCA1MjYuMSwyOTAuOCA1MzMuOSwyOTAuOCIgZmlsbD0iI2Q5MzAyNSIvPgo8dGV4dCB4PSI1NDAuMCIgeT0iMjQ4LjAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiNkOTMwMjUiIHRleHQtYW5jaG9yPSJzdGFydCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+b3duIHdvcmtlciBkaWVkPC90ZXh0Pgo8cGF0aCBkPSJNIDg5MC4wIDE3Ni4wIEwgODkwLjAgMzI4LjAgTCA2NDAuMCAzMjguMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZDkzMDI1IiBzdHJva2Utd2lkdGg9IjEuOCIvPgo8cG9seWdvbiBwb2ludHM9IjY0MC4wLDMyOC4wIDY0OS4yLDMyNC4xIDY0OS4yLDMzMS45IiBmaWxsPSIjZDkzMDI1Ii8+Cjx0ZXh0IHg9Ijg4MC4wIiB5PSIyMjIuMCIgZm9udC1zaXplPSIxMiIgZmlsbD0iI2Q5MzAyNSIgdGV4dC1hbmNob3I9ImVuZCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+c2NhbGVfZG93biBmYWlsZWQsIG9yIG5vIGluc3RydWN0aW9uPC90ZXh0Pgo8dGV4dCB4PSI4ODAuMCIgeT0iMjM4LjAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiNkOTMwMjUiIHRleHQtYW5jaG9yPSJlbmQiIHhtbDpzcGFjZT0icHJlc2VydmUiPmZvciBlbmdpbmVfcmVjb3ZlcnlfdGltZW91dF9zZWM8L3RleHQ+Cjwvc3ZnPgo=" width="1080" height="420" class="img_ev3q"></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Endpoint</th><th>Use</th></tr></thead><tbody><tr><td><code>GET /v1/fault_tolerance/status</code></td><td><code>status</code>, <code>fault_info</code>, <code>mask</code>, and for the last instruction <code>ft_state</code>, <code>last_ft_request_id</code>, <code>ft_error</code></td></tr><tr><td><code>POST /v1/fault_tolerance/apply</code></td><td><code>retry</code> or <code>scale_down</code>; <code>202</code> means queued, and the result, including a refusal, shows in the status</td></tr><tr><td><code>GET /health</code></td><td><code>503</code> once the engine process is gone</td></tr></tbody></table>
+<p>Rules that shape the driver:</p>
+<ul>
+<li class="">An instruction is accepted only while the rank is <code>unhealthy</code>.</li>
+<li class="">Every alive rank must get the same <code>request_id</code> within 10 seconds, or the reconfig fails.</li>
+<li class=""><code>scale_down</code> keeps the original rank numbers. Removing the lowest alive rank also moves the store it
+hosts, so the request carries the next lowest rank&#x27;s address and a port.</li>
+<li class="">A failed <code>scale_down</code> is final: the ranks report <code>dead</code>.</li>
+<li class="">The status is cached by the API server. If the engine process is killed, it can still say <code>healthy</code>;
+<code>/health</code> is what notices.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="driver">Driver<a href="#driver" class="hash-link" aria-label="Direct link to Driver" title="Direct link to Driver" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Contract</th><th>vLLM</th></tr></thead><tbody><tr><td>Members per Pod</td><td><code>--vllm-ranks-per-pod</code> ranks; rank <code>i</code> of Pod <code>Index</code> is <code>dp&lt;Index × ranks + i&gt;</code> on port <code>--vllm-api-port + i</code></td></tr><tr><td><code>Observe</code></td><td>status and <code>/health</code> of every rank of every Pod that has an IP and is not terminating</td></tr><tr><td><code>Serving</code></td><td>status <code>healthy</code> and <code>/health</code> 200</td></tr><tr><td><code>Terminal</code></td><td>status <code>dead</code>, or <code>/health</code> 503</td></tr><tr><td><code>Unknown</code></td><td>the API does not answer, or answers for another rank. If IRO can read no admitted rank, it waits with its deadlines paused and resets the group after <code>--ft-unseen-timeout</code>; if it can read some, the unknown ranks are a fault.</td></tr><tr><td><code>Probe</code></td><td>one short completion to each serving rank, so idle peers run a step and notice a dead rank</td></tr><tr><td><code>Apply</code></td><td><code>retry</code> when nothing is removed, else <code>scale_down</code> with <code>removed_dp_ranks</code>; <code>request_id</code> is the reconfig ID. Refused before anything is sent when a participant cannot be reached or a removed rank is not terminal in the observation. A lost rank needs no address: its number comes from its name.</td></tr><tr><td>Store host</td><td>when the reconfig removes the lowest alive rank: <code>dp_master_ip</code> of the lowest participant and <code>--vllm-store-port</code> plus its rank, so a second move inside one Pod does not reuse the port the previous host still holds. Ports from <code>--vllm-store-port</code> up to it plus the group size must be free.</td></tr><tr><td><code>Verify</code></td><td>an 8-token completion on each member; the error names every rank that failed</td></tr><tr><td><code>Grow</code></td><td>no: the fault tolerance API cannot add ranks</td></tr><tr><td>Same reconfig sent twice</td><td>never: <code>Progress</code> never says <code>NotStarted</code>, so IRO never resends. A second send would not be ignored: a healthy rank records it as failed under the same <code>request_id</code>, and a rank that faulted again runs it again.</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="policy">Policy<a href="#policy" class="hash-link" aria-label="Direct link to Policy" title="Direct link to Policy" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Admitted ranks</th><th>Plan</th></tr></thead><tbody><tr><td>all serving</td><td><code>Healthy</code></td></tr><tr><td>none left alive</td><td><code>Unrecoverable</code></td></tr><tr><td>one unknown, <code>diagnosing</code>, or running an instruction</td><td><code>Wait</code></td></tr><tr><td>some faulted, some still <code>healthy</code></td><td><code>Wait</code>: vLLM rejects instructions until every survivor reports <code>unhealthy</code></td></tr><tr><td>some terminal, every survivor <code>unhealthy</code></td><td><code>Change</code>: remove the terminal ranks</td></tr><tr><td>none terminal, all <code>unhealthy</code></td><td><code>Change</code>: retry</td></tr></tbody></table>
+<p>A rank that stays <code>healthy</code> while its peers fault (stuck in a collective) never accepts an instruction.
+The plan stays <code>Wait</code> and the diagnosis deadline resets the group.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>During a reconfig</th><th>Progress</th></tr></thead><tbody><tr><td>a participant is terminal</td><td><code>Failed</code>, scope <code>Group</code></td></tr><tr><td><code>ft_state</code> is <code>failed</code> for this reconfig</td><td><code>Failed</code>, scope <code>Group</code></td></tr><tr><td>a participant runs another <code>request_id</code></td><td><code>Failed</code>, scope <code>Group</code></td></tr><tr><td>a participant is <code>unhealthy</code> with no <code>request_id</code>: it finished the reconfig and faulted after it, or never got it</td><td><code>Failed</code>, scope <code>Group</code></td></tr><tr><td>every participant serving</td><td><code>Succeeded</code></td></tr><tr><td>otherwise</td><td><code>Running</code></td></tr><tr><td><code>NotStarted</code></td><td>never. The status drops <code>last_ft_request_id</code> at the next state report, so a reconfig never sent looks like one that finished before a new fault. A new leader that finds an unsent reconfig fails it, and the group is reset.</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="flags">Flags<a href="#flags" class="hash-link" aria-label="Direct link to Flags" title="Direct link to Flags" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Flag</th><th>Default</th></tr></thead><tbody><tr><td><code>--vllm-api-port</code></td><td>8000</td></tr><tr><td><code>--vllm-ranks-per-pod</code></td><td>1</td></tr><tr><td><code>--vllm-store-port</code></td><td>29600</td></tr><tr><td><code>--vllm-timeout</code></td><td>5s per status, health or apply request</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="deploying-vllm-for-iro">Deploying vLLM for IRO<a href="#deploying-vllm-for-iro" class="hash-link" aria-label="Direct link to Deploying vLLM for IRO" title="Direct link to Deploying vLLM for IRO" translate="no">​</a></h2>
+<ul>
+<li class="">Set <code>VLLM_KEEP_ALIVE_ON_ENGINE_DEATH=1</code>. Otherwise the API server exits with its engine and its container
+restarts: under <code>RecreateGroupOnPodRestart</code> the workload recreates the whole group and IRO never gets to
+shrink it; under <code>None</code> IRO removes the rank only once the restart changes its Pod&#x27;s identity, and the
+restarted rank cannot rejoin.</li>
+<li class="">No liveness probe on vLLM containers. A probe on the status or on a completion fails on every rank paused
+for recovery, and the restart loses that rank: under <code>RecreateGroupOnPodRestart</code> the group is recreated;
+under <code>None</code> the rank is removed with the dead one, or the reconfig in flight fails and the group is reset.
+A restarted rank never rejoins and holds its GPU until the next group. Under <code>None</code>, <code>GET /health</code> is the
+only safe target: it stays 200 while a rank is paused and turns 503 only when the engine process is gone.</li>
+<li class="">With sidecars in the Pod, name the vLLM container in <code>--lws-engine-containers</code>, and point
+<code>--vllm-api-port</code> at vLLM&#x27;s own port, not a proxy&#x27;s.</li>
+<li class=""><code>/health</code> stays 200 for a rank that is <code>dead</code> while its engine process lives, so a <code>/health</code> readiness
+probe keeps sending traffic to it, and it answers 503. Readiness that routes well checks the status
+endpoint for <code>healthy</code>.</li>
+<li class=""><code>engine_recovery_timeout_sec</code> must leave room for detection plus IRO&#x27;s diagnosis deadline.</li>
+<li class=""><code>scale_down</code> needs EPLB with redundant experts and an all2all backend with timeouts
+(<code>nixl_ep</code> or <code>deepep_low_latency</code>).</li>
+<li class="">Size the redundant experts for the ranks you want to lose in place: the survivors&#x27; slots must hold every
+logical expert. With E experts, R redundant and N ranks, losing k ranks needs (N - k)(E + R)/N &gt;= E.
+Otherwise the reconfig fails (&quot;no redundant slot for missing expert&quot;) and the group is reset.</li>
+<li class=""><code>nixl_ep</code> from NIXL 1.4 on uses GPU-initiated RDMA across Pods. Restrict <code>UCX_NET_DEVICES</code> to the RDMA
+devices the Pod can use for GPU memory, and make sure the nodes support it; within one Pod it runs over NVLink.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="known-engine-issues">Known engine issues<a href="#known-engine-issues" class="hash-link" aria-label="Direct link to Known engine issues" title="Direct link to Known engine issues" translate="no">​</a></h2>
+<p>Found with vllm#46370 (<code>384ba19</code>, then <code>fcfbd37</code>) on two setups: 4 H200 Pods of one rank each over InfiniBand
+(DeepSeek-V2-Lite, <code>nixl_ep</code> from NIXL 1.3.2), and one Pod of 4 H100 ranks over NVLink (Qwen3-30B-A3B,
+NIXL 1.3.2 and 1.5.0).</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Issue</th><th>What IRO does</th></tr></thead><tbody><tr><td>With NIXL before 1.4, removing the highest rank succeeds, then the next step fails <code>x.size(1) == active_rank_bound * num_max_dispatch_tokens_per_rank</code> in <code>nixl_ep</code>. NIXL 1.5.0, which vLLM pins, removes it in place. For NIXL 1.3, <code>Etelis/vllm</code> branch <code>ft-nixl-ep-highest-rank</code> trims the expert output to the dispatched slots.</td><td><code>Progress</code> fails the reconfig on the new fault and the group is reset</td></tr><tr><td>A Pod that disappears (not just its processes) can wedge the survivors: their next step fails on a Gloo connection reset, but the <code>nixl_ep</code> fault of the step in flight is never raised, so the EngineCore never learns of it and blocks on the shared-memory broadcast with status <code>healthy</code>. Seen in 1 of 2 Pod deletions at <code>384ba19</code>, none of 11 at <code>fcfbd37</code>.</td><td>the plan waits; the diagnosis deadline resets the group</td></tr><tr><td>The DP coordinator (rank 0) dying goes unnoticed under load; the first request after an idle period faults the group</td><td>the probe wakes the idle rank, then a retry; a second one within <code>FlapWindow</code> resets the group</td></tr><tr><td>NIXL 1.4 and later fail across Pods on nodes without GPU-initiated RDMA: <code>invalid memh</code> on unusable devices, then <code>lane not found</code></td><td>none: the group does not start</td></tr></tbody></table></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/llm-d-resiliency-operator/docs/components/engines/"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Engine</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/llm-d-resiliency-operator/docs/components/workloads/"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Workload</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#what-vllm-gives" class="table-of-contents__link toc-highlight">What vLLM gives</a></li><li><a href="#driver" class="table-of-contents__link toc-highlight">Driver</a></li><li><a href="#policy" class="table-of-contents__link toc-highlight">Policy</a></li><li><a href="#flags" class="table-of-contents__link toc-highlight">Flags</a></li><li><a href="#deploying-vllm-for-iro" class="table-of-contents__link toc-highlight">Deploying vLLM for IRO</a></li><li><a href="#known-engine-issues" class="table-of-contents__link toc-highlight">Known engine issues</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/llm-d-resiliency-operator/docs">Architecture</a></li><li class="footer__item"><a class="footer__link-item" href="/llm-d-resiliency-operator/docs/components">Components</a></li><li class="footer__item"><a class="footer__link-item" href="/llm-d-resiliency-operator/docs/failures">Failures</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/llm-d-incubation/llm-d-resiliency-operator" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://llm-d.ai" target="_blank" rel="noopener noreferrer" class="footer__link-item">llm-d<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 llm-d Project Authors. Apache-2.0.</div></div></div></footer></div>
+</body>
+</html>

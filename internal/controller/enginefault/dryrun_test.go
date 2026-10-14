@@ -33,7 +33,9 @@ type flakyEngine struct {
 
 func (eng *flakyEngine) Observe(context.Context, []workload.Pod) engine.Observation {
 	unknown := eng.observes.Add(1)%3 != 1
-	member := engine.Member{Pod: workload.PodRef{Name: "p0", UID: "u0"}, PodIdentity: "p0", Name: "m0", Serving: !unknown, Unknown: unknown}
+	member := engine.Member{
+		Pod: workload.PodRef{Name: "p0", UID: "u0"}, PodIdentity: "p0", Name: "m0", Serving: !unknown, Unknown: unknown,
+	}
 	return engine.Observation{Members: []engine.Member{member}}
 }
 
@@ -45,11 +47,16 @@ func TestDryRunSkipsResetAndStartsOver(t *testing.T) {
 	eng := &flakyEngine{}
 	config := enginefault.Defaults()
 	config.PollInterval, config.UnseenTimeout = time.Millisecond, time.Nanosecond
-	runner := &enginefault.Runner{Workload: oneMemberGroup{}, Engine: eng, Recorder: telemetry.New(logr.Discard(), time.Hour),
-		Config: config, DryRun: true}
+	runner := &enginefault.Runner{
+		Workload: oneMemberGroup{}, Engine: eng, Recorder: telemetry.New(logr.Discard(), time.Hour), Config: config, DryRun: true,
+	}
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
-	go func() { _ = runner.Start(ctx) }()
+	go func() {
+		if err := runner.Start(ctx); err != nil {
+			t.Error(err)
+		}
+	}()
 	// Without starting over, the runner would retry the skipped reset forever and never Observe again.
 	for eng.observes.Load() < 10 {
 		if ctx.Err() != nil {

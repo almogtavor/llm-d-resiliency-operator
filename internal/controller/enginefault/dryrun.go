@@ -40,6 +40,7 @@ func (dryEngine) Probe(ctx context.Context, _ engine.Observation) error {
 	return nil
 }
 
+//nolint:gocritic // The Engine contract passes the reconfig by value.
 func (dryEngine) Apply(ctx context.Context, _ engine.Observation, reconfig engine.Reconfig) ([]engine.Acceptance, error) {
 	return nil, skip(ctx, "apply reconfig", "reconfig", reconfig)
 }
@@ -52,6 +53,7 @@ func skip(ctx context.Context, action string, keysAndValues ...any) error {
 // memJournal keeps the record in memory, so a dry run never writes the real journal.
 type memJournal struct{ data []byte }
 
+//nolint:gocritic // The contract returns the record, its version and an error.
 func (store *memJournal) Load(context.Context) ([]byte, string, error) { return store.data, "", nil }
 
 func (store *memJournal) Save(_ context.Context, data []byte, _ string) (string, error) {

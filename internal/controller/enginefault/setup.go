@@ -94,8 +94,9 @@ func (options *Options) Setup(mgr ctrl.Manager, recorder Recorder) error {
 	if err != nil {
 		return err
 	}
-	return mgr.Add(&Runner{Workload: wl, Engine: eng, Journal: store, Recorder: recorder, Config: options.Config,
-		DryRun: options.DryRun})
+	return mgr.Add(&Runner{
+		Workload: wl, Engine: eng, Journal: store, Recorder: recorder, Config: options.Config, DryRun: options.DryRun,
+	})
 }
 
 func (config *Config) validate() error {

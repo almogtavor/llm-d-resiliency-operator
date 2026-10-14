@@ -49,7 +49,7 @@ func (runner *Runner) Start(ctx context.Context) error {
 			stepCtx, cancel := context.WithTimeout(ctx, runner.Config.ApplyTimeout)
 			err := current.Step(stepCtx)
 			if errors.Is(err, errDryRun) {
-				// The skipped action never happened, so start over from the live group.
+				// In dryrun we should throw the state away so the next poll will look at the real Pods again.
 				store = &memJournal{}
 			}
 			if errors.Is(err, journal.ErrConflict) || errors.Is(err, errDryRun) {

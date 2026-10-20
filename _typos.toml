@@ -11,4 +11,7 @@ IST = "IST"
 ND = "ND"
 
 # Add repo-specific false positives here:
-# word = "word"
+# Short vLLM commit hash (384ba19)
+ba = "ba"
+# resetAlls counts ResetAll calls in tests
+Alls = "Alls"

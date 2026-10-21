@@ -8,6 +8,7 @@ import (
 	"slices"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/go-logr/logr/funcr"
 
@@ -83,7 +84,8 @@ func TestDryRunLogsOnlyChanges(t *testing.T) {
 	}, funcr.Options{})
 	eng := &deadEngine{}
 	config := enginefault.Defaults()
-	config.DryRun, config.PollInterval = true, 0
+	// The diagnosis deadline passes on every poll: a skipped reconfig must not turn into a reset.
+	config.DryRun, config.PollInterval, config.DiagnosisTimeout = true, 0, time.Nanosecond
 	fsm, err := enginefault.New(t.Context(), twoPodGroup{}, eng, &memoryStore{}, telemetry.New(log, 0), config)
 	if err != nil {
 		t.Fatal(err)

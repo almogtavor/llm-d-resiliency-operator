@@ -514,7 +514,8 @@ func (fsm *controller) recover(ctx context.Context, next *Record, current *view,
 		return nil
 	case plan.Kind == engine.Unrecoverable:
 		return fsm.resetAll(ctx, next, ResetUnrecoverable, plan.Reason, now)
-	case now.Sub(next.Since) > fsm.config.DiagnosisTimeout:
+	// A dry run never sends the reconfig, so it stays in diagnosis; a real run would have left it already.
+	case now.Sub(next.Since) > fsm.config.DiagnosisTimeout && (!fsm.config.DryRun || plan.Kind != engine.Change):
 		return fsm.resetAll(ctx, next, ResetDiagnosisDeadline, plan.Reason, now)
 	case plan.Kind != engine.Change || now.Sub(next.Since) < 2*fsm.config.PollInterval:
 		return nil

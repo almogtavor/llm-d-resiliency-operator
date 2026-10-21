@@ -331,8 +331,11 @@ poll 5: healthy   -> state = reset all     -> changed, record "recovered without
 
 Each poll is deterministic: the action depends only on the record, the live group and the time. A dry run shows
 only the first action of a fault. What would follow depends on how the engine reacts to an action that never ran.
-Since nothing is repaired, the deadlines still run, so a fault that stays leads to "would reset all" after
-`--ft-diagnosis-timeout`.
+Since nothing is repaired, a fault that no rank notices leads to "would reset all" after `--ft-diagnosis-timeout`.
+Without `Probe`, the ranks notice a fault only through real traffic. Once the controller would reconfigure, the
+diagnosis deadline no longer applies, since a real run would have sent the reconfig already. The engine may still
+give up on its own, for example vLLM after `engine_recovery_timeout_sec`, and then the log shows "would reset all:
+unrecoverable".
 
 ## Guarantees
 

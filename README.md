@@ -53,7 +53,7 @@ versioned journal so a new leader picks up a recovery where the old one stopped.
 
 | Plugin | Implementations |
 |---|---|
-| Engine | [vLLM](docs/components/engines/vllm.md) |
+| Engine | [vLLM](docs/components/engines/vllm.md), [SGLang](https://github.com/llm-d-incubation/llm-d-resiliency-operator/pull/56) (WIP) |
 | Workload | [LeaderWorkerSet](docs/components/workloads/lws.md) |
 
 ## Quick start

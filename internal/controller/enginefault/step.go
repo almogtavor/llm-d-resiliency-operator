@@ -35,6 +35,8 @@ type controller struct {
 	callErr error
 	// waited restarts the deadlines on the first poll after a wait for the workload, or after a load.
 	waited bool
+	// wouldDo is the action this step skipped in a dry run.
+	wouldDo string
 }
 
 type view struct {
@@ -87,10 +89,11 @@ func load(ctx context.Context, wl workload.Workload, eng engine.Engine, store jo
 }
 
 func (fsm *controller) Step(ctx context.Context) error {
-	fsm.pending, fsm.callErr = nil, nil
+	fsm.pending, fsm.callErr, fsm.wouldDo = nil, nil, ""
 	next := fsm.record()
 	err := fsm.step(ctx, &next)
 	if err == nil {
+		next.WouldDo = fsm.wouldDo
 		err = fsm.save(ctx, &next)
 	}
 	err = errors.Join(err, fsm.callErr)
@@ -127,6 +130,9 @@ func (fsm *controller) save(ctx context.Context, next *Record) error {
 		if previous.Phase != next.Phase {
 			fsm.recorder.PhaseChanged(previous.Phase, next.Phase, next.Reason)
 		}
+		if previous.WouldDo != next.WouldDo {
+			fsm.recorder.WouldDo(previous.WouldDo, next.WouldDo, next.Reason)
+		}
 	}
 	for _, emit := range fsm.pending {
 		emit()
@@ -138,6 +144,14 @@ func (fsm *controller) save(ctx context.Context, next *Record) error {
 func (fsm *controller) later(emit func()) { fsm.pending = append(fsm.pending, emit) }
 
 func (fsm *controller) called(err error) { fsm.callErr = errors.Join(fsm.callErr, err) }
+
+// would keeps the action in a dry run, and tells the caller to skip it.
+func (fsm *controller) would(action string) bool {
+	if fsm.config.DryRun {
+		fsm.wouldDo = action
+	}
+	return fsm.config.DryRun
+}
 
 func (fsm *controller) step(ctx context.Context, next *Record) error {
 	now := fsm.now().UTC()
@@ -248,7 +262,7 @@ func (fsm *controller) waitForWorkload(ctx context.Context, next *Record, group 
 		}
 		fsm.openIncident(next, cause, nil, now)
 	}
-	if err := fsm.save(ctx, next); err != nil || !owed {
+	if err := fsm.save(ctx, next); err != nil || !owed || fsm.would("reset all") {
 		return true, err
 	}
 	fsm.called(fsm.wl.ResetAll(ctx, refs(next)))
@@ -476,6 +490,9 @@ func (fsm *controller) enterRecovering(ctx context.Context, next *Record, curren
 	}
 	if err := fsm.save(ctx, next); err != nil {
 		return err
+	}
+	if fsm.config.DryRun {
+		return nil
 	}
 	if err := fsm.eng.Probe(ctx, current.obs); err != nil {
 		next.Reason += ": " + err.Error()

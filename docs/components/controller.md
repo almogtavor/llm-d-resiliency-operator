@@ -312,6 +312,28 @@ when to stop, is the workload's restart policy. When the workload stops recreati
 | `capacity` | `--ft-capacity-restore=reset-all` and a member is excluded or rejected | [the failed Pod cannot come back](../failures/capacity-not-restored.md) |
 | `unseen` | no admitted member readable for `--ft-unseen-timeout` | [IRO cannot see the group](../failures/iro-blind.md) |
 
+## Dry run
+
+With `--ft-dry-run` the controller reads the group and decides as usual, but does nothing: no Pod reset, no
+`Probe`, `Apply` or `Verify`, and the record stays in memory instead of the journal. The record keeps the action
+the controller skipped, in `WouldDo`, so the next poll does not start over.
+
+On every poll the controller compares what it would do now with what the state already says, and records (logs)
+only when that changes.
+
+```
+poll 1: dp3 dead  -> state empty           -> record "would remove dp3"
+poll 2: dp3 dead  -> state = remove dp3    -> same, stay quiet
+poll 3: dp3 dead  -> state = remove dp3    -> same, stay quiet
+poll 4: all dead  -> state = remove dp3    -> changed, record "would reset all"
+poll 5: healthy   -> state = reset all     -> changed, record "recovered without IRO"
+```
+
+Each poll is deterministic: the action depends only on the record, the live group and the time. A dry run shows
+only the first action of a fault. What would follow depends on how the engine reacts to an action that never ran.
+Since nothing is repaired, the deadlines still run, so a fault that stays leads to "would reset all" after
+`--ft-diagnosis-timeout`.
+
 ## Guarantees
 
 | Guarantee | How |
@@ -332,7 +354,7 @@ when to stop, is the workload's restart policy. When the workload stops recreati
 | Flag | Default | Meaning |
 |---|---|---|
 | `--enable-engine-ft` | `false` | turn the controller on (needs `--leader-elect`) |
-| `--ft-dry-run` | `false` | log each Pod reset and reconfig instead of doing it. The record stays in memory, and after each skipped action the controller starts over from the live group. |
+| `--ft-dry-run` | `false` | decide as usual, but only log what recovery would do. See [dry run](#dry-run). |
 | `--engine` | | engine implementation |
 | `--workload` | | workload implementation |
 | `--ft-poll-interval` | 1s | how often the leader reads the group and acts |

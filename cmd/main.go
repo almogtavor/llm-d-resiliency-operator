@@ -65,7 +65,7 @@ func main() {
 	}
 
 	log := ctrl.Log.WithName("engine-fault")
-	if engineFT.DryRun {
+	if engineFT.Config.DryRun {
 		log = log.WithValues("dryRun", true)
 	}
 	recorder := telemetry.New(log, 10*engineFT.Config.ApplyTimeout)

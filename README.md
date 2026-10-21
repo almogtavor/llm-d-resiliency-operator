@@ -28,9 +28,9 @@ full capacity. It restarts the whole group only when nothing else can work.
 </p>
 
 - **Remove in place.** When the engine reports members dead, one reconfig removes them. The rest keep serving.
-- **Restore capacity.** Once the group serves again, IRO resets the failed Pods and admits their new members.
-- **Reset as a last resort.** If nothing can be removed safely, or a recovery fails, IRO resets the whole group.
-- **Never act blind.** IRO never removes a member it cannot see, and never resets a group it cannot list.
+- **Restore capacity.** The group now serves with fewer members. IRO restarts the failed Pods and adds their new members back.
+- **Reset as a last resort.** If nothing can be removed safely, or a recovery fails, IRO restarts the whole group.
+- **Act only on what it sees.** IRO removes a member only when the engine reports it dead, and resets a group only when it can list its Pods.
 
 Step through this recovery call by call in the
 [interactive example](https://llm-d-incubation.github.io/llm-d-resiliency-operator/docs/failures/member-dies/),
